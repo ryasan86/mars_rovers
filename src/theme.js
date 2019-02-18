@@ -1,0 +1,9 @@
+const primary = '#216ba5';
+const light = '#f2f2f2';
+const dark = '#17202a';
+
+export default {
+  primary,
+  light,
+  dark
+};
