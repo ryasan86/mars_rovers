@@ -36,8 +36,7 @@ const LinkContainer = styled.div`
 `;
 
 const Link = styled(NavLink)`
-  background: ${({ theme, active }) =>
-    active ? lighten(0.05, theme.primary) : theme.primary};
+  background: ${({ theme, active }) => active ? lighten(0.05, theme.primary) : theme.primary};
   color: ${({ theme }) => theme.light};
   text-decoration: none;
   padding: 15px;

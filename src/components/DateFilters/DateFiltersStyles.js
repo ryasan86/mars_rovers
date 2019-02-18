@@ -34,7 +34,7 @@ const DateTab = styled.li`
   color: ${({ theme }) => theme.primary};
   background: white;
   border-color: ${({ theme }) => theme.primary};
-  ${({ active }) => (active ? DateTabActiveCSS : '')}
+  ${({ active }) => (active ? DateTabActiveCSS : '')};
   text-align: center;
   padding: 10px;
   margin: 10px 0;
