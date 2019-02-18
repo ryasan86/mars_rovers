@@ -34,7 +34,7 @@ class Sidebar extends Component {
           name="close"
           width={25}
           fill="white"
-          style={{ margin: '5% 7%' }}
+          style={{ margin: '4% 6%' }}
           visibility="visibile"/>
         <SidebarHeader>
           <Title>Mars Rovers</Title>

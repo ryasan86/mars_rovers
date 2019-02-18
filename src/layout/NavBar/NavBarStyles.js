@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const NavBarWrap = styled.nav`
-  padding: 20px;
   width: 100%;
-  height: 50px;
+  height: ${({ theme }) => theme.navbarHeight};
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;

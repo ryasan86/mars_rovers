@@ -17,7 +17,8 @@ const CardsContainer = styled.div`
 
 const MainTitle = styled(Title)`
   color: ${({ theme }) => theme.dark};
-  height: 90vh;
+  position: absolute;
+  height: ${({ theme }) => `calc(100% - ${theme.navbarHeight})`};
   width: 100%;
   display: flex;
   justify-content: center;

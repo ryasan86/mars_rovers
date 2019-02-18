@@ -63,6 +63,9 @@ const CardLink = styled.a`
   cursor: pointer;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
   transition: background 0.3s, color 0.3s;
+  -webkit-transition: background 0.3s, color 0.3s;
+  -moz-transition: background 0.3s, color 0.3s;
+  -o-transition: background 0.3s, color 0.3s;
   &:hover {
     background: ${({ theme }) => theme.primary};
     color: white;
