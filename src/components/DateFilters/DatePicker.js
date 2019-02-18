@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import 'react-datepicker/dist/react-datepicker.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import { actionCreators } from '../../actions/RoverActions';
 import { DatePickerContainer, StyledDatePicker } from './DateFiltersStyles';

@@ -7,7 +7,7 @@ const SidebarWrap = styled.div`
   position: fixed;
   background: ${({ theme }) => theme.primary};
   width: 25vw;
-  height: 100%;
+  height: 100vh;
   flex-direction: column;
   flex-shrink: 0;
   box-shadow: 3px 0 5px rgba(0, 0, 0, 0.3);

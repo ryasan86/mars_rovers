@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { MainWrap, CardsContainer } from './MainStyles';
+import { MainWrap, CardsContainer, MainTitle } from './MainStyles';
 import Loader from './../../components/Loader/Loader';
 import Card from './../../components/Card/Card';
 
@@ -13,12 +13,12 @@ class Main extends Component {
         return <Card key={i} photo={photo} />;
       })
     ) : (
-      <h2>
+      <MainTitle>
         No photos for this day{' '}
         <span role="img" aria-label="img">
           😢
         </span>
-      </h2>
+      </MainTitle>
     );
   };
 

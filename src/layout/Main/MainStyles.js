@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Title } from './../../components/common/typography';
 
 const MainWrap = styled.div`
   width: 100%;
@@ -8,11 +9,19 @@ const MainWrap = styled.div`
 
 const CardsContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  padding-left: 10px;
-  align-items: center;
-  min-height: 70%;
+  align-items: ${({ loading }) => (loading ? 'center' : 'flex-start')};
+  flex-wrap: wrap;
+  min-height: 100%;
 `;
 
-export { MainWrap, CardsContainer };
+const MainTitle = styled(Title)`
+  color: ${({ theme }) => theme.dark};
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export { MainWrap, CardsContainer, MainTitle };

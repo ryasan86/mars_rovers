@@ -19,7 +19,6 @@ class App extends Component {
   // fetch photo data
   handleFetchPhotos = () => {
     const { startLoading, stopLoading, storePhotos } = this.props.actions;
-    // toggleSidebar();
     startLoading();
     const { selectedRover: rover, selectedDate: date } = this.props;
     client.getRoverPhotos({ rover, date }, async ({ photos }) => {
