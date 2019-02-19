@@ -17,7 +17,7 @@ class DateFilters extends Component {
   render() {
     return (
       <DateFiltersWrap>
-        <DateFiltersTitle>Date Filters</DateFiltersTitle>
+        <DateFiltersTitle>Filters</DateFiltersTitle>
         <DateTabs setDateFilter={this.handleSetDateFilter} />
         <DatePicker setDateFilter={this.handleSetDateFilter} />
       </DateFiltersWrap>

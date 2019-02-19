@@ -74,6 +74,18 @@ const StyledDatePicker = styled(ReactDatePicker)`
   @media screen and (max-width: 360px) {
     font-size: 0.7em;
   }
+  /* ::placeholder {
+    color: ${({ theme }) => theme.primary};
+    opacity: 1;
+  }
+
+  :-ms-input-placeholder {
+    color: ${({ theme }) => theme.primary};
+  }
+
+  ::-ms-input-placeholder {
+    color: ${({ theme }) => theme.primary};
+  } */
 `;
 
 export {
