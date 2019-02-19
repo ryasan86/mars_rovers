@@ -5,7 +5,8 @@ import {
 } from './../actions/types';
 
 const INITIAL_STATE = {
-  sidebarIsOpen: true
+  sidebarIsOpen: true,
+  loading: false
 };
 export default (state = INITIAL_STATE, action) => {
   const { type } = action;
