@@ -7,7 +7,7 @@ import Card from './../../components/Card/Card';
 
 class Main extends Component {
   renderPhotos = () => {
-    const { photos } = this.props;
+    const { photos } = this.props.rover;
     return photos.length ? (
       photos.map((photo, i) => {
         return <Card key={i} photo={photo} />;
@@ -23,7 +23,7 @@ class Main extends Component {
   };
 
   render() {
-    const { loading } = this.props;
+    const { loading } = this.props.ui;
 
     return (
       <MainWrap>
@@ -36,6 +36,6 @@ class Main extends Component {
 }
 
 export default connect(
-  state => state.rover,
+  state => state,
   null
 )(Main);

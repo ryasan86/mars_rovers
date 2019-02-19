@@ -1,16 +1,9 @@
-import {
-  SELECT_ROVER,
-  STORE_PHOTOS,
-  SELECT_DATE,
-  START_LOADING,
-  STOP_LOADING
-} from '../actions/types';
+import { SELECT_ROVER, STORE_PHOTOS, SELECT_DATE } from '../actions/types';
 
 const INITIAL_STATE = {
   selectedRover: 'curiosity',
   selectedDate: new Date(),
-  photos: [],
-  loading: false
+  photos: []
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -22,10 +15,6 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, selectedDate: payload.date };
     case STORE_PHOTOS:
       return { ...state, photos: payload.photos };
-    case START_LOADING:
-      return { ...state, loading: true };
-    case STOP_LOADING:
-      return { ...state, loading: false };
     default:
       return state;
   }
