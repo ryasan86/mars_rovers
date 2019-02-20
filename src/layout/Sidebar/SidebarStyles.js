@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { lighten } from 'polished';
 
+import { Title } from './../../components/common/typography';
+
 const SidebarWrap = styled.div`
   z-index: 1;
   position: fixed;
@@ -46,5 +48,13 @@ const Link = styled(NavLink)`
     padding-left: 15px;
   }
 `;
+
+// const FiltersTitle = styled(Title)`
+//   text-align: center;
+//   margin-bottom: 20px;
+//   @media screen and (max-width: 420px) {
+//     margin-bottom: 10px;
+//   }
+// `;
 
 export { SidebarWrap, SidebarHeader, LinkContainer, Link };

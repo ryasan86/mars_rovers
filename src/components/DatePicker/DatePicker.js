@@ -4,15 +4,15 @@ import { bindActionCreators } from 'redux';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { actionCreators } from '../../actions/RoverActions';
-import { DatePickerContainer, StyledDatePicker } from './DateFiltersStyles';
+import { DatePickerContainer, StyledDatePicker } from './DatePickerStyles';
 import { Text } from './../../components/common/typography';
 import { DATE_RANGES } from './../../constants';
 import { capitalize } from './../../utils';
 
 class DatePicker extends Component {
-  // unset tab since date picker is being used
-  handleDateSelect = date => {
-    this.props.setDateFilter(date);
+  handleDateSelect = async date => {
+    await this.props.actions.setDateFilter({ date });
+    this.props.fetchPhotos();
   };
 
   render() {
