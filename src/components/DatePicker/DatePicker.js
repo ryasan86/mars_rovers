@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { actionCreators } from '../../actions/RoverActions';
+import { actionCreators } from '../../actions';
 import { DatePickerContainer, StyledDatePicker } from './DatePickerStyles';
 import { Text } from './../../components/common/typography';
 import { DATE_RANGES } from './../../constants';

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { HeaderWrap } from './HeaderStyles';
 import Icon from '../../components/common/icons';
 import theme from '../../theme';
-import { actionCreators } from '../../actions/RoverActions';
+import { actionCreators } from '../../actions';
 import { GITHUB_REPO_URL } from '../../constants';
 
 class NavBar extends Component {

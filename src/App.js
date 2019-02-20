@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import client from './client';
-import { actionCreators } from './actions/RoverActions';
+import { actionCreators } from './actions';
 import { ROVERS } from './constants';
 import Header from './layout/Header/Header';
 import Sidebar from './layout/Sidebar/Sidebar';

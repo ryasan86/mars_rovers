@@ -1,8 +1,4 @@
-import {
-  TOGGLE_SIDEBAR,
-  START_LOADING,
-  STOP_LOADING
-} from '../actions/types';
+import { TOGGLE_SIDEBAR, START_LOADING, STOP_LOADING } from './../constants';
 
 const INITIAL_STATE = {
   sidebarIsOpen: true,

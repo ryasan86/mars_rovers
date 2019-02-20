@@ -13,7 +13,7 @@ import DatePicker from './../../components/DatePicker/DatePicker';
 import Icon from './../../components/common/icons';
 import { Title, Text } from './../../components/common/typography';
 import { ROVERS } from '../../constants';
-import { actionCreators } from '../../actions/RoverActions';
+import { actionCreators } from '../../actions';
 import { DATE_RANGES } from './../../constants';
 
 class Sidebar extends Component {
