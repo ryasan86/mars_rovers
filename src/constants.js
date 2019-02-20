@@ -3,7 +3,7 @@ const ROVERS = ['curiosity', 'opportunity', 'spirit'];
 const DATE_RANGES = {
   curiosity: {
     minPhotoDate: '2012-8-6',
-    maxPhotoDate: '2019-02-14'
+    maxPhotoDate: '2019-2-14'
   },
   opportunity: {
     minPhotoDate: '2004-1-25',

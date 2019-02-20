@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import {
   SidebarWrap,
+  SidebarIcon,
   SidebarHeader,
   LinkContainer,
   Link
@@ -24,36 +25,36 @@ class Sidebar extends Component {
   handleRoverSelect = async (rover, i) => {
     const date = new Date(DATE_RANGES[rover].maxPhotoDate);
     this.setState({ activeLink: i });
-    await this.props.actions.setDateFilter({ date });
+    this.props.actions.setDateFilter({ date });
     await this.props.actions.selectRover({ rover });
     this.props.fetchPhotos();
   };
 
+  renderLinks = () =>
+    ROVERS.map((rover, i) => (
+      <Link
+        key={i}
+        to={rover}
+        active={this.state.activeLink === i ? 1 : 0} // styled components work around
+        onClick={() => this.handleRoverSelect(rover, i)}>
+        <Text>{rover[0].toUpperCase() + rover.slice(1)}</Text>
+      </Link>
+    ));
+
   render() {
     return (
       <SidebarWrap isOpen={this.props.sidebarIsOpen}>
-        <Icon
+        <SidebarIcon
           iconClick={this.props.actions.toggleSidebar}
           name="close"
           width={25}
           fill="white"
-          style={{ margin: '4% 6%' }}
           visibility="visibile" />
         <SidebarHeader>
           <Title>Mars Rovers</Title>
           <Icon name="rover" width={100} fill="white" />
         </SidebarHeader>
-        <LinkContainer>
-          {ROVERS.map((rover, i) => (
-            <Link
-              key={i}
-              to={rover}
-              active={this.state.activeLink === i ? 1 : 0} // styled components work around
-              onClick={() => this.handleRoverSelect(rover, i)}>
-              <Text>{rover[0].toUpperCase() + rover.slice(1)}</Text>
-            </Link>
-          ))}
-        </LinkContainer>
+        <LinkContainer>{this.renderLinks()}</LinkContainer>
         <DatePicker fetchPhotos={this.props.fetchPhotos} />
       </SidebarWrap>
     );

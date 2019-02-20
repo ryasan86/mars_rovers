@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledSVG } from "./IconStyles";
+import { StyledSVG } from './IconStyles';
 
 const Github = ({
   style = {},
@@ -7,6 +7,7 @@ const Github = ({
   width = '100%',
   viewBox = '0 0 496 512',
   visibility = 'visibile',
+  className,
   iconClick = () => {}
 }) => (
   <StyledSVG
@@ -17,6 +18,7 @@ const Github = ({
     fill={fill}
     onClick={iconClick}
     visibility={visibility}
+    className={className}
     xmlSpace="preserve"
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"

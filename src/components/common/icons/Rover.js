@@ -6,6 +6,7 @@ const Rover = ({
   width = '100%',
   viewBox = '0 0 128 128',
   visibility = 'visibile',
+  className,
   iconClick = () => {}
 }) => (
   <svg
@@ -16,6 +17,7 @@ const Rover = ({
     fill={fill}
     onClick={iconClick}
     visibility={visibility}
+    className={className}
     xmlSpace="preserve"
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"

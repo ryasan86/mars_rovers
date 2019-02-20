@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { lighten } from 'polished';
 
+import Icon from './../../components/common/icons';
+import theme from './../../theme';
+
 const SidebarWrap = styled.div`
   z-index: 1;
   position: fixed;
@@ -22,6 +25,10 @@ const SidebarWrap = styled.div`
   }
 `;
 
+const SidebarIcon = styled(Icon)`
+  margin: 4% 6%;
+`;
+
 const SidebarHeader = styled.div`
   text-align: center;
   margin-top: 10%;
@@ -40,11 +47,11 @@ const Link = styled(NavLink)`
   color: ${({ theme }) => theme.light};
   text-decoration: none;
   padding: 15px;
-  padding-left: 30px;
+  padding-left: ${theme.sidebarPadding};
   @media screen and (max-width: 420px) {
     padding: 7.5px;
     padding-left: 15px;
   }
 `;
 
-export { SidebarWrap, SidebarHeader, LinkContainer, Link };
+export { SidebarWrap, SidebarIcon, SidebarHeader, LinkContainer, Link };

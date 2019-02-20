@@ -1,10 +1,13 @@
 import ReactDatePicker from 'react-datepicker';
 import styled from 'styled-components';
 
+import theme from './../../theme';
+
 const DatePickerContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+  padding-left: ${theme.sidebarPadding};
 `;
 
 const StyledDatePicker = styled(ReactDatePicker)`
