@@ -12,7 +12,6 @@ import { capitalize } from './../../utils';
 class DatePicker extends Component {
   // unset tab since date picker is being used
   handleDateSelect = date => {
-    this.props.actions.setActiveDateTab({});
     this.props.setDateFilter(date);
   };
 

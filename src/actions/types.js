@@ -3,5 +3,4 @@ export const SELECT_DATE    = 'select_date';
 export const STORE_PHOTOS   = 'store_photos';
 export const START_LOADING  = 'start_loading';
 export const STOP_LOADING   = 'stop_loading';
-export const ACTIVE_DATE    = 'active_date';
 export const TOGGLE_SIDEBAR = 'toggle_sidebar';

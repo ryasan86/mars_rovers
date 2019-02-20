@@ -13,6 +13,7 @@ import Icon from './../../components/common/icons';
 import { Title, Text } from './../../components/common/typography';
 import { ROVERS } from '../../constants';
 import { actionCreators } from '../../actions/RoverActions';
+import { DATE_RANGES } from './../../constants';
 
 class Sidebar extends Component {
   state = {
@@ -21,7 +22,9 @@ class Sidebar extends Component {
 
   // set active sidebar item then fetch photos
   handleRoverSelect = async (rover, i) => {
+    const date = new Date(DATE_RANGES[rover].maxPhotoDate);
     this.setState({ activeLink: i });
+    await this.props.actions.setDateFilter({ date });
     await this.props.actions.selectRover({ rover });
     this.props.fetchPhotos();
   };
@@ -35,7 +38,7 @@ class Sidebar extends Component {
           width={25}
           fill="white"
           style={{ margin: '4% 6%' }}
-          visibility="visibile"/>
+          visibility="visibile" />
         <SidebarHeader>
           <Title>Mars Rovers</Title>
           <Icon name="rover" width={100} fill="white" />
