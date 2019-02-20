@@ -1,5 +1,5 @@
 import { SELECT_ROVER, STORE_PHOTOS, SELECT_DATE } from '../actions/types';
-import { DATE_RANGES } from "./../constants";
+import { DATE_RANGES } from "../constants";
 
 const INITIAL_STATE = {
   selectedRover: 'curiosity',

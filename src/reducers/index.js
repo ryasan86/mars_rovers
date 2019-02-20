@@ -1,8 +1,5 @@
 import { combineReducers } from 'redux';
-import RoverReducer from './RoverReducer';
-import UiReducer from './UiReducer';
+import rover from './rover';
+import ui from './ui';
 
-export default combineReducers({
-  rover: RoverReducer,
-  ui: UiReducer
-});
+export default combineReducers({ rover, ui });
