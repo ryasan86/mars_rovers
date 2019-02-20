@@ -7,7 +7,7 @@ const INITIAL_STATE = [
     id: 0,
     title: 'Today',
     date: moment(),
-    active: false
+    active: true
   },
   {
     id: 1,

@@ -1,8 +1,9 @@
 import { SELECT_ROVER, STORE_PHOTOS, SELECT_DATE } from '../actions/types';
+import { DATE_RANGES } from "./../constants";
 
 const INITIAL_STATE = {
   selectedRover: 'curiosity',
-  selectedDate: new Date(),
+  selectedDate: new Date(DATE_RANGES.curiosity.maxPhotoDate),
   photos: []
 };
 

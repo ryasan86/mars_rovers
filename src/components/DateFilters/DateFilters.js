@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 
 import { actionCreators } from '../../actions/RoverActions';
 import { DateFiltersWrap, DateFiltersTitle } from "./DateFiltersStyles";
-import DateTabs from './DateTabs';
 import DatePicker from './DatePicker';
 
 class DateFilters extends Component {
@@ -18,7 +17,6 @@ class DateFilters extends Component {
     return (
       <DateFiltersWrap>
         <DateFiltersTitle>Filters</DateFiltersTitle>
-        <DateTabs setDateFilter={this.handleSetDateFilter} />
         <DatePicker setDateFilter={this.handleSetDateFilter} />
       </DateFiltersWrap>
     );

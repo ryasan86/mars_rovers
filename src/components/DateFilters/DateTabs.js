@@ -16,6 +16,7 @@ class DateTabs extends Component {
   render() {
     return (
       <DateTabsContainer>
+        <Text>Quick:</Text>
         {this.props.dateTabs.map(({ title, date, active }, i) => {
           return (
             <DateTab
