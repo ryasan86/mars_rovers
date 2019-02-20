@@ -11,7 +11,9 @@ import { capitalize } from './../../utils';
 
 class DatePicker extends Component {
   handleDateSelect = async date => {
-    await this.props.actions.setDateFilter({ date });
+    const { toggleSidebar, setDateFilter } = this.props.actions;
+    toggleSidebar();
+    await setDateFilter({ date });
     this.props.fetchPhotos();
   };
 

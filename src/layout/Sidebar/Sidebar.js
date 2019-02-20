@@ -22,11 +22,12 @@ class Sidebar extends Component {
   };
 
   // set active sidebar item then fetch photos
-  handleRoverSelect = async (rover, i) => {
+  handleRoverSelect = async (rover, activeLink) => {
+    const { setDateFilter, selectRover } = this.props.actions;
     const date = new Date(DATE_RANGES[rover].maxPhotoDate);
-    this.setState({ activeLink: i });
-    this.props.actions.setDateFilter({ date });
-    await this.props.actions.selectRover({ rover });
+    this.setState({ activeLink });
+    setDateFilter({ date });
+    await selectRover({ rover });
     this.props.fetchPhotos();
   };
 
