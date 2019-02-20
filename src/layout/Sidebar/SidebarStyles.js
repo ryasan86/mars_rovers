@@ -37,7 +37,7 @@ const SidebarHeader = styled.div`
   }
 `;
 
-const LinkContainer = styled.div`
+const LinkContainer = styled.nav`
   display: flex;
   flex-direction: column;
 `;

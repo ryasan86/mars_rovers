@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { NavBarWrap } from './NavBarStyles';
-import Icon from './../../components/common/icons/';
-import theme from './../../theme';
+import { HeaderWrap } from './HeaderStyles';
+import Icon from '../../components/common/icons';
+import theme from '../../theme';
 import { actionCreators } from '../../actions/RoverActions';
-import { GITHUB_REPO_URL } from './../../constants';
+import { GITHUB_REPO_URL } from '../../constants';
 
 class NavBar extends Component {
   toggleMenu = async () => {
@@ -15,7 +15,7 @@ class NavBar extends Component {
 
   render() {
     return (
-      <NavBarWrap>
+      <HeaderWrap>
         <Icon
           name="burger"
           width={25}
@@ -26,7 +26,7 @@ class NavBar extends Component {
           width={25}
           fill={theme.primary}
           iconClick={() => window.open(GITHUB_REPO_URL, '_blank')} />
-      </NavBarWrap>
+      </HeaderWrap>
     );
   }
 }

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import client from './client';
 import { actionCreators } from './actions/RoverActions';
 import { ROVERS } from './constants';
-import NavBar from "./layout/NavBar/NavBar";
+import Header from './layout/Header/Header';
 import Sidebar from './layout/Sidebar/Sidebar';
 import Main from './layout/Main/Main';
 
@@ -30,14 +30,11 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <NavBar />
+        <Header />
         <Sidebar fetchPhotos={this.handleFetchPhotos} />
         <Switch>
           {ROVERS.map((rover, i) => (
-            <Route
-              key={i}
-              path={`/${rover}`}
-              render={() => <Main />} />
+            <Route key={i} path={`/${rover}`} component={Main} />
           ))}
           <Redirect from="/" to="/curiosity" />
         </Switch>
