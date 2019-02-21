@@ -9,6 +9,7 @@ import { DATE_RANGES } from './../constants';
 const INITIAL_STATE = {
   selectedRover: 'curiosity',
   selectedDate: new Date(DATE_RANGES.curiosity.maxPhotoDate),
+  selectedCamera: 'All',
   photos: [],
   filteredPhotos: []
 };
@@ -29,6 +30,7 @@ export default (state = INITIAL_STATE, action) => {
     case SELECT_CAMERA:
       return {
         ...state,
+        selectedCamera: payload.camera,
         filteredPhotos: state.photos.filter(
           ({ camera }) => camera.name === payload.camera || payload.camera === 'All')
       };

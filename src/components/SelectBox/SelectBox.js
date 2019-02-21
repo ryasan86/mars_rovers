@@ -9,9 +9,6 @@ import { CAMERAS } from './../../constants';
 import theme from './../../theme';
 
 class SelectBox extends Component {
-  state = {
-    camera: 'All'
-  };
 
   handleCamFilterSelect = async e => {
     const camera = e.target.value;
@@ -26,7 +23,7 @@ class SelectBox extends Component {
         <Text color={theme.primary}>Select Camera:</Text>
         <SelectContainer>
           <StyledSelect
-            value={this.state.filter}
+            value={this.props.selectedCamera}
             onChange={this.handleCamFilterSelect}>
             <option value="All">All</option>
             {CAMERAS.map(({ abbrev, fullName }, i) => (
