@@ -15,10 +15,10 @@ const SidebarWrap = styled.div`
   flex-shrink: 0;
   box-shadow: 3px 0 5px rgba(0, 0, 0, 0.3);
   transform: ${({ isOpen }) => (isOpen ? 'none' : `translateX(-30vw)`)};
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  -o-transition: all 0.5s;
+  transition: transform 0.5s;
+  -webkit-transition: transform 0.5s;
+  -moz-transition: transform 0.5s;
+  -o-transition: transform 0.5s;
   @media screen and (max-width: 900px) {
     width: 50vw;
     transform: ${({ isOpen }) => (isOpen ? 'none' : `translateX(-60vw)`)};

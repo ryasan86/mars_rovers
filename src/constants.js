@@ -15,27 +15,47 @@ const DATE_RANGES = {
   }
 };
 
-const SELECT_ROVER   = 'select_rover';
-const SELECT_DATE    = 'select_date';
-const STORE_PHOTOS   = 'store_photos';
-const START_LOADING  = 'start_loading';
-const STOP_LOADING   = 'stop_loading';
-const TOGGLE_SIDEBAR = 'toggle_sidebar';
+const CAMERAS = [
+  {
+    abbrev: 'FHAZ',
+    camera: 'Front Hazard Avoidance Camera'
+  },
+  {
+    abbrev: 'RHAZ',
+    camera: 'Rear Hazard Avoidance Camera'
+  },
+  {
+    abbrev: 'MAST',
+    camera: 'Mast Camera'
+  },
+  {
+    abbrev: 'CHEMCAM',
+    camera: 'Chemistry and Camera Complex'
+  },
+  {
+    abbrev: 'MAHLI',
+    camera: 'Mars Hand Lens Imager'
+  },
+  {
+    abbrev: 'MARDI',
+    camera: 'Mars Descent Imager'
+  },
+  {
+    abbrev: 'NAVCAM',
+    camera: 'Navigation Camera'
+  },
+  {
+    abbrev: 'PANCAM',
+    camera: 'Panoramic Camera'
+  },
+  {
+    abbrev: 'MINITES',
+    camera: 'Miniature Thermal Emission Spectrometer'
+  }
+];
 
-const API_KEY         = 'ckPZgbeexCCXZb1IOIPsmugP5Uq3rowfH86GI6qM';
-const BASE_API_URL    = 'https://api.nasa.gov/mars-photos/api/v1/rovers';
+const API_KEY = 'ckPZgbeexCCXZb1IOIPsmugP5Uq3rowfH86GI6qM';
+const BASE_API_URL = 'https://api.nasa.gov/mars-photos/api/v1/rovers';
 const GITHUB_REPO_URL = 'https://github.com/ryasan86/mars_rovers';
 
-export {
-  BASE_API_URL,
-  ROVERS,
-  DATE_RANGES,
-  API_KEY,
-  GITHUB_REPO_URL,
-  SELECT_ROVER,
-  SELECT_DATE,
-  STORE_PHOTOS,
-  START_LOADING,
-  STOP_LOADING,
-  TOGGLE_SIDEBAR
-};
+export { BASE_API_URL, ROVERS, DATE_RANGES, CAMERAS, API_KEY, GITHUB_REPO_URL };
