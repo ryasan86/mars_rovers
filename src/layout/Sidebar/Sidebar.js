@@ -10,7 +10,6 @@ import {
   Link
 } from './SidebarStyles';
 import DatePicker from './../../components/DatePicker/DatePicker';
-import SelectBox from './../../components/SelectBox/SelectBox';
 import Icon from './../../components/common/icons';
 import { Title, Text } from './../../components/common/typography';
 import { ROVERS } from '../../constants';
@@ -58,7 +57,6 @@ class Sidebar extends Component {
         </SidebarHeader>
         <LinkContainer>{this.renderLinks()}</LinkContainer>
         <DatePicker fetchPhotos={this.props.fetchPhotos} />
-        <SelectBox />
       </SidebarWrap>
     );
   }

@@ -12,12 +12,11 @@ const DatePickerContainer = styled.div`
 
 const StyledDatePicker = styled(ReactDatePicker)`
   color: ${({ theme }) => theme.primary};
-  font-size: 1em;
+  font-size: 1.2em;
   padding: 5px;
   border-radius: 5px;
   border: none;
-  margin: 5px 0;
-  width: 100%;
+  margin: 10px 0;
   @media screen and (max-width: 420px) {
     font-size: 0.9em;
   }

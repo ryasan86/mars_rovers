@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { HeaderWrap } from './HeaderStyles';
+import SelectBox from './../../components/SelectBox/SelectBox';
 import Icon from '../../components/common/icons';
 import theme from '../../theme';
 import { actionCreators } from '../../actions';
@@ -21,6 +22,7 @@ class NavBar extends Component {
           width={25}
           fill={theme.primary}
           iconClick={this.toggleMenu} />
+        <SelectBox />
         <Icon
           name="github"
           width={25}
