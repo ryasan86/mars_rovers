@@ -6,13 +6,13 @@ import theme from './../../theme';
 const DatePickerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 5%;
   padding-left: ${theme.sidebarPadding};
 `;
 
 const StyledDatePicker = styled(ReactDatePicker)`
   color: ${({ theme }) => theme.primary};
-  font-size: 20px;
+  font-size: 1em;
   padding: 5px;
   border-radius: 5px;
   border: none;

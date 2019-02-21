@@ -42,6 +42,7 @@ const CardImg = styled.img`
 `;
 
 const CardBodyContainer = styled.div`
+  color: ${({ theme }) => theme.dark};
   visibility: ${({ imgIsLoading }) => (imgIsLoading ? 'hidden' : 'visible')};
   padding: 10px;
   border-radius: 0 0 4px 4px;

@@ -18,39 +18,39 @@ const DATE_RANGES = {
 const CAMERAS = [
   {
     abbrev: 'FHAZ',
-    camera: 'Front Hazard Avoidance Camera'
+    fullName: 'Front Hazard Avoidance Camera'
   },
   {
     abbrev: 'RHAZ',
-    camera: 'Rear Hazard Avoidance Camera'
+    fullName: 'Rear Hazard Avoidance Camera'
   },
   {
     abbrev: 'MAST',
-    camera: 'Mast Camera'
+    fullName: 'Mast Camera'
   },
   {
     abbrev: 'CHEMCAM',
-    camera: 'Chemistry and Camera Complex'
+    fullName: 'Chemistry and Camera Complex'
   },
   {
     abbrev: 'MAHLI',
-    camera: 'Mars Hand Lens Imager'
+    fullName: 'Mars Hand Lens Imager'
   },
   {
     abbrev: 'MARDI',
-    camera: 'Mars Descent Imager'
+    fullName: 'Mars Descent Imager'
   },
   {
     abbrev: 'NAVCAM',
-    camera: 'Navigation Camera'
+    fullName: 'Navigation Camera'
   },
   {
     abbrev: 'PANCAM',
-    camera: 'Panoramic Camera'
+    fullName: 'Panoramic Camera'
   },
   {
     abbrev: 'MINITES',
-    camera: 'Miniature Thermal Emission Spectrometer'
+    fullName: 'Miniature Thermal Emission Spectrometer'
   }
 ];
 

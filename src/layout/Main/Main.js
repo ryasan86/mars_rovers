@@ -7,14 +7,14 @@ import Card from './../../components/Card/Card';
 
 class Main extends Component {
   renderPhotos = () => {
-    const { photos } = this.props.rover;
-    return photos.length ? (
-      photos.map((photo, i) => {
+    const { filteredPhotos } = this.props.rover;
+    return filteredPhotos.length ? (
+      filteredPhotos.map((photo, i) => {
         return <Card key={i} photo={photo} />;
       })
     ) : (
       <MainTitle>
-        No photos for this day{' '}
+        No available photos{' '}
         <span role="img" aria-label="img">
           😢
         </span>

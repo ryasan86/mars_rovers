@@ -2,16 +2,14 @@ import styled from 'styled-components';
 import theme from './../../theme';
 
 const SelectBoxContainer = styled.div`
+  margin-top: 2%;
   padding-left: ${theme.sidebarPadding};
 `;
 
-const StyledLabel = styled.label`
-  color: white;
-`;
 
 const StyledSelect = styled.select`
   color: ${({ theme }) => theme.primary};
-  font-size: 15px;
+  font-size: 1em;
   padding: 5px;
   border-radius: 5px;
   border: none;
@@ -25,4 +23,4 @@ const StyledSelect = styled.select`
   }
 `;
 
-export { SelectBoxContainer, StyledLabel, StyledSelect };
+export { SelectBoxContainer, StyledSelect };

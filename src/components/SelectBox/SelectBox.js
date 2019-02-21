@@ -2,30 +2,34 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import {
-  SelectBoxContainer,
-  StyledLabel,
-  StyledSelect
-} from './SelectBoxStyles';
+import { SelectBoxContainer, StyledSelect } from './SelectBoxStyles';
+import { Text } from './../../components/common/typography';
 import { actionCreators } from '../../actions';
 import { CAMERAS } from './../../constants';
 
 class SelectBox extends Component {
-  handleCamFilterSelect = e => {
-    this.props.actions.setCameraFilter({ camera: e.target.value });
+  state = {
+    camera: 'All'
+  };
+
+  handleCamFilterSelect = async e => {
+    const camera = e.target.value;
+    const { setCameraFilter } = this.props.actions;
+    this.setState({ camera });
+    await setCameraFilter({ camera });
   };
 
   render() {
     return (
       <SelectBoxContainer>
-        <StyledLabel>Select Camera:</StyledLabel>
+        <Text>Select Camera:</Text>
         <StyledSelect
-          value={this.props.selectedCamera}
+          value={this.state.filter}
           onChange={this.handleCamFilterSelect}>
           <option value="All">All</option>
-          {CAMERAS.map(({ abbrev, camera }, i) => (
+          {CAMERAS.map(({ abbrev, fullName }, i) => (
             <option key={i} value={abbrev}>
-              {camera} ({abbrev})
+              {fullName} ({abbrev})
             </option>
           ))}
         </StyledSelect>
