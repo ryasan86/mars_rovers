@@ -15,6 +15,7 @@ import { Title, Text } from './../../components/common/typography';
 import { ROVERS } from '../../constants';
 import { actionCreators } from '../../actions';
 import { DATE_RANGES } from './../../constants';
+import { capitalize } from "./../../utils";
 
 class Sidebar extends Component {
   state = {
@@ -38,7 +39,7 @@ class Sidebar extends Component {
         to={rover}
         active={this.state.activeLink === i ? 1 : 0} // styled components work around
         onClick={() => this.handleRoverSelect(rover, i)}>
-        <Text>{rover[0].toUpperCase() + rover.slice(1)}</Text>
+        <Text>{capitalize(rover)}</Text>
       </Link>
     ));
 
