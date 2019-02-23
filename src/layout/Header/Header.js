@@ -10,7 +10,7 @@ import { actionCreators } from '../../actions';
 import { GITHUB_REPO_URL } from '../../constants';
 
 class NavBar extends Component {
-  toggleMenu = async () => {
+  handleToggleSidebar = async () => {
     await this.props.actions.toggleSidebar();
   };
 
@@ -21,7 +21,7 @@ class NavBar extends Component {
           name="burger"
           width={25}
           fill={theme.primary}
-          iconClick={this.toggleMenu} />
+          iconClick={this.handleToggleSidebar} />
         <SelectBox />
         <Icon
           name="github"

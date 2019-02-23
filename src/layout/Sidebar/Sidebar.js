@@ -15,7 +15,7 @@ import { Title, Text } from './../../components/common/typography';
 import { ROVERS } from '../../constants';
 import { actionCreators } from '../../actions';
 import { DATE_RANGES } from './../../constants';
-import { capitalize } from "./../../utils";
+import { capitalize } from './../../utils';
 
 class Sidebar extends Component {
   state = {
