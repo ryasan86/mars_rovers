@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Reveal from 'react-reveal/Reveal';
 
 import {
   CardWrap,
@@ -23,27 +24,28 @@ class Card extends Component {
     const { img_src, earth_date, sol, camera } = this.props.photo;
 
     return (
-      <CardWrap>
-        <CardImgContainer>
-          <CardImg
-            src={img_src}
-            alt="rover-photo"
-            onLoad={this.onPhotoLoad}
-            imgIsLoading={this.state.imgIsLoading}
-          />
-        </CardImgContainer>
-        {this.state.imgIsLoading ? <CardLoader /> : ''}
-        <CardBodyContainer imgIsLoading={this.state.imgIsLoading}>
-          <CardText>Date: {earth_date}</CardText>
-          <CardText>Martian Sol: {sol}</CardText>
-          <CardText>
-            Camera: {camera.full_name} ({camera.name})
-          </CardText>
-          <CardLink onClick={() => window.open(img_src, '_blank')}>
-            View Image
-          </CardLink>
-        </CardBodyContainer>
-      </CardWrap>
+      <Reveal>
+        <CardWrap>
+          <CardImgContainer>
+            <CardImg
+              src={img_src}
+              alt="rover-photo"
+              onLoad={this.onPhotoLoad}
+              imgIsLoading={this.state.imgIsLoading} />
+          </CardImgContainer>
+          {this.state.imgIsLoading ? <CardLoader /> : ''}
+          <CardBodyContainer imgIsLoading={this.state.imgIsLoading}>
+            <CardText>Date: {earth_date}</CardText>
+            <CardText>Martian Sol: {sol}</CardText>
+            <CardText>
+              Camera: {camera.full_name} ({camera.name})
+            </CardText>
+            <CardLink onClick={() => window.open(img_src, '_blank')}>
+              View Image
+            </CardLink>
+          </CardBodyContainer>
+        </CardWrap>
+      </Reveal>
     );
   }
 }

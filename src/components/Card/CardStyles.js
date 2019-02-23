@@ -19,7 +19,7 @@ const CardWrap = styled.div`
   margin: 10px;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
   border: 1px solid ${({ theme }) => darken(0.1, theme.light)};
-  animation: ${fadeIn} 0.3s linear;
+  /* animation: ${fadeIn} 0.3s linear; */
 `;
 
 const CardLoader = styled(Loader)`
