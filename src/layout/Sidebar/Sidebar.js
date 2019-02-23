@@ -26,7 +26,7 @@ class Sidebar extends Component {
   handleRoverSelect = async (rover, activeLink) => {
     const { setDateFilter, selectRover } = this.props.actions;
     const date = new Date(DATE_RANGES[rover].maxPhotoDate);
-    this.setState({ activeLink });
+    this.setState(() => ({ activeLink }));
     setDateFilter({ date });
     await selectRover({ rover });
     this.props.fetchPhotos();
