@@ -17,9 +17,7 @@ class Card extends Component {
   };
 
   onPhotoLoad = () => {
-    this.setState(currentState => ({
-      imgIsLoading: !currentState.imgIsLoading
-    }));
+    this.setState({ imgIsLoading: false });
   };
 
   render() {
