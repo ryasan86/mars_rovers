@@ -42,9 +42,9 @@ export default (state = INITIAL_STATE, action) => {
     case SELECT_ROVER:
       return {
         ...state,
-        rovers: state.rovers.map(rover => ({
+        rovers: state.rovers.map((rover, idx) => ({
           ...rover,
-          selected: rover.name === payload.name
+          selected: idx === payload.idx
         }))
       };
     case SELECT_DATE:

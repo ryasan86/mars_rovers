@@ -17,11 +17,11 @@ import { capitalize } from './../../utils';
 
 class Sidebar extends Component {
   // set active rover then fetch photos
-  handleRoverSelect = async (rover = {}) => {
+  handleRoverSelect = async (maxPhotoDate, idx) => {
     const { selectDateFilter, selectRover } = this.props.actions;
     // default date filter to active rover max photo date
-    selectDateFilter({ date: new Date(rover.maxPhotoDate) });
-    await selectRover({ name: rover.name });
+    selectDateFilter({ date: new Date(maxPhotoDate) });
+    await selectRover({ idx });
     this.props.fetchPhotos();
   };
 
@@ -31,7 +31,7 @@ class Sidebar extends Component {
         key={i}
         to={rover.name}
         selected={rover.selected}
-        onClick={() => this.handleRoverSelect(rover)}>
+        onClick={() => this.handleRoverSelect(rover.maxPhotoDate, i)}>
         <Text>{capitalize(rover.name)}</Text>
       </Link>
     ));
