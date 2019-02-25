@@ -12,7 +12,8 @@ class SelectBox extends Component {
 
   handleCamFilterSelect = async e => {
     const camera = e.target.value;
-    const { selectCameraFilter } = this.props.actions;
+    const { selectCameraFilter, toggleSidebar } = this.props.actions;
+    if (this.props.ui.sidebarIsOpen) toggleSidebar();
     this.setState({ camera });
     await selectCameraFilter({ camera });
   };
@@ -23,7 +24,7 @@ class SelectBox extends Component {
         <Text color={theme.primary}>Select Camera:</Text>
         <SelectContainer>
           <StyledSelect
-            value={this.props.selectedCamera}
+            value={this.props.rover.selectedCamera}
             onChange={this.handleCamFilterSelect}>
             <option value="All">All</option>
             {CAMERAS.map(({ abbrev, fullName }, i) => (
@@ -39,6 +40,6 @@ class SelectBox extends Component {
 }
 
 export default connect(
-  state => state.rover,
+  state => state,
   dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
 )(SelectBox);
