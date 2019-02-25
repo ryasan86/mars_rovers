@@ -19,7 +19,7 @@ class App extends Component {
   handleFetchPhotos = () => {
     const { startLoading, stopLoading, storePhotos } = this.props.actions;
     startLoading();
-    const { rovers, selectedDate: date } = this.props; // selected date from date picker or max photo date default
+    const { rovers, selectedDate: date } = this.props;
     const { name } = rovers.find(({ selected }) => selected); // selected rover
     client.getRoverPhotos({ name, date }, async ({ photos }) => {
       await storePhotos({ photos });
