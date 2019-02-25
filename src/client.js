@@ -4,8 +4,8 @@ import { formatEarthDate } from "./utils";
 
 export default {
   getRoverPhotos(query, successCb) {
-    const { rover, date } = query;
-    fetch(`${BASE_API_URL}/${rover}/photos?earth_date=${formatEarthDate(date)}&api_key=${API_KEY}`)
+    const { name, date } = query;
+    fetch(`${BASE_API_URL}/${name}/photos?earth_date=${formatEarthDate(date)}&api_key=${API_KEY}`)
       .then(checkStatus)
       .then(parseJSON)
       .then(successCb);

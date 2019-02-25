@@ -6,12 +6,16 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { DatePickerContainer, StyledDatePicker } from './DatePickerStyles';
 import { Text } from './../../components/common/typography';
 import { actionCreators } from '../../actions';
-import { DATE_RANGES } from './../../constants';
 import { capitalize } from './../../utils';
 
 class DatePicker extends Component {
   handleDateSelect = async date => {
-    const { toggleSidebar, setDateFilter, setCameraFilter } = this.props.actions;
+    const {
+      toggleSidebar,
+      setDateFilter,
+      setCameraFilter
+    } = this.props.actions;
+
     toggleSidebar();
     setCameraFilter({ camera: 'All' });
     await setDateFilter({ date });
@@ -19,13 +23,14 @@ class DatePicker extends Component {
   };
 
   render() {
-    const { selectedRover, selectedDate } = this.props;
-    const minDate = new Date(DATE_RANGES[selectedRover].minPhotoDate);
-    const maxDate = new Date(DATE_RANGES[selectedRover].maxPhotoDate);
+    const { rovers, selectedDate } = this.props;
+    const selectedRover = rovers.find(({ selected }) => selected);
+    const minDate = new Date(selectedRover.minPhotoDate);
+    const maxDate = new Date(selectedRover.maxPhotoDate);
 
     return (
       <DatePickerContainer>
-        <Text>{capitalize(selectedRover)} Date Range:</Text>
+        <Text>{capitalize(selectedRover.name)} Date Range:</Text>
         <StyledDatePicker
           minDate={minDate}
           maxDate={maxDate}

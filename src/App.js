@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 
 import client from './client';
 import { actionCreators } from './actions';
-import { ROVERS } from './constants';
 import Header from './layout/Header/Header';
 import Sidebar from './layout/Sidebar/Sidebar';
 import Main from './layout/Main/Main';
@@ -20,8 +19,9 @@ class App extends Component {
   handleFetchPhotos = () => {
     const { startLoading, stopLoading, storePhotos } = this.props.actions;
     startLoading();
-    const { selectedRover: rover, selectedDate: date } = this.props;
-    client.getRoverPhotos({ rover, date }, async ({ photos }) => {
+    const { rovers, selectedDate: date } = this.props; // selected date from date picker or max photo date default
+    const { name } = rovers.find(({ selected }) => selected); // selected rover
+    client.getRoverPhotos({ name, date }, async ({ photos }) => {
       await storePhotos({ photos });
       stopLoading();
     });
@@ -33,8 +33,8 @@ class App extends Component {
         <Header />
         <Sidebar fetchPhotos={this.handleFetchPhotos} />
         <Switch>
-          {ROVERS.map((rover, i) => (
-            <Route key={i} path={`/${rover}`} component={Main} />
+          {this.props.rovers.map(({ name }, i) => (
+            <Route key={i} path={`/${name}`} component={Main} />
           ))}
           <Redirect from="/" to="/curiosity" />
         </Switch>

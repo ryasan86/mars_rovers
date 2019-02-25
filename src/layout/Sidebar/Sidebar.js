@@ -12,40 +12,32 @@ import {
 import DatePicker from './../../components/DatePicker/DatePicker';
 import Icon from './../../components/common/icons';
 import { Title, Text } from './../../components/common/typography';
-import { ROVERS } from '../../constants';
 import { actionCreators } from '../../actions';
-import { DATE_RANGES } from './../../constants';
 import { capitalize } from './../../utils';
 
 class Sidebar extends Component {
-  state = {
-    activeLink: 0
-  };
-
   // set active sidebar item then fetch photos
-  handleRoverSelect = async (rover, activeLink) => {
+  handleRoverSelect = async (rover = {}) => {
     const { setDateFilter, selectRover } = this.props.actions;
-    const date = new Date(DATE_RANGES[rover].maxPhotoDate);
-    this.setState({ activeLink });
-    setDateFilter({ date });
-    await selectRover({ rover });
+    setDateFilter({ date: new Date(rover.maxPhotoDate) });
+    await selectRover({ name: rover.name });
     this.props.fetchPhotos();
   };
 
   renderLinks = () =>
-    ROVERS.map((rover, i) => (
+    this.props.rover.rovers.map((rover, i) => (
       <Link
         key={i}
-        to={rover}
-        active={this.state.activeLink === i ? 1 : 0} // styled components work around
-        onClick={() => this.handleRoverSelect(rover, i)}>
-        <Text>{capitalize(rover)}</Text>
+        to={rover.name}
+        selected={rover.selected}
+        onClick={() => this.handleRoverSelect(rover)}>
+        <Text>{capitalize(rover.name)}</Text>
       </Link>
     ));
 
   render() {
     return (
-      <SidebarWrap isOpen={this.props.sidebarIsOpen}>
+      <SidebarWrap isOpen={this.props.ui.sidebarIsOpen}>
         <SidebarIcon
           iconClick={this.props.actions.toggleSidebar}
           name="close"
@@ -64,6 +56,6 @@ class Sidebar extends Component {
 }
 
 export default connect(
-  state => state.ui,
+  state => state,
   dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
 )(Sidebar);
