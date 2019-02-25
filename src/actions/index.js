@@ -1,11 +1,11 @@
-import { selectRover, storePhotos, setDateFilter, setCameraFilter } from './roverActions';
+import { selectRover, storePhotos, selectDateFilter, selectCameraFilter } from './roverActions';
 import { startLoading, stopLoading, toggleSidebar } from './uiActions';
 
 export const actionCreators = {
   selectRover,
   storePhotos,
-  setDateFilter,
-  setCameraFilter,
+  selectDateFilter,
+  selectCameraFilter,
   startLoading,
   stopLoading,
   toggleSidebar

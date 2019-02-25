@@ -12,9 +12,9 @@ class SelectBox extends Component {
 
   handleCamFilterSelect = async e => {
     const camera = e.target.value;
-    const { setCameraFilter } = this.props.actions;
+    const { selectCameraFilter } = this.props.actions;
     this.setState({ camera });
-    await setCameraFilter({ camera });
+    await selectCameraFilter({ camera });
   };
 
   render() {

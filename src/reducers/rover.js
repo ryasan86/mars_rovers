@@ -26,10 +26,8 @@ const rovers = [
   }
 ];
 
-const INITIAL_ROVER = rovers[0];
-
 const INITIAL_STATE = {
-  selectedDate: new Date(INITIAL_ROVER.maxPhotoDate),
+  selectedDate: new Date(rovers[0].maxPhotoDate),
   selectedCamera: 'All',
   photos: [],
   filteredPhotos: [],

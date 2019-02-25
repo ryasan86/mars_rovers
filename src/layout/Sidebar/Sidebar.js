@@ -18,8 +18,8 @@ import { capitalize } from './../../utils';
 class Sidebar extends Component {
   // set active sidebar item then fetch photos
   handleRoverSelect = async (rover = {}) => {
-    const { setDateFilter, selectRover } = this.props.actions;
-    setDateFilter({ date: new Date(rover.maxPhotoDate) });
+    const { selectDateFilter, selectRover } = this.props.actions;
+    selectDateFilter({ date: new Date(rover.maxPhotoDate) });
     await selectRover({ name: rover.name });
     this.props.fetchPhotos();
   };

@@ -12,13 +12,13 @@ class DatePicker extends Component {
   handleDateSelect = async date => {
     const {
       toggleSidebar,
-      setDateFilter,
-      setCameraFilter
+      selectDateFilter,
+      selectCameraFilter
     } = this.props.actions;
 
     toggleSidebar();
-    setCameraFilter({ camera: 'All' });
-    await setDateFilter({ date });
+    selectCameraFilter({ camera: 'All' });
+    await selectDateFilter({ date });
     this.props.fetchPhotos();
   };
 
