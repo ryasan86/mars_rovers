@@ -16,9 +16,10 @@ import { actionCreators } from '../../actions';
 import { capitalize } from './../../utils';
 
 class Sidebar extends Component {
-  // set active sidebar item then fetch photos
+  // set active rover then fetch photos
   handleRoverSelect = async (rover = {}) => {
     const { selectDateFilter, selectRover } = this.props.actions;
+    // default date filter to active rover max photo date
     selectDateFilter({ date: new Date(rover.maxPhotoDate) });
     await selectRover({ name: rover.name });
     this.props.fetchPhotos();
