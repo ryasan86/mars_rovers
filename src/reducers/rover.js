@@ -39,6 +39,12 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
   switch (type) {
+    case STORE_PHOTOS:
+      return {
+        ...state,
+        photos: payload.photos,
+        filteredPhotos: payload.photos
+      };
     case SELECT_ROVER:
       return {
         ...state,
@@ -49,19 +55,13 @@ export default (state = INITIAL_STATE, action) => {
       };
     case SELECT_DATE:
       return { ...state, selectedDate: payload.date };
-    case STORE_PHOTOS:
-      return {
-        ...state,
-        photos: payload.photos,
-        filteredPhotos: payload.photos
-      };
     case SELECT_CAMERA:
       return {
         ...state,
         selectedCamera: payload.camera,
-        filteredPhotos: state.photos.filter(
-          ({ camera }) => camera.name === payload.camera || payload.camera === 'All'
-        )
+        filteredPhotos: state.photos.filter(({ camera }) => {
+          return camera.name === payload.camera || payload.camera === 'All';
+        })
       };
     default:
       return state;

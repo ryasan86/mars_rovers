@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   sidebarIsOpen: true,
   loading: false
 };
+
 export default (state = INITIAL_STATE, action) => {
   const { type } = action;
   switch (type) {
