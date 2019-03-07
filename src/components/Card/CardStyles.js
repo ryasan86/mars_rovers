@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
 
-import Loader from './../Loader/Loader';
-
 const CardWrap = styled.li`
   position: relative;
   width: 300px;
