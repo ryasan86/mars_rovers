@@ -1,12 +1,16 @@
 import { BASE_API_URL } from './constants';
-import { API_KEY } from './constants';
-import { formatEarthDate } from "./utils";
+import { formatEarthDate } from './utils';
 
 export default {
   getRoverPhotos(query, successCb) {
     const { name, date } = query;
-    fetch(`${BASE_API_URL}/${name}/photos?earth_date=${formatEarthDate(date)}&api_key=${API_KEY}`)
+    const url = BASE_API_URL;
+    const apiKey = process.env.REACT_APP_API_KEY;
+    const earthDate = formatEarthDate(date);
+
+    fetch(`${url}/${name}/photos?earth_date=${earthDate}&api_key=${apiKey}`)
       .then(res => res.json())
-      .then(successCb).catch(err => console.error(err));
+      .then(successCb)
+      .catch(err => console.error(err));
   }
 };
