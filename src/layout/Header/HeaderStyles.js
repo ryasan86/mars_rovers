@@ -10,4 +10,4 @@ const HeaderWrap = styled.header`
   box-shadow: 1px 0 5px rgba(0, 0, 0, 0.3);
 `;
 
-export { HeaderWrap };
+export default HeaderWrap;

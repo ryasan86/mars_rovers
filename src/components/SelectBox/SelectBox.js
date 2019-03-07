@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { SelectBoxContainer, SelectContainer, StyledSelect } from './SelectBoxStyles';
+import SelectBoxWrap from './SelectBoxStyles';
+import theme from './../../theme';
 import { Text } from './../../components/common/typography';
 import { actionCreators } from '../../actions';
 import { CAMERAS } from './../../constants';
-import theme from './../../theme';
 
 class SelectBox extends Component {
-
   handleCamFilterSelect = async e => {
     const camera = e.target.value;
     const { selectCameraFilter, toggleSidebar } = this.props.actions;
@@ -20,10 +19,10 @@ class SelectBox extends Component {
 
   render() {
     return (
-      <SelectBoxContainer>
+      <SelectBoxWrap>
         <Text color={theme.primary}>Select Camera:</Text>
-        <SelectContainer>
-          <StyledSelect
+        <div className="select-container">
+          <select
             value={this.props.rover.selectedCamera}
             onChange={this.handleCamFilterSelect}>
             <option value="All">All</option>
@@ -32,9 +31,9 @@ class SelectBox extends Component {
                 {fullName} ({abbrev})
               </option>
             ))}
-          </StyledSelect>
-        </SelectContainer>
-      </SelectBoxContainer>
+          </select>
+        </div>
+      </SelectBoxWrap>
     );
   }
 }

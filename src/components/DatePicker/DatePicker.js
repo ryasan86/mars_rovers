@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { DatePickerContainer, StyledDatePicker } from './DatePickerStyles';
+import DatePickerWrap from './DatePickerStyles';
 import { Text } from './../../components/common/typography';
 import { actionCreators } from '../../actions';
 import { capitalize } from './../../utils';
@@ -29,15 +30,16 @@ class DatePicker extends Component {
     const maxDate = new Date(selectedRover.maxPhotoDate);
 
     return (
-      <DatePickerContainer>
+      <DatePickerWrap>
         <Text>{capitalize(selectedRover.name)} Date Range:</Text>
-        <StyledDatePicker
+        <ReactDatePicker
+          className="date-picker"
           minDate={minDate}
           maxDate={maxDate}
           onChange={this.handleDateSelect}
           selected={new Date(selectedDate)}
           dateFormat="MMMM d, yyyy" />
-      </DatePickerContainer>
+      </DatePickerWrap>
     );
   }
 }

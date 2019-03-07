@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import {
-  SidebarWrap,
-  SidebarIcon,
-  SidebarHeader,
-  LinkContainer,
-  Link
-} from './SidebarStyles';
+import SidebarWrap from './SidebarStyles';
 import DatePicker from './../../components/DatePicker/DatePicker';
 import Icon from './../../components/common/icons';
 import { Title, Text } from './../../components/common/typography';
@@ -27,29 +22,32 @@ class Sidebar extends Component {
 
   renderLinks = () =>
     this.props.rover.rovers.map((rover, i) => (
-      <Link
+      <NavLink
+        className="nav-link"
         key={i}
         to={rover.name}
         selected={rover.selected}
         onClick={() => this.handleRoverSelect(rover.maxPhotoDate, i)}>
         <Text>{capitalize(rover.name)}</Text>
-      </Link>
+      </NavLink>
     ));
 
   render() {
     return (
       <SidebarWrap isOpen={this.props.ui.sidebarIsOpen}>
-        <SidebarIcon
+        <Icon
           iconClick={this.props.actions.toggleSidebar}
           name="close"
           width={25}
           fill="white"
-          visibility="visibile" />
-        <SidebarHeader>
+          visibility="visibile"
+          style={{ margin: '4% 6%' }}
+        />
+        <div className="sidebar-header">
           <Title>Mars Rovers</Title>
           <Icon name="rover" width={100} fill="white" />
-        </SidebarHeader>
-        <LinkContainer>{this.renderLinks()}</LinkContainer>
+        </div>
+        <div className="link-container">{this.renderLinks()}</div>
         <DatePicker fetchPhotos={this.props.fetchPhotos} />
       </SidebarWrap>
     );

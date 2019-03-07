@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import { MainWrap, CardsContainer, MainTitle } from './MainStyles';
+import MainWrap from './MainStyles';
 import Loader from './../../components/Loader/Loader';
 import Card from './../../components/Card/Card';
+import { Title } from './../../components/common/typography';
+
+const MainTitle = styled(Title)`
+  color: ${({ theme }) => theme.dark};
+  position: absolute;
+  height: ${({ theme }) => `calc(100% - ${theme.navbarHeight})`};
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 class Main extends Component {
   renderPhotos = () => {
@@ -26,10 +38,14 @@ class Main extends Component {
     const { loading } = this.props.ui;
 
     return (
-      <MainWrap>
-        <CardsContainer loading={loading}>
-          {loading ? <Loader width="75px" height="75px" /> : this.renderPhotos()}
-        </CardsContainer>
+      <MainWrap loading={loading}>
+        <ul>
+          {loading ? (
+            <Loader width="75px" height="75px" />
+          ) : (
+            this.renderPhotos()
+          )}
+        </ul>
       </MainWrap>
     );
   }

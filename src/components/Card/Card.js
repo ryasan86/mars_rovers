@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import Reveal from 'react-reveal/Reveal';
 
-import {
-  CardWrap,
-  CardLoader,
-  CardImgContainer,
-  CardImg,
-  CardBodyContainer,
-  CardText,
-  CardLink
-} from './CardStyles';
+import CardWrap from './CardStyles';
+import Loader from './../Loader/Loader';
 
 class Card extends Component {
   state = {
@@ -25,25 +18,25 @@ class Card extends Component {
 
     return (
       <Reveal>
-        <CardWrap>
-          <CardImgContainer>
-            <CardImg
-              src={img_src}
-              alt="rover-photo"
-              onLoad={this.onPhotoLoad}
-              imgIsLoading={this.state.imgIsLoading} />
-          </CardImgContainer>
-          {this.state.imgIsLoading ? <CardLoader /> : ''}
-          <CardBodyContainer imgIsLoading={this.state.imgIsLoading}>
-            <CardText>Date: {earth_date}</CardText>
-            <CardText>Martian Sol: {sol}</CardText>
-            <CardText>
+        <CardWrap {...this.state}>
+          <div className="img-container">
+            <img src={img_src} alt="rover" onLoad={this.onPhotoLoad} />
+          </div>
+          {this.state.imgIsLoading ? (
+            <Loader style={{ position: 'absolute' }} />
+          ) : (
+            ''
+          )}
+          <div className="card-body">
+            <p>Date: {earth_date}</p>
+            <p>Martian Sol: {sol}</p>
+            <p>
               Camera: {camera.full_name} ({camera.name})
-            </CardText>
-            <CardLink onClick={() => window.open(img_src, '_blank')}>
+            </p>
+            <span onClick={() => window.open(img_src, '_blank')}>
               View Image
-            </CardLink>
-          </CardBodyContainer>
+            </span>
+          </div>
         </CardWrap>
       </Reveal>
     );

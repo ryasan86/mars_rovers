@@ -8,7 +8,8 @@ const Burger = ({
   viewBox = '0 0 32 32',
   visibility = 'visibile',
   className,
-  iconClick = () => {}}) => (
+  iconClick = () => {}
+}) => (
   <StyledSVG
     width={width}
     height={width}

@@ -8,10 +8,9 @@ const StyledLoader = styled.div`
   margin: 0 auto 1em;
   display: inline-block;
   vertical-align: top;
+  svg {
+    fill: ${({ theme }) => theme.primary};
+  }
 `;
 
-const StyledSvg = styled.svg`
-  fill: ${({ theme }) => theme.primary};
-`;
-
-export { StyledLoader, StyledSvg };
+export default StyledLoader;
