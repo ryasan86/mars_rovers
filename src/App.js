@@ -47,14 +47,14 @@ class App extends Component {
 App.propTypes = {
   photos: PropTypes.arrayOf(
     PropTypes.shape({
-      img_src: PropTypes.string.isRequired,
-      earth_date: PropTypes.string.isRequired,
-      sol: PropTypes.number.isRequired,
+      img_src: PropTypes.string,
+      earth_date: PropTypes.string,
+      sol: PropTypes.number,
       camera: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        full_name: PropTypes.string.isRequired
-      })
-    })
+        name: PropTypes.string,
+        full_name: PropTypes.string
+      }).isRequired
+    }).isRequired
   )
 };
 
