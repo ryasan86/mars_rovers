@@ -10,14 +10,15 @@ const SidebarWrap = styled.div`
   flex-direction: column;
   flex-shrink: 0;
   box-shadow: 3px 0 5px rgba(0, 0, 0, 0.3);
-  transform: ${({ isOpen }) => (isOpen ? 'none' : `translateX(-30vw)`)};
+  overflow-x: hidden;
+  transform: translateX(-100%);
+  ${({ isOpen }) => isOpen && `transform: translateX(0)`};
   transition: transform 0.5s;
   -webkit-transition: transform 0.5s;
   -moz-transition: transform 0.5s;
   -o-transition: transform 0.5s;
   @media screen and (max-width: 900px) {
     width: 50vw;
-    transform: ${({ isOpen }) => (isOpen ? 'none' : `translateX(-60vw)`)};
   }
   .sidebar-header {
     text-align: center;
