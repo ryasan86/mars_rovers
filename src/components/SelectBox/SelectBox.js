@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import SelectBoxWrap from './SelectBoxStyles';
-import theme from './../../theme';
 import { actionCreators } from '../../actions';
 import { CAMERAS } from './../../constants';
 

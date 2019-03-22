@@ -43,7 +43,7 @@ class App extends Component {
   }
 }
 
-// type check shape of photo data
+// type check shape of incoming photo data
 App.propTypes = {
   photos: PropTypes.arrayOf(
     PropTypes.shape({
