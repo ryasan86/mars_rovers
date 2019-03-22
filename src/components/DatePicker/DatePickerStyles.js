@@ -14,12 +14,6 @@ const DatePickerWrap = styled.div`
     border-radius: 5px;
     border: none;
     margin: 10px 0;
-    @media screen and (max-width: 420px) {
-      font-size: 0.9em;
-    }
-    @media screen and (max-width: 360px) {
-      font-size: 0.7em;
-    }
   }
 `;
 

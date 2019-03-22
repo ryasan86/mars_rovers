@@ -5,27 +5,22 @@ const SidebarWrap = styled.div`
   z-index: 1;
   position: fixed;
   background: ${({ theme }) => theme.primary};
-  width: 25vw;
-  height: 100vh;
-  flex-direction: column;
-  flex-shrink: 0;
+  top: 0;
+  left: 0;
+  width: 30%;
+  min-width: 300px;
+  height: 100%;
   box-shadow: 3px 0 5px rgba(0, 0, 0, 0.3);
   overflow-x: hidden;
   transform: translateX(-100%);
   ${({ isOpen }) => isOpen && `transform: translateX(0)`};
-  transition: transform 0.5s;
-  -webkit-transition: transform 0.5s;
-  -moz-transition: transform 0.5s;
-  -o-transition: transform 0.5s;
-  @media screen and (max-width: 900px) {
-    width: 50vw;
-  }
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
   .sidebar-header {
     text-align: center;
     margin-top: 10%;
-    @media screen and (max-width: 420px) {
-      margin-top: 0;
-    }
   }
   .link-container {
     display: flex;
@@ -37,10 +32,6 @@ const SidebarWrap = styled.div`
       text-decoration: none;
       padding: 15px;
       padding-left: ${({ theme }) => theme.sidebarPadding};
-      @media screen and (max-width: 420px) {
-        padding: 7.5px;
-        padding-left: 15px;
-      }
     }
   }
 `;
