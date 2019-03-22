@@ -11,7 +11,6 @@ const SidebarWrap = styled.div`
   min-width: 300px;
   height: 100%;
   box-shadow: 3px 0 5px rgba(0, 0, 0, 0.3);
-  overflow-x: hidden;
   transform: translateX(-100%);
   ${({ isOpen }) => isOpen && `transform: translateX(0)`};
   transition: all 0.5s;

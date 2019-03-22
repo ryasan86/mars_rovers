@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 
 import SelectBoxWrap from './SelectBoxStyles';
 import theme from './../../theme';
-import { Text } from './../../components/common/typography';
 import { actionCreators } from '../../actions';
 import { CAMERAS } from './../../constants';
 
@@ -20,7 +19,7 @@ class SelectBox extends Component {
   render() {
     return (
       <SelectBoxWrap>
-        <Text color={theme.primary}>Select Camera:</Text>
+        <h3 className="title">Camera:</h3>
         <div className="select-container">
           <select
             value={this.props.rover.selectedCamera}
