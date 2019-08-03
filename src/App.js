@@ -1,14 +1,15 @@
 import React, { Component, Fragment } from 'react';
-import { Route, Redirect, Switch } from 'react-router-dom';
+// import { Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { actionCreators } from './actions';
 import client from './client';
-import Header from './layout/Header/Header';
-import Sidebar from './layout/Sidebar/Sidebar';
-import Main from './layout/Main/Main';
+import Home from './layout/Home/Home';
+// import Header from './layout/Header/Header';
+// import Sidebar from './layout/Sidebar/Sidebar';
+// import Main from './layout/Main/Main';
 
 class App extends Component {
   componentDidMount = () => {
@@ -30,14 +31,15 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <Header />
+        <Home />
+        {/* <Header />
         <Sidebar fetchPhotos={this.handleFetchPhotos} />
         <Switch>
           {this.props.rovers.map(({ name }, i) => (
             <Route key={i} path={`/${name}`} component={Main} />
           ))}
           <Redirect from="/" to="/curiosity" />
-        </Switch>
+        </Switch> */}
       </Fragment>
     );
   }

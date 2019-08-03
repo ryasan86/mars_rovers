@@ -1,7 +1,7 @@
 import { TOGGLE_SIDEBAR, START_LOADING, STOP_LOADING } from './../actions/types';
 
 const INITIAL_STATE = {
-  sidebarIsOpen: true,
+  sidebarIsOpen: false,
   loading: false
 };
 
