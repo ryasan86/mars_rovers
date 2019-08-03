@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
+// css for item-1, item-2, and item-3
 const itemsCSS = () => {
   let styles = '';
-
   for (let i = 1, pct = 85; i <= 3; i++, pct -= 2) {
     styles += `
       &.item-${i} {
@@ -20,7 +20,7 @@ const StyledHome = styled.div`
   height: 100%;
   position: fixed;
   overflow: hidden;
-  
+
   video {
     height: 100%;
     position: relative;
@@ -68,7 +68,7 @@ const StyledHome = styled.div`
     .rover-list__item {
       position: relative;
       left: -10%;
-      background: rgba(140, 140, 140, 0.5);
+      background: rgba(140, 140, 140, 0.9);
       margin: 10px 0;
       text-transform: uppercase;
       padding: 5px 10px;

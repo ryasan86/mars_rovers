@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import MainWrap from './MainStyles';
-import Loader from './../../components/Loader/Loader';
-import Card from './../../components/Card/Card';
-import { Title } from './../../components/common/typography';
+import PhotosWrap from './PhotosStyles';
+import Loader from '../Loader/Loader';
+import Card from '../Card/Card';
+import { Title } from '../common/typography';
 
-const MainTitle = styled(Title)`
+const PhotosTitle = styled(Title)`
   color: ${({ theme }) => theme.dark};
   position: absolute;
   height: ${({ theme }) => `calc(100% - ${theme.navbarHeight})`};
@@ -17,7 +17,7 @@ const MainTitle = styled(Title)`
   align-items: center;
 `;
 
-class Main extends Component {
+class Photos extends Component {
   renderPhotos = () => {
     const { filteredPhotos } = this.props.rover;
     return filteredPhotos.length ? (
@@ -25,12 +25,12 @@ class Main extends Component {
         return <Card key={i} photo={photo} />;
       })
     ) : (
-      <MainTitle>
+      <PhotosTitle>
         No available photos{' '}
         <span role="img" aria-label="img">
           😢
         </span>
-      </MainTitle>
+      </PhotosTitle>
     );
   };
 
@@ -38,7 +38,7 @@ class Main extends Component {
     const { loading } = this.props.ui;
 
     return (
-      <MainWrap loading={loading}>
+      <PhotosWrap loading={loading}>
         <ul>
           {loading ? (
             <Loader width="75px" height="75px" />
@@ -46,7 +46,7 @@ class Main extends Component {
             this.renderPhotos()
           )}
         </ul>
-      </MainWrap>
+      </PhotosWrap>
     );
   }
 }
@@ -54,4 +54,4 @@ class Main extends Component {
 export default connect(
   state => state,
   null
-)(Main);
+)(Photos);

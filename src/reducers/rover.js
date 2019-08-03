@@ -10,7 +10,7 @@ const rovers = [
     name: 'curiosity',
     minPhotoDate: '2012-8-6',
     maxPhotoDate: '2019-2-14',
-    selected: true
+    selected: false
   },
   {
     name: 'opportunity',
@@ -26,10 +26,8 @@ const rovers = [
   }
 ];
 
-const INITIAL_ROVER = rovers[0];
-
 const INITIAL_STATE = {
-  selectedDate: new Date(INITIAL_ROVER.maxPhotoDate),
+  selectedDate: null,
   selectedCamera: 'All',
   photos: [],
   filteredPhotos: [],

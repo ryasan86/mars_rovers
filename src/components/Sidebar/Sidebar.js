@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import SidebarWrap from './SidebarStyles';
-import DatePicker from './../../components/DatePicker/DatePicker';
-import Icon from './../../components/common/icons';
-import { Title, Text } from './../../components/common/typography';
+import DatePicker from '../DatePicker/DatePicker';
+import Icon from '../common/icons';
+import { Title, Text } from '../common/typography';
 import { actionCreators } from '../../actions';
-import { capitalize } from './../../utils';
+import { capitalize } from '../../utils';
 
 class Sidebar extends Component {
   // set active rover then fetch photos

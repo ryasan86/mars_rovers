@@ -1,46 +1,25 @@
-import React, { Component, Fragment } from 'react';
-// import { Route, Redirect, Switch } from 'react-router-dom';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import { actionCreators } from './actions';
-import client from './client';
-import Home from './layout/Home/Home';
-// import Header from './layout/Header/Header';
-// import Sidebar from './layout/Sidebar/Sidebar';
-// import Main from './layout/Main/Main';
+import Home from './pages/Home/Home';
+// import Main from './pages/Main/Main';
 
 class App extends Component {
   componentDidMount = () => {
-    this.handleFetchPhotos();
+    this.roverHasBeenSelected();
   };
 
-  // fetch photo data
-  handleFetchPhotos = () => {
-    const { startLoading, stopLoading, storePhotos } = this.props.actions;
-    startLoading();
-    const { rovers, selectedDate: date } = this.props;
-    const { name } = rovers.find(({ selected }) => selected); // selected rover
-    client.getRoverPhotos({ name, date }, async ({ photos }) => {
-      await storePhotos({ photos });
-      stopLoading();
-    });
+  roverHasBeenSelected = () => {
+    const x = this.props.rovers.some(rover => rover.selected);
+    console.log(x);
   };
 
   render() {
     return (
-      <Fragment>
+      <>
         <Home />
-        {/* <Header />
-        <Sidebar fetchPhotos={this.handleFetchPhotos} />
-        <Switch>
-          {this.props.rovers.map(({ name }, i) => (
-            <Route key={i} path={`/${name}`} component={Main} />
-          ))}
-          <Redirect from="/" to="/curiosity" />
-        </Switch> */}
-      </Fragment>
+      </>
     );
   }
 }
@@ -62,5 +41,5 @@ App.propTypes = {
 
 export default connect(
   state => state.rover,
-  dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
+  null
 )(App);

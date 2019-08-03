@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const MainWrap = styled.div`
+const PhotosWrap = styled.div`
   width: 100%;
   height: 100%;
   overflow-y: scroll;
@@ -16,4 +16,4 @@ const MainWrap = styled.div`
   }
 `;
 
-export default MainWrap;
+export default PhotosWrap;

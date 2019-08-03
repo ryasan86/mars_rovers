@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import HeaderWrap from './HeaderStyles';
-import SelectBox from './../../components/SelectBox/SelectBox';
-import Icon from '../../components/common/icons';
+import SelectBox from '../SelectBox/SelectBox';
+import Icon from '../common/icons';
 import theme from '../../theme';
 import { actionCreators } from '../../actions';
 import { GITHUB_REPO_URL } from '../../constants';
