@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "c439bdae217f665f9762",
-    "url": "/mars_rovers/static/js/main.c439bdae.chunk.js"
+    "revision": "1c82a052edab79c912e5",
+    "url": "/mars_rovers/static/js/main.1c82a052.chunk.js"
   },
   {
     "revision": "1906e1362dc7d262ed99",
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/mars_rovers/static/media/mars_rovers_clip_2.766b8620.mp4"
   },
   {
-    "revision": "b449605485fb6202bbf8ad5b5c7601fb",
+    "revision": "269893cd029ea29917844daca04ed411",
     "url": "/mars_rovers/index.html"
   }
 ];
