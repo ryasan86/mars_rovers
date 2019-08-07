@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import Home from './pages/Home/Home';
-// import Main from './pages/Main/Main';
+import Main from './pages/Main/Main';
 
 class App extends Component {
-  componentDidMount = () => {
-    this.roverHasBeenSelected();
-  };
-
-  roverHasBeenSelected = () => {
-    const x = this.props.rovers.some(rover => rover.selected);
-    console.log(x);
-  };
-
   render() {
     return (
-      <>
-        <Home />
-      </>
+      <BrowserRouter>
+        <Route
+          render={({ location }) => (
+            <TransitionGroup>
+              <CSSTransition
+                key={location.key}
+                timeout={600}
+                classNames="fade">
+                <Switch location={location}>
+                  <Route component={Home} path="/" exact />
+                  <Route component={Main} path="/main" />
+                </Switch>
+              </CSSTransition>
+            </TransitionGroup>
+          )}
+        />
+      </BrowserRouter>
     );
   }
 }

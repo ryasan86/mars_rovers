@@ -49,6 +49,26 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: lighten(#216ba5, 20%);
 }
+
+.fade-appear .fade-enter {
+  opacity: 0;
+  z-index: 10;
+}
+
+.fade-appear-active 
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 0.6s linear 0.3s;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  transition: opacity 0.3s linear;
+}
 `;
 
 ReactDOM.render(
