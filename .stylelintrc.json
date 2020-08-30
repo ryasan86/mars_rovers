@@ -1,0 +1,15 @@
+{
+    "extends": [
+        "stylelint-config-standard",
+        "stylelint-config-sass-guidelines"
+    ],
+    "rules": {
+        "color-named": "always-where-possible",
+        "no-missing-end-of-source-newline": null,
+        "function-parentheses-space-inside": null,
+        "scss/dollar-variable-pattern": null,
+        "selector-class-pattern": null,
+        "indentation": 4
+        
+    }
+}
