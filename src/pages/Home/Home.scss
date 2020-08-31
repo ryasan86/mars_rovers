@@ -53,11 +53,21 @@
 
 .home__circle-container {
     align-items: center;
+    color: $primary;
     display: flex;
+    flex-direction: column;
     height: 40rem;
     justify-content: center;
     position: relative;
     width: 40rem;
+
+    footer {
+        bottom: 3rem;
+        font-size: 1.8rem;
+        left: 50%;
+        position: absolute;
+        transform: translateX(-50%);
+    }
 }
 
 @mixin rotate($name, $initial, $final) {
@@ -142,11 +152,22 @@
 }
 
 .home__title {
-    color: $primary;
-    display: inline-block;
     letter-spacing: 1rem;
-    position: absolute;
+    margin: 0;
+    padding: 0;
     text-align: center;
+    transform: translateY(-1rem);
+}
+
+.home__subtitle {
+    font-size: 1.8rem;
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    transform: translateY(5rem);
+    width: 80%;
 }
 
 .home__title-dot {
@@ -175,10 +196,11 @@
 /********************** body ************************/
 
 .home__body {
-    background: $dark;
+    background: $darker;
     bottom: 0;
     box-shadow: $box_shadow_top;
-    padding: 10rem;
+    clip-path: polygon(0 0, 100% 7%, 100% 100%, 0% 100%);
+    padding: 8rem 0 3rem;
     position: relative;
     top: 100vh;
     width: 100%;
@@ -190,6 +212,7 @@
     flex-direction: column;
     justify-content: center;
     margin: 0;
+    margin-top: 5rem;
 }
 
 .home__card-img-container {
@@ -257,7 +280,6 @@
 .home__card-btn {
     background: $primary;
     border: 0;
-    border-radius: 0.3rem;
     color: white;
     padding: 1rem 0;
     text-align: center;

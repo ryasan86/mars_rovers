@@ -5,14 +5,86 @@ import { Link } from 'react-router-dom'
 
 import { actionCreators } from '../../actions'
 import { MilkyWay } from '../../videos'
-import { ReduxProps } from '../../interfaces'
+import { ReduxProps, RoverProps } from '../../interfaces'
+import { capitalize } from '../../utils'
 import './Home.scss'
+
+interface Props {
+    img: string
+    activeDate: string
+    description: string
+}
+
+const detailsMap = {
+    opportunity: {
+        img: require('../../images/opportunity-1.png'),
+        activeDate: 'Feb. 7, 2019 - Feb. 13 2019',
+        description:
+            'No response has been received from Opportunity since Sol 5111 (June 10, 2018), amid a planet-encircling dust storm on Mars.'
+    } as Props,
+    curiosity: {
+        img: require('../../images/opportunity-1.png'),
+        activeDate: 'Feb. 7, 2019 - Feb. 13 2019',
+        description:
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ullam quisquam.'
+    } as Props,
+    spirit: {
+        img: require('../../images/opportunity-1.png'),
+        activeDate: 'Feb. 7, 2019 - Feb. 13 2019',
+        description:
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ullam quisquam.'
+    } as Props
+}
+
+interface CardProps extends RoverProps {
+    name: string
+    img: string
+    activeDate: string
+    description: string
+}
+
+const CardList: React.StatelessComponent<{
+    rovers: CardProps[]
+    onSelect: (maxPhotoDate, idx) => void
+}> = ({ rovers, onSelect }) => (
+    <ul className='home__card-list'>
+        {rovers.map((rover, i: number) => (
+            <li key={i} className='home__card-item'>
+                <h2 className='home__card-title'>{capitalize(rover.name)}</h2>
+                <div className='home__card-img-container'>
+                    <img
+                        className='home__card-img'
+                        src={rover.img}
+                        alt='opportunity'
+                    />
+                </div>
+                <div className='home__card-details'>
+                    <h4 className='home__card-active-date'>
+                        {rover.activeDate}
+                    </h4>
+                    <span className='home__card-description'>
+                        {rover.description}
+                    </span>
+                    <Link
+                        to={{
+                            pathname: '/main',
+                            search: `?name=${rover.name}`
+                        }}
+                        onClick={() => onSelect(rover.maxPhotoDate, i)}
+                        className='home__card-btn'>
+                        View photos {'>'}
+                    </Link>
+                </div>
+            </li>
+        ))}
+    </ul>
+)
 
 const Home: React.FC<ReduxProps> = ({ actions, data }) => {
     const [pct, setPct] = useState(0)
     const [int, setInt] = useState(null)
 
-    const handleSelect = async (maxPhotoDate, idx) => {
+    const handleSelect = async (maxPhotoDate: string, idx: number) => {
         const { selectDateFilter, selectRover } = actions
         selectDateFilter({ date: new Date(maxPhotoDate) })
         await selectRover({ idx })
@@ -23,10 +95,10 @@ const Home: React.FC<ReduxProps> = ({ actions, data }) => {
         const interval = setInterval(increase, 20)
         setInt(interval)
         return () => clearInterval(int)
-    }, [int])
+    }, [])
 
     useEffect(() => {
-        if (pct >= 100) clearInterval(int) 
+        if (pct >= 100) clearInterval(int)
     }, [pct, int])
 
     return (
@@ -50,103 +122,22 @@ const Home: React.FC<ReduxProps> = ({ actions, data }) => {
                     <h1 className='home__title'>
                         Welc<span className='home__title-dot'></span>me to Mars
                     </h1>
+                    <blockquote className='home__subtitle'>
+                        Mars is the only planet inhabited solely by robots.
+                    </blockquote>
+                    <footer>– Sarcastic Rover</footer>
                 </div>
                 <div className='home__pct-text'>{pct}%</div>
             </div>
             <div className='home__body'>
-                <ul className='home__card-list'>
-                    <li className='home__card-item'>
-                        <h2 className='home__card-title'>Opportunity</h2>
-                        <div className='home__card-img-container'>
-                            <img
-                                className='home__card-img'
-                                src={require('../../images/opportunity-1.png')}
-                                alt='opportunity'
-                            />
-                        </div>
-                        <div className='home__card-details'>
-                            <h4 className='home__card-active-date'>
-                                Feb. 7, 2019 - Feb. 13 2019
-                            </h4>
-                            <span className='home__card-description'>
-                                No response has been received from Opportunity
-                                since Sol 5111 (June 10, 2018), amid a
-                                planet-encircling dust storm on Mars.
-                            </span>
-                            <Link
-                                to={{
-                                    pathname: '/main',
-                                    search: `?name=opportunity`
-                                }}
-                                onClick={() =>
-                                    handleSelect(data.rovers[0].maxPhotoDate, 0)
-                                }
-                                className='home__card-btn'>
-                                View photos {'>'}
-                            </Link>
-                        </div>
-                    </li>
-                    <li className='home__card-item'>
-                        <h2 className='home__card-title'>Curiosity</h2>
-                        <div className='home__card-img-container'>
-                            <img
-                                className='home__card-img'
-                                src={require('../../images/curiosity-1.png')}
-                                alt='curiosity'
-                            />
-                        </div>
-                        <div className='home__card-details'>
-                            <h4 className='home__card-active-date'>
-                                Feb. 7, 2019 - Feb. 13 2019
-                            </h4>
-                            <span className='home__card-description'>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipisicing elit. Ab, ullam quisquam.
-                            </span>
-                            <Link
-                                to={{
-                                    pathname: '/main',
-                                    search: `?name=curiosity`
-                                }}
-                                onClick={() =>
-                                    handleSelect(data.rovers[1].maxPhotoDate, 1)
-                                }
-                                className='home__card-btn'>
-                                View photos {'>'}
-                            </Link>
-                        </div>
-                    </li>
-                    <li className='home__card-item'>
-                        <h2 className='home__card-title'>Spirit</h2>
-                        <div className='home__card-img-container'>
-                            <img
-                                className='home__card-img'
-                                src={require('../../images/spirit-1.png')}
-                                alt='spirit'
-                            />
-                        </div>
-                        <div className='home__card-details'>
-                            <h4 className='home__card-active-date'>
-                                Feb. 7, 2019 - Feb. 13 2019
-                            </h4>
-                            <span className='home__card-description'>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipisicing elit. Ab, ullam quisquam.
-                            </span>
-                            <Link
-                                to={{
-                                    pathname: '/main',
-                                    search: `?name=spirit`
-                                }}
-                                onClick={() =>
-                                    handleSelect(data.rovers[2].maxPhotoDate, 2)
-                                }
-                                className='home__card-btn'>
-                                View photos {'>'}
-                            </Link>
-                        </div>
-                    </li>
-                </ul>
+                <CardList
+                    onSelect={handleSelect}
+                    rovers={data.rovers.map((rover, i) => ({
+                        idx: i,
+                        ...rover,
+                        ...detailsMap[rover.name]
+                    }))}
+                />
             </div>
         </div>
     )
