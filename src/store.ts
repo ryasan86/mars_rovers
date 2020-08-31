@@ -1,6 +1,7 @@
 import { createStore } from 'redux'
 import { combineReducers } from 'redux'
-import rover from './reducers/rover'
-import ui from './reducers/ui'
+import app from './reducers'
 
-export default createStore(combineReducers({ rover, ui }))
+export default createStore(
+    combineReducers({ data: app.dataReducer, ui: app.uiReducer })
+)

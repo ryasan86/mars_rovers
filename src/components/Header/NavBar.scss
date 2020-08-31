@@ -1,0 +1,11 @@
+@import '../../index';
+
+.navbar {
+    align-items: center;
+    box-shadow: $box_shadow_xs;
+    display: flex;
+    height: 5rem;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+}

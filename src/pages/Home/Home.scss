@@ -1,27 +1,77 @@
 @import '../../index';
 
 .home {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.home__header {
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.home__coordinates-text {
+    color: $primary;
+    display: inline-block;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    transform: rotate(-90deg);
+    z-index: 1;
+}
+
+.home__pct-text {
+    color: $primary;
+    display: inline-block;
+    position: absolute;
+    right: 7rem;
+    top: 50%;
+    z-index: 1;
+}
+
+.home__overlay {
+    background: $dark;
     height: 100%;
+    opacity: 0.8;
+    position: absolute;
+    width: 100%;
 }
 
 .home__video {
-    filter: grayscale(1);
     height: 100%;
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
 }
 
-.home__content {
+.home__circle-container {
     align-items: center;
-    background: white;
-    color: $dark;
     display: flex;
-    height: 100%;
+    height: 40rem;
     justify-content: center;
-    left: 0;
-    letter-spacing: 1rem;
-    opacity: 0.7;
-    position: absolute;
-    top: 0;
-    width: 100%;
+    position: relative;
+    width: 40rem;
+}
+
+@mixin rotate($name, $initial, $final) {
+    animation: #{$name} 10s ease-in-out infinite;
+
+    @keyframes #{$name} {
+        0% {
+            transform: rotate($initial);
+        }
+
+        100% {
+            transform: rotate($final);
+        }
+    }
 }
 
 @keyframes clockwise {
@@ -35,31 +85,182 @@
 }
 
 @keyframes counterclockwise {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
 }
 
 .home__circle-track {
-    animation: clockwise 10s ease-in-out infinite;
+    border: 0.1rem solid $primary;
     border-radius: 50%;
-    border-style: solid;
-    border-width: 0.2rem;
-    height: 55rem;
+    height: 100%;
     position: absolute;
     text-align: center;
-    width: 55rem;
-
-    &::before {
-        border: 0.2rem solid $dark;
-        border-radius: 50%;
-        content: '';
-        height: 4rem;
-        position: absolute;
-        top: -2rem;
-        width: 4rem;
-    }
+    width: 100%;
 
     &--clockwise {
-        animation: clockwise 10s ease-in-out infinite;
-        border-left-color: lightgray !important;
-        border-right-color: lightgray !important;
+        @include rotate(clockwise, 0, 360deg);
     }
+
+    &--counterclockwise {
+        @include rotate(counterclockwise, 0, -360deg);
+    }
+
+    &--counterclockwise::before {
+        align-items: center;
+        border: 0.2rem solid white;
+        border-radius: 50%;
+        content: '';
+        display: flex;
+        height: 3rem;
+        justify-content: center;
+        left: 50%;
+        position: absolute;
+        top: -1.5rem;
+        transform: translateX(-50%);
+        width: 3rem;
+    }
+
+    &--counterclockwise::after {
+        align-items: center;
+        background: $primary;
+        border-radius: 50%;
+        content: '';
+        display: flex;
+        height: 1rem;
+        justify-content: center;
+        left: 50%;
+        position: absolute;
+        top: -0.5rem;
+        transform: translateX(-50%);
+        width: 1rem;
+    }
+}
+
+.home__title {
+    color: $primary;
+    display: inline-block;
+    letter-spacing: 1rem;
+    position: absolute;
+    text-align: center;
+}
+
+.home__title-dot {
+    border: 0.2rem solid white;
+    border-radius: 50%;
+    content: '';
+    display: inline-block;
+    height: 2rem;
+    position: relative;
+    transform: translate(-0.4rem, 0.2rem);
+    width: 2rem;
+
+    &::before {
+        background: $primary;
+        border-radius: 50%;
+        content: '';
+        height: 0.5rem;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 0.5rem;
+    }
+}
+
+/********************** body ************************/
+
+.home__body {
+    background: $dark;
+    bottom: 0;
+    box-shadow: $box_shadow_top;
+    padding: 10rem;
+    position: relative;
+    top: 100vh;
+    width: 100%;
+}
+
+.home__card-list {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+}
+
+.home__card-img-container {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+}
+
+.home__card-img {
+    grid-column: 1/2;
+    grid-row: 2/6;
+    height: 100%;
+    object-fit: contain;
+    overflow: hidden;
+    width: 20rem;
+}
+
+.home__card-item {
+    background: $light;
+    box-shadow: $box_shadow-xlg;
+    color: $dark;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 5fr;
+    height: 25rem;
+    list-style-type: none;
+    margin: 0;
+    width: 60rem;
+
+    &:not(:first-child) {
+        margin-top: 3rem;
+    }
+
+    &:not(:nth-child(2)) .home__card-img {
+        padding: 3rem;
+    }
+}
+
+.home__card-title {
+    background: $primary;
+    color: white;
+    grid-column: 1/3;
+    grid-row: 1/2;
+    letter-spacing: 1rem;
+    margin: 0;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.home__card-details {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.4rem;
+    grid-column: 2/3;
+    grid-row: 2/6;
+    justify-content: space-around;
+    line-height: 1.5;
+    padding: 1rem 0;
+}
+
+.home__card-active-date {
+    margin: 0;
+}
+
+.home__card-btn {
+    background: $primary;
+    border: 0;
+    border-radius: 0.3rem;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    text-decoration: none;
+    width: 15rem;
 }

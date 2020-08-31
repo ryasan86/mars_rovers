@@ -1,49 +1,41 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { actionCreators } from '../../actions'
-import StyledMain from './MainStyles'
 import Header from '../../components/Header/Header'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import Photos from '../../components/Photos/Photos'
 import client from '../../client'
+import { ReduxProps } from '../../interfaces'
 
-interface Props {
-    rovers: any
-    selectedDate: string
-    actions: any
-}
-
-class Main extends Component<Props> {
-    componentDidMount = () => {
-        this.handleFetchPhotos()
-    }
-
-    // fetch photo data
-    handleFetchPhotos = () => {
-        const { startLoading, stopLoading, storePhotos } = this.props.actions
+const Main: React.FC<ReduxProps> = ({ actions, data }) => {
+    const fetchPhotos = () => {
+        const { startLoading, stopLoading, storePhotos } = actions
+        const { rovers, selectedDate: date } = data
         startLoading()
-        const { rovers, selectedDate: date } = this.props
-        const { name } = rovers.find(({ selected }) => selected) // selected rover
-        client.getRoverPhotos({ name, date }, async ({ photos }) => {
-            await storePhotos({ photos })
-            stopLoading()
-        })
-    }
 
-    render () {
-        return (
-            <StyledMain>
-                <Header />
-                <Sidebar fetchPhotos={this.handleFetchPhotos} />
-                <Photos />
-            </StyledMain>
+        client.getRoverPhotos(
+            { name: rovers[0].name, date },
+            async ({ photos }) => {
+                await storePhotos({ photos })
+                stopLoading()
+            }
         )
     }
+
+    useEffect(() => fetchPhotos(), [])
+
+    return (
+        <div style={{ width: '100%', height: '100%', position: 'absolute' }}>
+            <Header />
+            <Sidebar fetchPhotos={fetchPhotos} />
+            <Photos />
+        </div>
+    )
 }
 
 export default connect(
-    state => state.rover,
+    state => state,
     dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
 )(Main)

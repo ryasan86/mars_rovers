@@ -9,7 +9,7 @@
         "function-parentheses-space-inside": null,
         "scss/dollar-variable-pattern": null,
         "selector-class-pattern": null,
-        "indentation": 4
-        
+        "indentation": 4,
+        "declaration-block-semicolon-newline-after": null
     }
 }

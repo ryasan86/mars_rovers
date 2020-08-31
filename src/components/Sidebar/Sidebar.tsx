@@ -1,69 +1,67 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import SidebarWrap from './SidebarStyles'
 import DatePicker from '../DatePicker/DatePicker'
 import Icon from '../common/icons'
 import { Title, Text } from '../common/typography'
 import { actionCreators } from '../../actions'
 import { capitalize } from '../../utils'
+import { ReduxProps, DataProps } from '../../interfaces'
 
-interface Props {
-    actions: any
-    fetchPhotos: () => void
-    rover: any
-    ui: any
+const LinkList: React.StatelessComponent<{
+    data: DataProps
+    onRoverSelect: (maxPhotoDate, idx) => void
+}> = ({ data, onRoverSelect }) => {
+    return (
+        <div className='sidebar__link-list'>
+            {data.rovers.map((rover, i) => (
+                <NavLink
+                    className='nav-link'
+                    key={i}
+                    to={{ pathname: `/main`, search: `?name=${rover.name}` }}
+                    selected={rover.selected}
+                    onClick={() => onRoverSelect(rover.maxPhotoDate, i)}>
+                    <Text>{capitalize(rover.name)}</Text>
+                </NavLink>
+            ))}
+        </div>
+    )
 }
 
-class Sidebar extends Component<Props> {
-    // set active rover then fetch photos
-    handleRoverSelect = async (maxPhotoDate, idx) => {
-        const {
-            selectDateFilter,
-            selectRover,
-            toggleSidebar
-        } = this.props.actions
+const Sidebar: React.FC<ReduxProps & { fetchPhotos: () => void }> = ({
+    data,
+    ui,
+    actions,
+    fetchPhotos
+}) => {
+    const handleRoverSelect = async (maxPhotoDate, idx) => {
+        const { selectDateFilter, selectRover, toggleSidebar } = actions
         toggleSidebar()
-        // default date filter to active rover max photo date
         selectDateFilter({ date: new Date(maxPhotoDate) })
         await selectRover({ idx })
-        this.props.fetchPhotos()
+        fetchPhotos()
     }
 
-    renderLinks = () =>
-        this.props.rover.rovers.map((rover, i) => (
-            <NavLink
-                className='nav-link'
-                key={i}
-                to={{ pathname: `/main`, search: `?name=${rover.name}` }}
-                selected={rover.selected}
-                onClick={() => this.handleRoverSelect(rover.maxPhotoDate, i)}>
-                <Text>{capitalize(rover.name)}</Text>
-            </NavLink>
-        ))
-
-    render () {
-        return (
-            <SidebarWrap isOpen={this.props.ui.sidebarIsOpen}>
-                <Icon
-                    iconClick={this.props.actions.toggleSidebar}
-                    name='close'
-                    width={25}
-                    fill='white'
-                    visibility='visibile'
-                    style={{ margin: '4% 6%' }}
-                />
-                <div className='sidebar-header'>
-                    <Title>Mars Rovers</Title>
-                    <Icon name='rover' width={100} fill='white' />
-                </div>
-                <div className='link-container'>{this.renderLinks()}</div>
-                <DatePicker fetchPhotos={this.props.fetchPhotos} />
-            </SidebarWrap>
-        )
-    }
+    return (
+        <div className={`sidebar${ui.sidebarIsOpen ? ' active' : ''}`}>
+            <Icon
+                onClick={actions.toggleSidebar}
+                name='close'
+                width={25}
+                fill='white'
+                visibility='visible'
+                style={{ margin: '4% 6%' }}
+            />
+            <div className='sidebar__header'>
+                <Title>Mars Rovers</Title>
+                <Icon name='rover' width={100} fill='white' />
+            </div>
+            <LinkList onRoverSelect={handleRoverSelect} data={data} />
+            <DatePicker fetchPhotos={fetchPhotos} />
+        </div>
+    )
 }
 
 export default connect(

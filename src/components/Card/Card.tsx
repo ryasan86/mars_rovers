@@ -1,35 +1,48 @@
 import React, { useState } from 'react'
 import Reveal from 'react-reveal/Reveal'
 
-import CardWrap from './CardStyles'
 import Loader from '../Loader/Loader'
 
-const Card = ({ photo: { img_src, earth_date, sol, camera } }) => {
+interface Props {
+    photo: {
+        img_src: string
+        earth_date: string
+        sol: string
+        camera: {
+            full_name: string
+            name: string
+        }
+    }
+}
+
+const Card: React.FC<Props> = (props) => {
+    const { img_src, earth_date, sol, camera } = props.photo
     const [imgIsLoading, setLoading] = useState(true)
+
     const onPhotoLoad = () => setLoading(false)
 
     return (
         <Reveal>
-            <CardWrap imgIsLoading={imgIsLoading}>
-                <div className='img-container'>
-                    <img src={img_src} alt='rover' onLoad={onPhotoLoad} />
+            <div className='card'>
+                <div className='card__img-container'>
+                    <img
+                        className='card__img'
+                        src={img_src}
+                        alt='rover'
+                        onLoad={onPhotoLoad}
+                    />
                 </div>
-                {imgIsLoading ? (
-                    <Loader style={{ position: 'absolute' }} />
-                ) : (
-                    ''
-                )}
-                <div className='card-body'>
-                    <p>Date: {earth_date}</p>
-                    <p>Martian Sol: {sol}</p>
-                    <p>
-                        Camera: {camera.full_name} ({camera.name})
-                    </p>
-                    <span onClick={() => window.open(img_src, '_blank')}>
+                {imgIsLoading && <Loader style={{ position: 'absolute' }} />}
+                {/* prettier-ignore */}
+                <div className='card__body'>
+                    <p className='card__text'>Date: {earth_date}</p>
+                    <p className='card__text'>Martian Sol: {sol}</p>
+                    <p className='card__text'>Camera: {camera.full_name} ({camera.name})</p>
+                    <button className='card__btn' onClick={() => window.open(img_src, '_blank')}>
                         View Image
-                    </span>
+                    </button>
                 </div>
-            </CardWrap>
+            </div>
         </Reveal>
     )
 }

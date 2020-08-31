@@ -3,8 +3,8 @@ import { formatEarthDate } from './utils'
 
 export default {
     getRoverPhotos: (
-        query: { name: string; date: any },
-        successCb: any
+        query: { name: string; date: Date },
+        successCb: (arg: unknown) => void
     ): void => {
         const { name, date } = query
         const url = BASE_API_URL

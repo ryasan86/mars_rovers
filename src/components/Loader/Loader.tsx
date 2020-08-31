@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react'
-import StyledLoader from './LoaderStyles'
+import './Loader.scss'
 
 interface Props {
     width?: string | number
@@ -9,13 +9,14 @@ interface Props {
 }
 
 const Loader: React.FC<Props> = ({ width, height, className, style }) => (
-    <StyledLoader className={className} style={style}>
+    <div className={`${className} loader`} style={style}>
         <svg
             version='1.1'
             xmlns='http://www.w3.org/2000/svg'
             x='0px'
             y='0px'
             viewBox='0 0 24 30'
+            className='loader__inner'
             width={width}
             height={height}>
             <rect x='0' y='13' width='4' height='5'>
@@ -73,7 +74,7 @@ const Loader: React.FC<Props> = ({ width, height, className, style }) => (
                 />
             </rect>
         </svg>
-    </StyledLoader>
+    </div>
 )
 
 export default Loader

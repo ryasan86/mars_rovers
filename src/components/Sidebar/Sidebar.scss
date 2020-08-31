@@ -1,0 +1,32 @@
+@import '../../index.scss';
+
+.sidebar {
+    background: $primary;
+    box-shadow: 3px 0 5px rgba(0, 0, 0, 0.3);
+    height: 100%;
+    left: 0;
+    min-width: 300px;
+    position: fixed;
+    top: 0;
+    transform: translateX(-100%);
+    transition: all 0.5s;
+    width: 30%;
+    z-index: 1;
+
+    &.active {
+        transform: translateX(0);
+    }
+}
+
+.sidebar__header {
+    margin-top: 10%;
+    text-align: center;
+}
+
+.sidebar__link-item {
+    background: $primary;
+    color: $light;
+    padding: 15px;
+    padding-left: 5rem;
+    text-decoration: none;
+}

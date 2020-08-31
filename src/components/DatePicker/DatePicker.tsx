@@ -4,55 +4,49 @@ import { bindActionCreators } from 'redux'
 import ReactDatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-import DatePickerWrap from './DatePickerStyles'
-import { Text } from './../../components/common/typography'
 import { actionCreators } from '../../actions'
 import { capitalize } from './../../utils'
+import { ReduxProps } from '../../interfaces'
+import './DatePicker'
 
-interface Props {
-    actions: any
+const DatePicker: React.FC<ReduxProps & {
     fetchPhotos: () => void
-    rovers: any[]
-    selectedDate: string
-}
-
-class DatePicker extends React.Component<Props> {
-    handleDateSelect = async date => {
+}> = props => {
+    const handleDateSelect = async date => {
         const {
             toggleSidebar,
             selectDateFilter,
             selectCameraFilter
-        } = this.props.actions
+        } = props.actions
 
         toggleSidebar()
         selectCameraFilter({ camera: 'All' })
         await selectDateFilter({ date })
-        this.props.fetchPhotos()
+        props.fetchPhotos()
     }
 
-    render () {
-        const { rovers, selectedDate } = this.props
-        const selectedRover = rovers.find(({ selected }) => selected)
-        const minDate = new Date(selectedRover.minPhotoDate)
-        const maxDate = new Date(selectedRover.maxPhotoDate)
+    const { selectedDate, rovers } = props.data
+    const minDate = new Date(rovers[0].minPhotoDate)
+    const maxDate = new Date(rovers[0].maxPhotoDate)
 
-        return (
-            <DatePickerWrap>
-                <Text>{capitalize(selectedRover.name)} Date Range:</Text>
-                <ReactDatePicker
-                    className='date-picker'
-                    minDate={minDate}
-                    maxDate={maxDate}
-                    onChange={this.handleDateSelect}
-                    selected={new Date(selectedDate)}
-                    dateFormat='MMMM d, yyyy'
-                />
-            </DatePickerWrap>
-        )
-    }
+    return (
+        <div className='date-picker'>
+            <div className='date-picker__text'>
+                {capitalize(rovers[0].name)} Date Range:
+            </div>
+            <ReactDatePicker
+                className='date-picker__inner'
+                minDate={minDate}
+                maxDate={maxDate}
+                onChange={handleDateSelect}
+                selected={new Date(selectedDate)}
+                dateFormat='MMMM d, yyyy'
+            />
+        </div>
+    )
 }
 
 export default connect(
-    state => state.rover,
+    state => state,
     dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
 )(DatePicker)

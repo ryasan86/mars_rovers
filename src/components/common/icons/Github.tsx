@@ -1,14 +1,25 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import { StyledSVG } from './IconStyles'
 
-const Github = ({
+interface Props {
+    style: CSSProperties
+    name: string
+    fill: string
+    width: string | number
+    viewBox: string
+    visibility: string
+    className: string
+    onClick: () => void
+}
+
+const Github: React.StatelessComponent<Partial<Props>> = ({
     style = {},
     fill = '#fff',
     width = '100%',
     viewBox = '0 0 496 512',
     visibility = 'visibile',
     className,
-    iconClick = () => {}
+    onClick = () => ({})
 }) => (
     <StyledSVG
         width={width}
@@ -16,7 +27,7 @@ const Github = ({
         style={style}
         viewBox={viewBox}
         fill={fill}
-        onClick={iconClick}
+        onClick={onClick}
         visibility={visibility}
         className={className}
         xmlSpace='preserve'

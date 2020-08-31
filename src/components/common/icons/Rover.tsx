@@ -1,13 +1,24 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 
-const Rover = ({
+interface Props {
+    style: CSSProperties
+    name: string
+    fill: string
+    width: string | number
+    viewBox: string
+    visibility: string
+    className: string
+    onClick: () => void
+}
+
+const Rover: React.StatelessComponent<Partial<Props>> = ({
     style = {},
     fill = '#fff',
     width = '100%',
     viewBox = '0 0 128 128',
     visibility = 'visibile',
     className,
-    iconClick = () => {}
+    onClick = () => ({})
 }) => (
     <svg
         width={width}
@@ -15,7 +26,7 @@ const Rover = ({
         style={style}
         viewBox={viewBox}
         fill={fill}
-        onClick={iconClick}
+        onClick={onClick}
         visibility={visibility}
         className={className}
         xmlSpace='preserve'
