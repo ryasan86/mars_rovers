@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { Link } from 'react-router-dom'
 
-import { actionCreators } from '../../actions'
 import { MilkyWay } from '../../videos'
-import { ReduxProps } from '../../interfaces'
+import { ReduxProps, RoverProps } from '../../interfaces'
 import { classList } from '../../utils'
 import { roverList } from '../../store'
 import './Home.scss'
@@ -20,7 +16,7 @@ interface Props {
 // prettier-ignore
 const detailsMap = {
     opportunity: {
-        img: require('../../images/opportunity-1.png'),
+        img: require('../../images/curiosity-1.png'),
         activeDate: 'Feb. 7, 2019 - Feb. 13 2019',
         description: 'No response has been received from Opportunity since Sol 5111 (June 10, 2018), amid a planet-encircling dust storm on Mars.'
     } as Props,
@@ -30,7 +26,7 @@ const detailsMap = {
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ullam quisquam.'
     } as Props,
     spirit: {
-        img: require('../../images/opportunity-1.png'),
+        img: require('../../images/spirit-1.png'),
         activeDate: 'Feb. 7, 2019 - Feb. 13 2019',
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ullam quisquam.'
     } as Props
@@ -41,52 +37,67 @@ const rovers = roverList.map(({ rover }) => ({
     ...detailsMap[rover.name]
 }))
 
-const CardList: React.StatelessComponent<{
-    onSelect: (maxPhotoDate, idx) => void
-}> = ({ onSelect }) => (
-    <ul className='home__card-list'>
-        {rovers.map((rover, i: number) => (
-            <li key={i} className='home__card-item'>
-                <h2 className='home__card-title'>{rover.name}</h2>
-                <div className='home__card-img-container'>
-                    <img
-                        className='home__card-img'
-                        src={rover.img}
-                        alt='opportunity'
-                    />
-                </div>
-                <div className='home__card-details'>
-                    <h4 className='home__card-active-date'>
-                        {rover.activeDate}
-                    </h4>
-                    <span className='home__card-description'>
-                        {rover.description}
-                    </span>
-                    <Link
-                        to={{
-                            pathname: '/main',
-                            search: `?name=${rover.name}`
-                        }}
-                        onClick={() => onSelect(rover.maxPhotoDate, i)}
-                        className='home__card-btn'>
-                        View photos {'>'}
-                    </Link>
-                </div>
-            </li>
-        ))}
-    </ul>
-)
+const CardList: React.FC = () => {
+    const [activeIdx, setActiveIdx] = useState(null)
 
-const Home: React.FC<ReduxProps> = ({ actions }) => {
+    const handleToggleActive = (i: number) => () => {
+        setActiveIdx(prevIdx => (prevIdx === null ? i : null))
+    }
+
+    useEffect(() => {
+        console.log(activeIdx)
+    }, [activeIdx])
+
+    return (
+        <ul className='home__card-list'>
+            {rovers.map((rover: RoverProps & Props, i: number) => (
+                <li
+                    key={i}
+                    className={classList({
+                        'home__card-item': true,
+                        [`home__card-item--${i + 1}`]: true,
+                        active: activeIdx === i
+                    })}
+                    onMouseEnter={handleToggleActive(i)}
+                    onMouseLeave={handleToggleActive(i)}>
+                    <div className='home__card-header'>
+                        <div className='home__card-img-container'>
+                            <img
+                                className='home__card-img'
+                                src={rover.img}
+                                alt={rover.name}
+                            />
+                        </div>
+                    </div>
+                    {/* prettier-ignore */}
+                    <div
+                        className={`home__card-panel home__card-panel--${i + 1}`}>
+                        <p className='home__card-medium-text'>{rover.name}</p>
+                        <small className='home__card-small-text'>
+                            {rover.activeDate}
+                        </small>
+                    </div>
+                    <div
+                        className={`home__card-body home__card-body--${i + 1}`}>
+                        <p className='home__card-medium-text'>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing
+                            elit. Nisi voluptatem labore repellendus possimus
+                            ullam impedit porro rerum, sunt cumque molestiae
+                            debitis beatae vero perspiciatis sint architecto
+                            recusandae corporis cum reprehenderit.
+                        </p>
+                        <button className='home__card-btn'>See photos</button>
+                    </div>
+                </li>
+            ))}
+        </ul>
+    )
+}
+
+const Home: React.FC<ReduxProps> = () => {
     const [pct, setPct] = useState(0)
     const [int, setInt] = useState(null)
     const [isDownScroll, setIsDownScroll] = useState(true)
-
-    const handleSelect = async (maxPhotoDate: string, idx: number) => {
-        const { selectDateFilter, selectRover } = actions
-        selectDateFilter({ date: new Date(maxPhotoDate) })
-        await selectRover({ idx })
-    }
 
     const handleScrollClick = () => {
         window.scrollTo(0, document.body.scrollHeight)
@@ -134,7 +145,8 @@ const Home: React.FC<ReduxProps> = ({ actions }) => {
                     <div className='home__circle-track home__circle-track--clockwise'></div>
                     <div className='home__circle-track home__circle-track--counterclockwise'></div>
                     <h1 className='home__title'>
-                        Welc<span className='home__title-dot'></span>me to <br/> Mars
+                        Welc<span className='home__title-dot'></span>me to{' '}
+                        <br /> Mars
                     </h1>
                     <q className='home__subtitle'>
                         Mars is the only planet inhabited solely by robots.
@@ -142,11 +154,12 @@ const Home: React.FC<ReduxProps> = ({ actions }) => {
                     <footer>– Sarcastic Rover</footer>
                 </div>
                 <div className='home__pct-text'>
-                    {pct}<span>%</span>
+                    {pct}
+                    <span>%</span>
                 </div>
             </div>
             <div className='home__body'>
-                <CardList onSelect={handleSelect} />
+                <CardList />
             </div>
             <button
                 className={classList({
@@ -161,6 +174,4 @@ const Home: React.FC<ReduxProps> = ({ actions }) => {
     )
 }
 
-export default connect(null, dispatch => ({
-    actions: bindActionCreators(actionCreators, dispatch)
-}))(Home)
+export default Home
