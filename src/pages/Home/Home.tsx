@@ -5,9 +5,11 @@ import { Link } from 'react-router-dom'
 
 import { actionCreators } from '../../actions'
 import { MilkyWay } from '../../videos'
-import { ReduxProps, RoverProps } from '../../interfaces'
-import { capitalize } from '../../utils'
+import { ReduxProps } from '../../interfaces'
+import { classList } from '../../utils'
+import { useCustomQuery, baseUrl, apiKey } from '../../client'
 import './Home.scss'
+import { roverList } from '../../store'
 
 interface Props {
     img: string
@@ -15,42 +17,37 @@ interface Props {
     description: string
 }
 
+// prettier-ignore
 const detailsMap = {
     opportunity: {
         img: require('../../images/opportunity-1.png'),
         activeDate: 'Feb. 7, 2019 - Feb. 13 2019',
-        description:
-            'No response has been received from Opportunity since Sol 5111 (June 10, 2018), amid a planet-encircling dust storm on Mars.'
+        description: 'No response has been received from Opportunity since Sol 5111 (June 10, 2018), amid a planet-encircling dust storm on Mars.'
     } as Props,
     curiosity: {
         img: require('../../images/opportunity-1.png'),
         activeDate: 'Feb. 7, 2019 - Feb. 13 2019',
-        description:
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ullam quisquam.'
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ullam quisquam.'
     } as Props,
     spirit: {
         img: require('../../images/opportunity-1.png'),
         activeDate: 'Feb. 7, 2019 - Feb. 13 2019',
-        description:
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ullam quisquam.'
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ullam quisquam.'
     } as Props
 }
 
-interface CardProps extends RoverProps {
-    name: string
-    img: string
-    activeDate: string
-    description: string
-}
+const rovers = roverList.map(({ rover }) => ({
+    ...rover,
+    ...detailsMap[rover.name]
+}))
 
 const CardList: React.StatelessComponent<{
-    rovers: CardProps[]
     onSelect: (maxPhotoDate, idx) => void
-}> = ({ rovers, onSelect }) => (
+}> = ({ onSelect }) => (
     <ul className='home__card-list'>
         {rovers.map((rover, i: number) => (
             <li key={i} className='home__card-item'>
-                <h2 className='home__card-title'>{capitalize(rover.name)}</h2>
+                <h2 className='home__card-title'>{rover.name}</h2>
                 <div className='home__card-img-container'>
                     <img
                         className='home__card-img'
@@ -70,7 +67,7 @@ const CardList: React.StatelessComponent<{
                             pathname: '/main',
                             search: `?name=${rover.name}`
                         }}
-                        onClick={() => onSelect(rover.maxPhotoDate, i)}
+                        onClick={() => onSelect(rover.info.maxPhotoDate, i)}
                         className='home__card-btn'>
                         View photos {'>'}
                     </Link>
@@ -80,15 +77,33 @@ const CardList: React.StatelessComponent<{
     </ul>
 )
 
-const Home: React.FC<ReduxProps> = ({ actions, data }) => {
+const query = `${baseUrl}/insight_weather/?api_key=${apiKey}&feedtype=json&ver=2.0`
+
+const Home: React.FC<ReduxProps> = ({ actions }) => {
+    const { data: weatherData } = useCustomQuery({ query })
     const [pct, setPct] = useState(0)
     const [int, setInt] = useState(null)
+    const [isDownScroll, setIsDownScroll] = useState(true)
 
     const handleSelect = async (maxPhotoDate: string, idx: number) => {
         const { selectDateFilter, selectRover } = actions
         selectDateFilter({ date: new Date(maxPhotoDate) })
         await selectRover({ idx })
     }
+
+    const handleScrollClick = () => {
+        window.scrollTo(0, document.body.scrollHeight)
+    }
+
+    const handleScroll = () => {
+        console.log('scrolling')
+        setIsDownScroll(prev => !prev)
+    }
+
+    useEffect(() => {
+        document.addEventListener('scroll', handleScroll)
+        return document.removeEventListener('scroll', handleScroll)
+    }, [])
 
     useEffect(() => {
         const increase = () => setPct(prev => prev + 1)
@@ -101,11 +116,15 @@ const Home: React.FC<ReduxProps> = ({ actions, data }) => {
         if (pct >= 100) clearInterval(int)
     }, [pct, int])
 
+    useEffect(() => {
+        if (weatherData) console.log(weatherData['sol_keys'])
+    }, [weatherData])
+
     return (
         <div className='home'>
             <div className='home__header'>
                 <span className='home__coordinates-text'>
-                    34.0522° N, 118.2437° W
+                    Sol 259 | High: -17° F | Low: -150° F
                 </span>
                 <video
                     className='home__video'
@@ -122,30 +141,29 @@ const Home: React.FC<ReduxProps> = ({ actions, data }) => {
                     <h1 className='home__title'>
                         Welc<span className='home__title-dot'></span>me to Mars
                     </h1>
-                    <blockquote className='home__subtitle'>
+                    <q className='home__subtitle'>
                         Mars is the only planet inhabited solely by robots.
-                    </blockquote>
+                    </q>
                     <footer>– Sarcastic Rover</footer>
                 </div>
                 <div className='home__pct-text'>{pct}%</div>
             </div>
             <div className='home__body'>
-                <CardList
-                    onSelect={handleSelect}
-                    rovers={data.rovers.map((rover, i) => ({
-                        idx: i,
-                        ...rover,
-                        ...detailsMap[rover.name]
-                    }))}
-                />
+                <CardList onSelect={handleSelect} />
             </div>
+            <button
+                className={classList({
+                    'home__scroll-btn': true,
+                    'down-scroll': isDownScroll,
+                    'up-scroll': !isDownScroll
+                })}
+                onClick={handleScrollClick}>
+                &#8595;
+            </button>
         </div>
     )
 }
 
-export default connect(
-    state => state,
-    dispatch => ({
-        actions: bindActionCreators(actionCreators, dispatch)
-    })
-)(Home)
+export default connect(null, dispatch => ({
+    actions: bindActionCreators(actionCreators, dispatch)
+}))(Home)

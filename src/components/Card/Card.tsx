@@ -2,20 +2,9 @@ import React, { useState } from 'react'
 import Reveal from 'react-reveal/Reveal'
 
 import Loader from '../Loader/Loader'
+import { PhotoProps } from '../../interfaces'
 
-interface Props {
-    photo: {
-        img_src: string
-        earth_date: string
-        sol: string
-        camera: {
-            full_name: string
-            name: string
-        }
-    }
-}
-
-const Card: React.FC<Props> = (props) => {
+const Card: React.FC<{ photo: PhotoProps }> = props => {
     const { img_src, earth_date, sol, camera } = props.photo
     const [imgIsLoading, setLoading] = useState(true)
 

@@ -5,13 +5,22 @@ export interface RoverProps {
     selected: boolean
 }
 
-interface PhotoProps {
+export interface PhotoProps {
+    id: number
     img_src: string
     earth_date: string
-    sol: string
+    sol: number
     camera: {
+        id: number
+        rover_id: number
         full_name: string
         name: string
+    }
+    rover: {
+        id: number
+        name: string
+        landing_date: string
+        status: string
     }
 }
 
@@ -20,7 +29,7 @@ export interface DataProps {
     selectedCamera: string
     photos: PhotoProps[]
     filteredPhotos: PhotoProps[]
-    rovers: RoverProps[]
+    roverList: Array<{ rover: RoverProps }>
 }
 
 export interface UiProps {

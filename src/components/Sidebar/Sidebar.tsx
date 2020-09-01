@@ -4,38 +4,39 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import DatePicker from '../DatePicker/DatePicker'
-import Icon from '../common/icons'
-import { Title, Text } from '../common/typography'
+import Icon from '../../common/icons'
 import { actionCreators } from '../../actions'
-import { capitalize } from '../../utils'
-import { ReduxProps, DataProps } from '../../interfaces'
+import { ReduxProps, DataProps, RoverProps } from '../../interfaces'
+import { roverList } from '../../store'
 
 const LinkList: React.StatelessComponent<{
     data: DataProps
+    selectedRover: RoverProps
     onRoverSelect: (maxPhotoDate, idx) => void
-}> = ({ data, onRoverSelect }) => {
+}> = ({ onRoverSelect, selectedRover }) => {
     return (
         <div className='sidebar__link-list'>
-            {data.rovers.map((rover, i) => (
+            {roverList.map(({ rover }, i) => (
                 <NavLink
-                    className='nav-link'
+                    className='sidebar__nav-link'
                     key={i}
-                    to={{ pathname: `/main`, search: `?name=${rover.name}` }}
-                    selected={rover.selected}
+                    to={{
+                        pathname: `/main`,
+                        search: `?name=${rover.name}`
+                    }}
+                    selected={selectedRover}
                     onClick={() => onRoverSelect(rover.maxPhotoDate, i)}>
-                    <Text>{capitalize(rover.name)}</Text>
+                    <span className='sidebar__rover-name'>{rover.name}</span>
                 </NavLink>
             ))}
         </div>
     )
 }
 
-const Sidebar: React.FC<ReduxProps & { fetchPhotos: () => void }> = ({
-    data,
-    ui,
-    actions,
-    fetchPhotos
-}) => {
+const Sidebar: React.FC<ReduxProps & {
+    fetchPhotos: () => void
+    selectedRover: RoverProps
+}> = ({ data, ui, actions, fetchPhotos, selectedRover }) => {
     const handleRoverSelect = async (maxPhotoDate, idx) => {
         const { selectDateFilter, selectRover, toggleSidebar } = actions
         toggleSidebar()
@@ -55,11 +56,18 @@ const Sidebar: React.FC<ReduxProps & { fetchPhotos: () => void }> = ({
                 style={{ margin: '4% 6%' }}
             />
             <div className='sidebar__header'>
-                <Title>Mars Rovers</Title>
+                <h2 className='sidebar__title'>Mars Rovers</h2>
                 <Icon name='rover' width={100} fill='white' />
             </div>
-            <LinkList onRoverSelect={handleRoverSelect} data={data} />
-            <DatePicker fetchPhotos={fetchPhotos} />
+            <LinkList
+                onRoverSelect={handleRoverSelect}
+                data={data}
+                selectedRover={selectedRover}
+            />
+            <DatePicker
+                fetchPhotos={fetchPhotos}
+                selectedRover={selectedRover}
+            />
         </div>
     )
 }

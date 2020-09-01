@@ -5,34 +5,30 @@ import ReactDatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 import { actionCreators } from '../../actions'
-import { capitalize } from './../../utils'
-import { ReduxProps } from '../../interfaces'
+import { ReduxProps, RoverProps } from '../../interfaces'
 import './DatePicker'
 
 const DatePicker: React.FC<ReduxProps & {
     fetchPhotos: () => void
-}> = props => {
+    selectedRover: RoverProps
+}> = ({ data, actions, selectedRover }) => {
     const handleDateSelect = async date => {
-        const {
-            toggleSidebar,
-            selectDateFilter,
-            selectCameraFilter
-        } = props.actions
+        const { toggleSidebar, selectDateFilter, selectCameraFilter } = actions
 
         toggleSidebar()
         selectCameraFilter({ camera: 'All' })
         await selectDateFilter({ date })
-        props.fetchPhotos()
     }
 
-    const { selectedDate, rovers } = props.data
-    const minDate = new Date(rovers[0].minPhotoDate)
-    const maxDate = new Date(rovers[0].maxPhotoDate)
+    const { selectedDate } = data
+    const minDate = new Date(selectedRover.minPhotoDate)
+    const maxDate = new Date(selectedRover.maxPhotoDate)
+    console.log(selectedRover)
 
     return (
         <div className='date-picker'>
             <div className='date-picker__text'>
-                {capitalize(rovers[0].name)} Date Range:
+                {/* {capitalize(selectedRover.minPhotoDate)} Date Range: */}
             </div>
             <ReactDatePicker
                 className='date-picker__inner'

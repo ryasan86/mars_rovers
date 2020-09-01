@@ -1,6 +1,6 @@
 import moment from 'moment'
 
-const formatEarthDate = (date: Date = new Date()): string => {
+const formatEarthDate = (date: string): string => {
     return moment(date).format('YYYY-M-D')
 }
 

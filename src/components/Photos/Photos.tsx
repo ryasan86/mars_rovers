@@ -3,19 +3,19 @@ import { connect } from 'react-redux'
 
 import Loader from '../Loader/Loader'
 import Card from '../Card/Card'
-import { ReduxProps } from '../../interfaces'
+import { ReduxProps, PhotoProps } from '../../interfaces'
 import './Photos'
 
-const Photos: React.FC<ReduxProps> = props => {
-    const { filteredPhotos } = props.data
+const Photos: React.FC<ReduxProps & { photos: Array<PhotoProps> }> = props => {
+    const { photos } = props
     const { loading } = props.ui
 
     return (
         <div className='photos'>
             <ul className='photos__list'>
                 {loading && <Loader width='75px' height='75px' />}
-                {filteredPhotos.length ? (
-                    filteredPhotos.map((photo, i) => {
+                {photos?.length ? (
+                    photos.map((photo, i) => {
                         return <Card key={i} photo={photo} />
                     })
                 ) : (

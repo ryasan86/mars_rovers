@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import SelectBox from '../SelectBox/SelectBox'
-import Icon from '../common/icons'
+import Icon from '../../common/icons'
 import theme from '../../theme'
 import { actionCreators } from '../../actions'
 import { GITHUB_REPO_URL } from '../../constants'
