@@ -37,8 +37,6 @@ export const roverList: Array<{ rover: RoverProps }> = Object.values(
     roverMap
 ).map(value => ({ rover: value }))
 
-console.log(roverList)
-
 const DATA_INITIAL_STATE = {
     selectedDate: null,
     selectedCamera: 'All',

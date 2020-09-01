@@ -17,8 +17,8 @@ const SelectBox: React.FC<ReduxProps> = ({ data, ui, actions }) => {
 
     return (
         <div className='select-box'>
-            <h3 className='select-box__title'>Camera:</h3>
-            <div className='select-container'>
+            <div className='select-box__title'>Camera</div>
+            <div className='select-box__container'>
                 <select
                     className='select-box__box'
                     value={data.selectedCamera}

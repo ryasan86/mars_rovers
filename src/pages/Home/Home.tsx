@@ -7,9 +7,9 @@ import { actionCreators } from '../../actions'
 import { MilkyWay } from '../../videos'
 import { ReduxProps } from '../../interfaces'
 import { classList } from '../../utils'
-import { useCustomQuery, baseUrl, apiKey } from '../../client'
-import './Home.scss'
 import { roverList } from '../../store'
+import './Home.scss'
+import './HomeCards.scss'
 
 interface Props {
     img: string
@@ -67,7 +67,7 @@ const CardList: React.StatelessComponent<{
                             pathname: '/main',
                             search: `?name=${rover.name}`
                         }}
-                        onClick={() => onSelect(rover.info.maxPhotoDate, i)}
+                        onClick={() => onSelect(rover.maxPhotoDate, i)}
                         className='home__card-btn'>
                         View photos {'>'}
                     </Link>
@@ -77,10 +77,7 @@ const CardList: React.StatelessComponent<{
     </ul>
 )
 
-const query = `${baseUrl}/insight_weather/?api_key=${apiKey}&feedtype=json&ver=2.0`
-
 const Home: React.FC<ReduxProps> = ({ actions }) => {
-    const { data: weatherData } = useCustomQuery({ query })
     const [pct, setPct] = useState(0)
     const [int, setInt] = useState(null)
     const [isDownScroll, setIsDownScroll] = useState(true)
@@ -116,16 +113,14 @@ const Home: React.FC<ReduxProps> = ({ actions }) => {
         if (pct >= 100) clearInterval(int)
     }, [pct, int])
 
-    useEffect(() => {
-        if (weatherData) console.log(weatherData['sol_keys'])
-    }, [weatherData])
-
     return (
         <div className='home'>
             <div className='home__header'>
-                <span className='home__coordinates-text'>
-                    Sol 259 | High: -17° F | Low: -150° F
-                </span>
+                <div className='home__coordinates-text'>
+                    current weather on mars: <br /> Sol 259<span> | </span>High:
+                    -17° F <span> | </span>
+                    Low: -150° F
+                </div>
                 <video
                     className='home__video'
                     preload='auto'
@@ -139,14 +134,16 @@ const Home: React.FC<ReduxProps> = ({ actions }) => {
                     <div className='home__circle-track home__circle-track--clockwise'></div>
                     <div className='home__circle-track home__circle-track--counterclockwise'></div>
                     <h1 className='home__title'>
-                        Welc<span className='home__title-dot'></span>me to Mars
+                        Welc<span className='home__title-dot'></span>me to <br/> Mars
                     </h1>
                     <q className='home__subtitle'>
                         Mars is the only planet inhabited solely by robots.
                     </q>
                     <footer>– Sarcastic Rover</footer>
                 </div>
-                <div className='home__pct-text'>{pct}%</div>
+                <div className='home__pct-text'>
+                    {pct}<span>%</span>
+                </div>
             </div>
             <div className='home__body'>
                 <CardList onSelect={handleSelect} />

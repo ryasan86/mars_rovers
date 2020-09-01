@@ -2,10 +2,16 @@
 
 .navbar {
     align-items: center;
-    box-shadow: $box_shadow_xs;
+    box-shadow: $box_shadow_s;
     display: flex;
     height: 5rem;
     justify-content: space-between;
     padding: 20px;
     width: 100%;
+}
+
+.navbar__icon {
+    fill: $primary;
+    height: 2.5rem;
+    width: 2.5rem;
 }

@@ -2,7 +2,7 @@
 
 .sidebar {
     background: $primary;
-    box-shadow: 3px 0 5px rgba(0, 0, 0, 0.3);
+    box-shadow: $box_shadow_m;
     height: 100%;
     left: 0;
     min-width: 300px;
@@ -21,6 +21,11 @@
 .sidebar__header {
     margin-top: 10%;
     text-align: center;
+}
+
+.sidebar__link-list {
+    display: flex;
+    flex-direction: column;
 }
 
 .sidebar__link-item {

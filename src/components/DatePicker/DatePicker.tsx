@@ -23,7 +23,6 @@ const DatePicker: React.FC<ReduxProps & {
     const { selectedDate } = data
     const minDate = new Date(selectedRover.minPhotoDate)
     const maxDate = new Date(selectedRover.maxPhotoDate)
-    console.log(selectedRover)
 
     return (
         <div className='date-picker'>

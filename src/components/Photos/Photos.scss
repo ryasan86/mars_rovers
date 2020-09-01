@@ -1,9 +1,25 @@
+@import '../../index';
+
 .photos {
     align-items: center;
     color: $dark;
     display: flex;
-    height: 5rem;
     justify-content: center;
-    position: absolute;
+    min-height: calc(100% - 5rem);
     width: 100%;
+}
+
+.photos__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 5rem;
+    max-width: $max_width;
+    position: relative;
+    width: 100%;
+}
+
+.photos__loader {
+    height: 7.5rem;
+    width: 7.5rem;
 }

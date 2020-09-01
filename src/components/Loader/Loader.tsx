@@ -1,24 +1,15 @@
-import React, { CSSProperties } from 'react'
+import React from 'react'
 import './Loader.scss'
 
-interface Props {
-    width?: string | number
-    height?: string | number
-    className?: string
-    style?: CSSProperties
-}
-
-const Loader: React.FC<Props> = ({ width, height, className, style }) => (
-    <div className={`${className} loader`} style={style}>
+const Loader: React.FC<{ className?: string }> = ({ className }) => (
+    <div className={`${className} loader`}>
         <svg
             version='1.1'
             xmlns='http://www.w3.org/2000/svg'
             x='0px'
             y='0px'
             viewBox='0 0 24 30'
-            className='loader__inner'
-            width={width}
-            height={height}>
+            className='loader__inner'>
             <rect x='0' y='13' width='4' height='5'>
                 <animate
                     attributeName='height'
