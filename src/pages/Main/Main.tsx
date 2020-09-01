@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
-import { actionCreators } from '../../actions'
 import Header from '../../components/Navbar/Navbar'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import Photos from '../../components/Photos/Photos'
 import Loader from '../../components/Loader/Loader'
 import { useCustomQuery, baseUrl, apiKey } from '../../client'
-import { ReduxProps } from '../../interfaces'
 import { formatEarthDate, parseParams } from '../../utils'
 import { roverMap } from '../../store'
 import './Main.scss'
 
-
-
-const Main: React.FC<ReduxProps> = () => {
+const Main: React.FC = () => {
     const location = useLocation()
     const [, name] = parseParams(location.search)
     const [selectedRover, setSelectedRover] = useState(roverMap[name])
@@ -44,7 +38,4 @@ const Main: React.FC<ReduxProps> = () => {
     )
 }
 
-export default connect(
-    state => state,
-    dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
-)(Main)
+export default Main
