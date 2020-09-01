@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react'
+import { ResponseProps } from './interfaces'
 
 export const baseUrl = 'https://api.nasa.gov'
 export const apiKey = process.env.REACT_APP_API_KEY
 
-interface ResponseProps {
-    data: Record<string, unknown>
-    loading: boolean
-    error: unknown
-}
-
-export const useCustomQuery = ({ query }: { query: string }): ResponseProps => {
+export const useCustomQuery = <T>({
+    query
+}: {
+    query: string
+}): T | ResponseProps => {
     const [{ data, loading, error }, setState] = useState({
         data: null,
         loading: false,
@@ -26,15 +25,3 @@ export const useCustomQuery = ({ query }: { query: string }): ResponseProps => {
 
     return { data, loading, error }
 }
-
-// export const getRoverPhotos = (
-//     query: { name: string; date: string },
-//     successCb: (arg: unknown) => void
-// ): void => {
-//     const { name, date } = query
-
-//     fetch(`${baseUrl}/mars-photos/api/v1/rovers/${name}/photos?earth_date=${formatEarthDate(date)}&api_key=${process.env.REACT_APP_API_KEY}`) // prettier-ignore
-//         .then(res => res.json())
-//         .then(successCb)
-//         .catch(err => console.error(err))
-// }

@@ -1,8 +1,7 @@
 import React from 'react'
 
-import SelectBox from '../SelectBox/SelectBox'
-import Icon from '../../icons'
-import { GITHUB_REPO_URL } from '../../constants'
+import SelectBox from '../SelectBox'
+import Icon from '../Icons'
 import './Navbar.scss'
 
 const Navbar: React.StatelessComponent<{ toggleSidebar: () => void }> = ({
@@ -14,7 +13,7 @@ const Navbar: React.StatelessComponent<{ toggleSidebar: () => void }> = ({
         <Icon
             className='navbar__icon'
             name='github'
-            onClick={() => window.open(GITHUB_REPO_URL, '_blank')}
+            onClick={() => window.open('https://github.com/ryasan86/mars_rovers', '_blank')}
         />
     </div>
 )

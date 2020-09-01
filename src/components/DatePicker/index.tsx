@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 import { actionCreators } from '../../actions'
 import { ReduxProps, RoverProps } from '../../interfaces'
-import './DatePicker'
+import './DatePicker.scss'
 
 const DatePicker: React.FC<ReduxProps & {
     fetchPhotos: () => void

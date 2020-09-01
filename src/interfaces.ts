@@ -47,3 +47,10 @@ export interface ActionProps {
     type: string
     payload?: Record<string, unknown>
 }
+
+
+export interface ResponseProps {
+    data: Record<string, unknown>
+    loading: boolean
+    error: unknown
+}

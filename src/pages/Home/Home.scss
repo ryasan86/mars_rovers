@@ -1,4 +1,4 @@
-@import '../../index';
+@import '../../globals';
 
 /********************** header ************************/
 .home {
@@ -225,8 +225,6 @@
     position: fixed;
     transform: translate(-50%);
 }
-
-/********************** body ************************/
 
 .home__body {
     background: $darker;

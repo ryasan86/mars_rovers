@@ -44,10 +44,6 @@ const CardList: React.FC = () => {
         setActiveIdx(prevIdx => (prevIdx === null ? i : null))
     }
 
-    useEffect(() => {
-        console.log(activeIdx)
-    }, [activeIdx])
-
     return (
         <ul className='home__card-list'>
             {rovers.map((rover: RoverProps & Props, i: number) => (
@@ -69,9 +65,9 @@ const CardList: React.FC = () => {
                             />
                         </div>
                     </div>
-                    {/* prettier-ignore */}
                     <div
-                        className={`home__card-panel home__card-panel--${i + 1}`}>
+                        className={`home__card-panel home__card-panel--${i +
+                            1}`}>
                         <p className='home__card-medium-text'>{rover.name}</p>
                         <small className='home__card-small-text'>
                             {rover.activeDate}

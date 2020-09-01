@@ -6,7 +6,7 @@ import 'normalize.css'
 
 import store from './store'
 import App from './App'
-import './index.scss'
+import './globals.scss'
 
 ReactDOM.render(
     <Provider store={store}>

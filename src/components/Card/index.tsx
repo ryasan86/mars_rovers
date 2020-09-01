@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Reveal from 'react-reveal/Reveal'
 
-import Loader from '../Loader/Loader'
+import Loader from '../Loader'
 import { PhotoProps } from '../../interfaces'
 import './Card.scss'
 

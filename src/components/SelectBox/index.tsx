@@ -4,8 +4,46 @@ import { bindActionCreators } from 'redux'
 
 import { actionCreators } from '../../actions'
 import { ReduxProps } from '../../interfaces'
-import { CAMERAS } from '../../constants'
 import './SelectBox.scss'
+
+const CAMERAS = [
+    {
+        abbrev: 'FHAZ',
+        fullName: 'Front Hazard Avoidance Camera'
+    },
+    {
+        abbrev: 'RHAZ',
+        fullName: 'Rear Hazard Avoidance Camera'
+    },
+    {
+        abbrev: 'MAST',
+        fullName: 'Mast Camera'
+    },
+    {
+        abbrev: 'CHEMCAM',
+        fullName: 'Chemistry and Camera Complex'
+    },
+    {
+        abbrev: 'MAHLI',
+        fullName: 'Mars Hand Lens Imager'
+    },
+    {
+        abbrev: 'MARDI',
+        fullName: 'Mars Descent Imager'
+    },
+    {
+        abbrev: 'NAVCAM',
+        fullName: 'Navigation Camera'
+    },
+    {
+        abbrev: 'PANCAM',
+        fullName: 'Panoramic Camera'
+    },
+    {
+        abbrev: 'MINITES',
+        fullName: 'Miniature Thermal Emission Spectrometer'
+    }
+]
 
 const SelectBox: React.FC<ReduxProps> = ({ data, ui, actions }) => {
     const handleCamFilterSelect = async e => {

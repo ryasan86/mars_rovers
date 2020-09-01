@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import DatePicker from '../DatePicker/DatePicker'
-import Icon from '../../icons'
+import DatePicker from '../DatePicker'
+import Icon from '../Icons'
 import { actionCreators } from '../../actions'
 import { RoverProps } from '../../interfaces'
 import { roverList } from '../../store'
@@ -13,7 +13,7 @@ import './Sidebar.scss'
 const LinkList: React.StatelessComponent<{
     selectedRover: RoverProps
     onRoverSelect: () => void
-}> = ({ onRoverSelect, selectedRover }) => (
+}> = ({ selectedRover }) => (
     <ul className='sidebar__link-list'>
         {roverList.map(({ rover }, i) => (
             <NavLink
@@ -23,8 +23,7 @@ const LinkList: React.StatelessComponent<{
                     pathname: `/main`,
                     search: `?name=${rover.name}`
                 }}
-                selected={selectedRover}
-                onClick={() => onRoverSelect()}>
+                selected={selectedRover}>
                 <span className='sidebar__rover-name'>{rover.name}</span>
             </NavLink>
         ))}
@@ -37,20 +36,9 @@ const Sidebar: React.StatelessComponent<{
     toggleSidebar: () => void
 }> = ({ sidebarOpen, selectedRover, toggleSidebar }) => (
     <div className={`sidebar${sidebarOpen ? ' active' : ''}`}>
-        <Icon
-            onClick={toggleSidebar}
-            name='close'
-            width={25}
-            fill='white'
-            visibility='visible'
-            style={{ margin: '4% 6%' }}
-        />
-        <div className='sidebar__header'>
-            <h2 className='sidebar__title'>Mars Rovers</h2>
-            <Icon name='rover' width={100} fill='white' />
-        </div>
+        <Icon onClick={toggleSidebar} name='close' />
         <LinkList onRoverSelect={() => ({})} selectedRover={selectedRover} />
-        <DatePicker selectedRover={selectedRover} />
+        <DatePicker />
     </div>
 )
 

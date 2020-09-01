@@ -1,4 +1,4 @@
-@import '../../index';
+@import '../../globals';
 
 $card_width: 35rem;
 $card_panel_height: 10rem;
@@ -69,15 +69,15 @@ $card_panel_height: 10rem;
     z-index: 3;
 
     &--1 {
-        background: #f44335;
+        background: $orange;
     }
 
     &--2 {
-        background: #e91e62;
+        background: $pink;
     }
 
     &--3 {
-        background: #9c27b0;
+        background: $purple;
     }
 }
 
@@ -104,15 +104,15 @@ $card_panel_height: 10rem;
     }
 
     &--1 button {
-        background: #f44335;
+        background: $orange;
     }
 
     &--2 button {
-        background: #e91e62;
+        background: $pink;
     }
 
     &--3 button {
-        background: #9c27b0;
+        background: $purple;
     }
 }
 
