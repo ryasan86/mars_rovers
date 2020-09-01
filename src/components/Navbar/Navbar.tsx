@@ -1,7 +1,7 @@
 import React from 'react'
 
 import SelectBox from '../SelectBox/SelectBox'
-import Icon from '../../common/icons'
+import Icon from '../../icons'
 import { GITHUB_REPO_URL } from '../../constants'
 import './Navbar.scss'
 

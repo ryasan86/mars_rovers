@@ -232,8 +232,9 @@
     background: $darker;
     bottom: 0;
     box-shadow: $box_shadow_top;
+    height: 120vh;
     padding: 8rem 0;
     position: relative;
-    top: 100vh;
+    top: calc(100vh + 10rem);
     width: 100%;
 }

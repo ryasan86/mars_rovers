@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import DatePicker from '../DatePicker/DatePicker'
-import Icon from '../../common/icons'
+import Icon from '../../icons'
 import { actionCreators } from '../../actions'
 import { RoverProps } from '../../interfaces'
 import { roverList } from '../../store'
