@@ -1,5 +1,14 @@
 @import '../../globals';
 
+@keyframes percentage {
+    @for $i from 1 through 100 {
+        $value: $i + '%';
+        #{$value} {
+            content: '#{$i}';
+        }
+    }
+}
+
 @mixin rotate($name, $initial, $final) {
     animation: #{$name} 10s ease-in-out infinite;
 
@@ -80,6 +89,14 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
+
+    &::before {
+        animation: percentage 10s ease-in-out infinite;
+        content: '';
+        position: absolute;
+        right: 1.5rem;
+        top: 0;
+    }
 }
 
 .home__overlay {

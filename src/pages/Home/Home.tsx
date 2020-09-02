@@ -51,7 +51,7 @@ const Home: React.FC<ReduxProps> = () => {
 
     useEffect(() => {
         const increase = () => setPct(prev => prev + 1)
-        const interval = setInterval(increase, 20)
+        const interval = setInterval(increase, 50)
         setInt(interval)
         return () => clearInterval(int)
     }, [])
@@ -102,7 +102,6 @@ const Home: React.FC<ReduxProps> = () => {
                         <footer>– Sarcastic Rover</footer>
                     </div>
                     <div className='home__pct-text'>
-                        {pct}
                         <span>%</span>
                     </div>
                 </div>
