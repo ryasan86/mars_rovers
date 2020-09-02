@@ -15,7 +15,7 @@
 
 .card__img-container {
     align-items: center;
-    background: $dark;
+    background: $black;
     display: flex;
     height: 30rem;
     justify-content: center;
@@ -23,14 +23,14 @@
     width: 30rem;
 
     .card__img {
-        background: $dark;
+        background: $black;
         height: 100%;
         width: 100%;
     }
 }
 
 .card__body {
-    color: $dark;
+    color: $black;
     padding: 1rem;
     position: relative;
 }

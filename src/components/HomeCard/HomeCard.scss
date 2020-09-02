@@ -3,17 +3,17 @@
 $card-height: 35rem;
 $panel-height: 10rem;
 
-@mixin card-primary-color($darkenPct: 0) {
+@mixin card-primary-color($blackenPct: 0) {
     &--1 {
-        background: darken($blue, $darkenPct);
+        background: darken($blue, $blackenPct);
     }
 
     &--2 {
-        background: darken($teal, $darkenPct);
+        background: darken($teal, $blackenPct);
     }
 
     &--3 {
-        background: darken($purple, $darkenPct);
+        background: darken($purple, $blackenPct);
     }
 }
 
@@ -21,7 +21,7 @@ $panel-height: 10rem;
     @include card-primary-color();
 
     box-shadow: $box-shadow-xlg;
-    color: $dark;
+    color: $black;
     height: 100%;
     height: $card-height + $panel-height;
     perspective: 600px;
@@ -118,7 +118,7 @@ $panel-height: 10rem;
 
 .home__card-body {
     align-items: flex-start;
-    background: $dark;
+    background: $black;
     bottom: 0;
     color: white;
     display: flex;
