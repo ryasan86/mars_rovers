@@ -1,9 +1,7 @@
-import React, { useEffect, useContext, Suspense } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import Layout from '../../components/Layout'
-import Header from '../../components/Navbar'
-import Sidebar from '../../components/Sidebar'
 import Loader from '../../components/Loader'
 import PhotoCard from '../../components/PhotoCard'
 import { useCustomQuery, baseUrl, apiKey } from '../../client'
@@ -20,7 +18,7 @@ const PhotosPage: React.FC = () => {
         ctx.selectedDate || roverMap[name].maxPhotoDate
     )
 
-    const { data } = useCustomQuery({
+    const { data, loading } = useCustomQuery({
         query: `${baseUrl}/mars-photos/api/v1/rovers/${name}/photos?earth_date=${date}&api_key=${apiKey}`
     })
 
@@ -29,9 +27,9 @@ const PhotosPage: React.FC = () => {
     return (
         <Layout>
             <div className='photos'>
-                <Header toggleSidebar={ctx.onToggleSidebar} />
-                <Sidebar />
-                <Suspense fallback={<Loader />}>
+                {loading ? (
+                    <Loader className='photos__loader' />
+                ) : (
                     <ul className='photos__list'>
                         {data.photos?.length ? (
                             data.photos?.map((photo, i) => {
@@ -39,14 +37,14 @@ const PhotosPage: React.FC = () => {
                             })
                         ) : (
                             <div className='photos__title'>
-                                No available photos{' '}
+                                No results{' '}
                                 <span role='img' aria-label='img'>
                                     😢
                                 </span>
                             </div>
                         )}
                     </ul>
-                </Suspense>
+                )}
             </div>
         </Layout>
     )

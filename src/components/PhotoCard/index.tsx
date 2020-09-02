@@ -13,22 +13,22 @@ const Card: React.FC<{ photo: PhotoProps }> = props => {
 
     return (
         <Reveal>
-            <div className='card'>
-                <div className='card__img-container'>
+            <div className='photo-card'>
+                <div className='photo-card__img-container'>
                     <img
-                        className='card__img'
+                        className='photo-card__img'
                         alt='rover'
                         src={img_src}
                         onLoad={onPhotoLoad}
                     />
+                    {imgIsLoading && <Loader className='photo-card__loader' />}
                 </div>
-                {imgIsLoading && <Loader />}
                 {/* prettier-ignore */}
-                <div className='card__body'>
-                    <p className='card__text'>Date: {earth_date}</p>
-                    <p className='card__text'>Martian Sol: {sol}</p>
-                    <p className='card__text'>Camera: {camera.full_name} ({camera.name})</p>
-                    <button className='card__btn' onClick={() => window.open(img_src, '_blank')}>
+                <div className='photo-card__body'>
+                    <p className='photo-card__text'>Date: {earth_date}</p>
+                    <p className='photo-card__text'>Martian Sol: {sol}</p>
+                    <p className='photo-card__text'>Camera: {camera.full_name} ({camera.name})</p>
+                    <button className='photo-card__btn' onClick={() => window.open(img_src, '_blank')}>
                         View Image
                     </button>
                 </div>

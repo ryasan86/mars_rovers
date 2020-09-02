@@ -24,7 +24,6 @@ const App: React.FC = () => {
                     onSelectDate: (date: string) => setSelectedDate(date),
                     onSelectRover: (rover: RoverProps): void => setSelectedRover(rover)
                 }}>
-                <div className='app'>
                     <Route
                         render={({ location }) => (
                             <Switch location={location}>
@@ -33,7 +32,6 @@ const App: React.FC = () => {
                             </Switch>
                         )}
                     />
-                </div>
             </Context.Provider>
         </BrowserRouter>
     )

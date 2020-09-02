@@ -7,7 +7,7 @@ import './Layout.scss'
 const Layout: React.StatelessComponent = ({ children }) => (
     <div className='layout'>
         <Navbar />
-        {/* <Sidebar /> */}
+        <Sidebar />
         <main className='layout__inner'>{children}</main>
     </div>
 )

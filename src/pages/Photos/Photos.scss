@@ -1,9 +1,9 @@
 @import '../../globals';
 
 .photos {
-    align-items: center;
     background: linear-gradient(90.49deg, #191919 15.36%, #282828 70.44%);
     display: flex;
+    flex: 1;
     height: 100%;
     justify-content: center;
     width: 100%;
@@ -21,5 +21,6 @@
 
 .photos__loader {
     height: 7.5rem;
+    margin-top: 10%;
     width: 7.5rem;
 }
