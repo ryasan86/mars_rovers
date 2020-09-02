@@ -3,7 +3,7 @@
 .card {
     align-items: center;
     background: white;
-    box-shadow: $box_shadow_lg;
+    box-shadow: $box-shadow-lg;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,9 +40,9 @@
 }
 
 .card__btn {
-    background: $primary;
-    border: 0.1rem solid $primary;
-    box-shadow: $box_shadow_m;
+    background: $red;
+    border: 0.1rem solid $red;
+    box-shadow: $box-shadow-m;
     color: white;
     cursor: pointer;
     display: block;
@@ -53,7 +53,7 @@
     transition: background 0.3s, color 0.3s;
 
     &:hover {
-        background: $primary;
+        background: $red;
         color: white;
     }
 }

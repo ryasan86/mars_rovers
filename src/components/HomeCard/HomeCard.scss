@@ -1,0 +1,202 @@
+@import '../../globals';
+
+$card-height: 35rem;
+$panel-height: 10rem;
+
+@mixin card-primary-color($darkenPct: 0) {
+    &--1 {
+        background: darken($blue, $darkenPct);
+    }
+
+    &--2 {
+        background: darken($teal, $darkenPct);
+    }
+
+    &--3 {
+        background: darken($purple, $darkenPct);
+    }
+}
+
+.home__card-item {
+    @include card-primary-color();
+
+    box-shadow: $box-shadow-xlg;
+    color: $dark;
+    height: 100%;
+    height: $card-height + $panel-height;
+    perspective: 600px;
+    position: relative;
+    width: $card-height;
+    z-index: 0;
+
+    &:not(:first-child) {
+        margin-left: 5rem;
+    }
+
+    &::before {
+        @include card-primary-color();
+
+        content: '';
+        height: 1rem;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+}
+
+.home__card-header {
+    height: calc(100% - 10rem);
+    position: relative;
+    width: 100%;
+}
+
+.home__card-img-container {
+    align-items: center;
+    background: white;
+    display: flex;
+    height: $card-height;
+    justify-content: center;
+    position: absolute;
+    top: 1rem;
+    transition: border-radius 0.3s ease-out, height 0.3s ease-out, width 0.3s ease-out;
+    width: $card-height;
+    z-index: 0;
+}
+
+.home__card-img {
+    background: white;
+    height: calc(100% + 2rem);
+    object-fit: contain;
+    transition: all 0.3s ease-out;
+    width: 100%;
+}
+
+.home__card-panel-container {
+    bottom: 0;
+    perspective: 600px;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+
+.home__card-wing {
+    @include card-primary-color(15%);
+
+    bottom: 3rem;
+    height: 9rem;
+    left: -7rem;
+    position: absolute;
+    transform: rotateY(-80deg) rotateZ(5deg);
+    transform-style: preserve-3d;
+    transition: all 0.3s ease-out;
+    width: 13rem;
+    z-index: -1;
+
+    &--right {
+        left: initial;
+        right: -7rem;
+        transform: rotateY(80deg) rotateZ(-5deg);
+    }
+}
+
+.home__card-panel {
+    @include card-primary-color();
+
+    bottom: 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 10rem;
+    justify-content: space-evenly;
+    padding: 1rem;
+    position: absolute;
+    right: -1.5rem;
+    transition: all 0.3s ease-out;
+    width: $card-height + 3rem;
+}
+
+.home__card-body {
+    align-items: flex-start;
+    background: $dark;
+    bottom: 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: $card-height;
+    height: 0;
+    justify-content: space-between;
+    opacity: 0;
+    overflow-y: hidden;
+    padding: 3rem;
+    position: absolute;
+    transition: transform 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;
+    z-index: -1;
+
+    p {
+        line-height: 1.7;
+        position: relative;
+    }
+}
+
+.home__card-btn {
+    @include card-primary-color();
+
+    border: 0;
+    bottom: 3rem;
+    color: white;
+    font-size: 1.5rem;
+    outline: 0;
+    padding: 1rem 2rem;
+    transition: all 0.3s ease-out;
+}
+
+.home__card-item.active .home__card-img-container {
+    border-radius: 50%;
+    height: 8rem;
+    width: 8rem;
+    z-index: 2;
+
+    .home__card-img {
+        border-radius: 50%;
+        height: 100%;
+    }
+}
+
+.home__card-item.active .home__card-panel {
+    bottom: $card-height;
+
+    p {
+        transform: translateX(12rem);
+        transition: all 0.3s ease-out;
+    }
+}
+
+.home__card-item.active .home__card-wing {
+    bottom: $card-height - 2rem;
+    transform: rotateY(-80deg) rotateZ(-5deg);
+
+    &--right {
+        transform: rotateY(80deg) rotateZ(5deg);
+    }
+}
+
+.home__card-item.active .home__card-body {
+    height: $card-height;
+    opacity: 1;
+}
+
+.home__card-toggle-btn {
+    @include card-primary-color();
+
+    border-radius: 50%;
+    box-shadow: $box-shadow-m;
+    cursor: pointer;
+    height: 4rem;
+    padding: 1rem;
+    position: absolute;
+    right: 1rem;
+    top: 2rem;
+    width: 4rem;
+    z-index: 20;
+}

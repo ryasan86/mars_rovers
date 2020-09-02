@@ -3,7 +3,7 @@ import Reveal from 'react-reveal/Reveal'
 
 import Loader from '../Loader'
 import { PhotoProps } from '../../interfaces'
-import './Card.scss'
+import './PhotoCard.scss'
 
 const Card: React.FC<{ photo: PhotoProps }> = props => {
     const { img_src, earth_date, sol, camera } = props.photo

@@ -1,8 +1,8 @@
 @import '../../globals.scss';
 
 .sidebar {
-    background: $primary;
-    box-shadow: $box_shadow_m;
+    background: $red;
+    box-shadow: $box-shadow-m;
     height: 100%;
     left: 0;
     min-width: 300px;
@@ -29,7 +29,7 @@
 }
 
 .sidebar__link-item {
-    background: $primary;
+    background: $red;
     color: $light;
     padding: 15px;
     padding-left: 5rem;

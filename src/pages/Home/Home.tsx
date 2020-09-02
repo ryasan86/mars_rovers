@@ -4,8 +4,8 @@ import { MilkyWay } from '../../videos'
 import { ReduxProps, RoverProps } from '../../interfaces'
 import { classList } from '../../utils'
 import { roverList } from '../../store'
+import HomeCard from '../../components/HomeCard'
 import './Home.scss'
-import './HomeCards.scss'
 
 interface Props {
     img: string
@@ -37,58 +37,13 @@ const rovers = roverList.map(({ rover }) => ({
     ...detailsMap[rover.name]
 }))
 
-const CardList: React.FC = () => {
-    const [activeIdx, setActiveIdx] = useState(null)
-
-    const handleToggleActive = (i: number) => () => {
-        setActiveIdx(prevIdx => (prevIdx === null ? i : null))
-    }
-
-    return (
-        <ul className='home__card-list'>
-            {rovers.map((rover: RoverProps & Props, i: number) => (
-                <li
-                    key={i}
-                    className={classList({
-                        'home__card-item': true,
-                        [`home__card-item--${i + 1}`]: true,
-                        active: activeIdx === i
-                    })}
-                    onMouseEnter={handleToggleActive(i)}
-                    onMouseLeave={handleToggleActive(i)}>
-                    <div className='home__card-header'>
-                        <div className='home__card-img-container'>
-                            <img
-                                className='home__card-img'
-                                src={rover.img}
-                                alt={rover.name}
-                            />
-                        </div>
-                    </div>
-                    <div
-                        className={`home__card-panel home__card-panel--${i +
-                            1}`}>
-                        <p className='home__card-medium-text'>{rover.name}</p>
-                        <small className='home__card-small-text'>
-                            {rover.activeDate}
-                        </small>
-                    </div>
-                    <div
-                        className={`home__card-body home__card-body--${i + 1}`}>
-                        <p className='home__card-medium-text'>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing
-                            elit. Nisi voluptatem labore repellendus possimus
-                            ullam impedit porro rerum, sunt cumque molestiae
-                            debitis beatae vero perspiciatis sint architecto
-                            recusandae corporis cum reprehenderit.
-                        </p>
-                        <button className='home__card-btn'>See photos</button>
-                    </div>
-                </li>
-            ))}
-        </ul>
-    )
-}
+const CardList: React.StatelessComponent = () => (
+    <ul className='home__card-list'>
+        {rovers.map((rover: RoverProps & Props, i: number) => (
+            <HomeCard key={i} rover={rover} idx={i + 1} />
+        ))}
+    </ul>
+)
 
 const Home: React.FC<ReduxProps> = () => {
     const [pct, setPct] = useState(0)

@@ -7,7 +7,7 @@ import Loader from '../../components/Loader'
 import { useCustomQuery, baseUrl, apiKey } from '../../client'
 import { formatEarthDate, parseParams } from '../../utils'
 import { roverMap } from '../../store'
-import Card from '../../components/Card'
+import PhotoCard from '../../components/PhotoCard'
 import './Photos.scss'
 
 const Main: React.FC = () => {
@@ -39,7 +39,7 @@ const Main: React.FC = () => {
                 <ul className='photos__list'>
                     {data.photos?.length ? (
                         data.photos?.map((photo, i) => {
-                            return <Card key={i} photo={photo} />
+                            return <PhotoCard key={i} photo={photo} />
                         })
                     ) : (
                         <div className='photos__title'>
