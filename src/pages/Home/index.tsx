@@ -45,7 +45,7 @@ const CardList: React.StatelessComponent = () => (
     </ul>
 )
 
-const Home: React.FC<ReduxProps> = () => {
+const HomePage: React.FC<ReduxProps> = () => {
     const [pct, setPct] = useState(0)
     const [int, setInt] = useState(null)
 
@@ -120,4 +120,4 @@ const Home: React.FC<ReduxProps> = () => {
     )
 }
 
-export default Home
+export default HomePage

@@ -10,7 +10,7 @@ export const useCustomQuery = <T>({
     query: string
 }): T | ResponseProps => {
     const [{ data, loading, error }, setState] = useState({
-        data: null,
+        data: [],
         loading: false,
         error: null
     })

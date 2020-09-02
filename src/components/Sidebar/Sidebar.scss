@@ -1,8 +1,8 @@
 @import '../../globals.scss';
 
 .sidebar {
-    background: $red;
-    box-shadow: $box-shadow-m;
+    background: $blacker;
+    box-shadow: $box-shadow-lg;
     height: 100%;
     left: 0;
     min-width: 300px;
@@ -29,9 +29,15 @@
 }
 
 .sidebar__link-item {
-    background: $red;
+    background: $teal;
     color: $light;
     padding: 15px;
     padding-left: 5rem;
     text-decoration: none;
+}
+
+.sidebar__toggle-btn {
+    color: $teal;
+    height: 2.5rem;
+    width: 2.5rem;
 }

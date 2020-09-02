@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import { classList } from '../../utils'
 import { RoverProps } from '../../interfaces'
@@ -13,6 +14,11 @@ interface Props {
 
 const HomeCard: React.StatelessComponent<Props> = ({ idx, rover }) => {
     const [isActive, setIsActive] = useState(false)
+    const history = useHistory()
+
+    const navigate = (path: string) => () => {
+        history.push(path)
+    }
 
     return (
         <li
@@ -56,7 +62,9 @@ const HomeCard: React.StatelessComponent<Props> = ({ idx, rover }) => {
                 })}></div>
             <div className={`home__card-body home__card-body--${idx}`}>
                 <p className='home__card-medium-text'>{rover.description}</p>
-                <button className={`home__card-btn home__card-btn--${idx}`}>
+                <button
+                    className={`home__card-btn home__card-btn--${idx}`}
+                    onClick={navigate(`/photos?name=${rover.name}`)}>
                     See photos
                 </button>
             </div>

@@ -1,28 +1,24 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import ReactDatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-import { actionCreators } from '../../actions'
-import { ReduxProps, RoverProps } from '../../interfaces'
+import { RoverProps } from '../../interfaces'
 import './DatePicker.scss'
 
-const DatePicker: React.FC<ReduxProps & {
-    fetchPhotos: () => void
+const DatePicker: React.FC<{
+    onSelectDate: (date: string) => string
+    selectedDate: string
     selectedRover: RoverProps
-}> = ({ data, actions, selectedRover }) => {
+}> = ({ selectedRover, selectedDate, onSelectDate }) => {
     const handleDateSelect = async date => {
-        const { toggleSidebar, selectDateFilter, selectCameraFilter } = actions
 
-        toggleSidebar()
-        selectCameraFilter({ camera: 'All' })
-        await selectDateFilter({ date })
+        // toggleSidebar()
+        // selectCameraFilter({ camera: 'All' })
+        // await selectDateFilter({ date })
     }
 
-    const { selectedDate } = data
-    const minDate = new Date(selectedRover.minPhotoDate)
-    const maxDate = new Date(selectedRover.maxPhotoDate)
+    const minDate = new Date(selectedRover?.minPhotoDate)
+    const maxDate = new Date(selectedRover?.maxPhotoDate)
 
     return (
         <div className='date-picker'>
@@ -41,7 +37,4 @@ const DatePicker: React.FC<ReduxProps & {
     )
 }
 
-export default connect(
-    state => state,
-    dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
-)(DatePicker)
+export default DatePicker

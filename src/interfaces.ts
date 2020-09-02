@@ -50,7 +50,7 @@ export interface ActionProps {
 
 
 export interface ResponseProps {
-    data: Record<string, unknown>
+    data: Array<unknown> | Record<string, unknown>
     loading: boolean
     error: unknown
 }
