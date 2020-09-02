@@ -4,10 +4,11 @@ import { classList } from '../../utils'
 import { RoverProps } from '../../interfaces'
 import './HomeCard.scss'
 import Icon from '../Icons'
+import { capitalize } from '../../utils'
 
 interface Props {
     idx: number
-    rover: { img: string; activeDate: string } & RoverProps
+    rover: { img: string; activeDate: string; description: string } & RoverProps
 }
 
 const HomeCard: React.StatelessComponent<Props> = ({ idx, rover }) => {
@@ -42,7 +43,9 @@ const HomeCard: React.StatelessComponent<Props> = ({ idx, rover }) => {
                     [`home__card-wing--${idx}`]: true
                 })}></div>
             <div className={`home__card-panel home__card-panel--${idx}`}>
-                <p className='home__card-medium-text'>{rover.name}</p>
+                <p className='home__card-medium-text'>
+                    {capitalize(rover.name)}
+                </p>
                 <p className='home__card-small-text'>{rover.activeDate}</p>
             </div>
             <div
@@ -52,13 +55,7 @@ const HomeCard: React.StatelessComponent<Props> = ({ idx, rover }) => {
                     [`home__card-wing--${idx}`]: true
                 })}></div>
             <div className={`home__card-body home__card-body--${idx}`}>
-                <p className='home__card-medium-text'>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Nisi voluptatem labore repellendus possimus ullam impedit
-                    porro rerum, sunt cumque molestiae debitis beatae vero
-                    perspiciatis sint architecto recusandae corporis cum
-                    reprehenderit.
-                </p>
+                <p className='home__card-medium-text'>{rover.description}</p>
                 <button className={`home__card-btn home__card-btn--${idx}`}>
                     See photos
                 </button>

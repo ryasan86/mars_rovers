@@ -1,15 +1,14 @@
 import React from 'react'
 
-import SelectBox from '../SelectBox'
 import Icon from '../Icons'
 import './Navbar.scss'
 
-const Navbar: React.StatelessComponent<{ toggleSidebar: () => void }> = ({
+const Navbar: React.StatelessComponent<{ toggleSidebar?: () => void }> = ({
     toggleSidebar
 }) => (
     <div className='navbar'>
         <Icon className='navbar__icon' name='burger' onClick={toggleSidebar} />
-        <SelectBox />
+        {/* <SelectBox /> */}
         <Icon
             className='navbar__icon'
             name='github'

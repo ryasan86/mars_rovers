@@ -2,16 +2,20 @@
 
 .navbar {
     align-items: center;
-    box-shadow: $box-shadow-s;
+    background: linear-gradient(90.49deg, #121212 15.36%, #282828 70.44%);
+    box-shadow: $box-shadow-m;
     display: flex;
-    height: 5rem;
     justify-content: space-between;
-    padding: 20px;
+    left: 0;
+    padding: 2rem;
+    position: fixed;
+    top: 0;
     width: 100%;
+    z-index: 10;
 }
 
 .navbar__icon {
-    fill: $red;
+    fill: $teal;
     height: 2.5rem;
     width: 2.5rem;
 }

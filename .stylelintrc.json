@@ -9,6 +9,7 @@
         "function-parentheses-space-inside": null,
         "selector-class-pattern": null,
         "indentation": 4,
-        "declaration-block-semicolon-newline-after": null
+        "declaration-block-semicolon-newline-after": null,
+        "max-nesting-depth": 2
     }
 }

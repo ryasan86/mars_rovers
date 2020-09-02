@@ -1,7 +1,14 @@
 import React from 'react'
 
-const Layout: React.StatelessComponent = () => {
-    return <div></div>
-}
+import Navbar from '../Navbar/index'
+import Sidebar from '../Sidebar'
+
+const Layout: React.StatelessComponent = ({ children }) => (
+    <div className='layout'>
+        <Navbar />
+        {/* <Sidebar /> */}
+        <main className='layout__inner'>{children}</main>
+    </div>
+)
 
 export default Layout

@@ -5,7 +5,7 @@ $panel-height: 10rem;
 
 @mixin card-primary-color($blackenPct: 0) {
     &--1 {
-        background: darken($blue, $blackenPct);
+        background: darken($teal, $blackenPct);
     }
 
     &--2 {
@@ -13,7 +13,7 @@ $panel-height: 10rem;
     }
 
     &--3 {
-        background: darken($purple, $blackenPct);
+        background: darken($teal, $blackenPct);
     }
 }
 
@@ -53,21 +53,25 @@ $panel-height: 10rem;
 
 .home__card-img-container {
     align-items: center;
-    background: white;
+    background: $teal;
     display: flex;
     height: $card-height;
     justify-content: center;
     position: absolute;
     top: 1rem;
-    transition: border-radius 0.3s ease-out, height 0.3s ease-out, width 0.3s ease-out;
+    transition:
+        border-radius 0.3s ease-out,
+        height 0.3s ease-out,
+        width 0.3s ease-out;
     width: $card-height;
     z-index: 0;
 }
 
 .home__card-img {
-    background: white;
+    background: $black;
     height: calc(100% + 2rem);
     object-fit: contain;
+    padding: 2rem;
     transition: all 0.3s ease-out;
     width: 100%;
 }
@@ -100,22 +104,6 @@ $panel-height: 10rem;
     }
 }
 
-.home__card-panel {
-    @include card-primary-color();
-
-    bottom: 0;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    height: 10rem;
-    justify-content: space-evenly;
-    padding: 1rem;
-    position: absolute;
-    right: -1.5rem;
-    transition: all 0.3s ease-out;
-    width: $card-height + 3rem;
-}
-
 .home__card-body {
     align-items: flex-start;
     background: $black;
@@ -123,6 +111,7 @@ $panel-height: 10rem;
     color: white;
     display: flex;
     flex-direction: column;
+    font-size: 1.5rem;
     height: $card-height;
     height: 0;
     justify-content: space-between;
@@ -130,12 +119,45 @@ $panel-height: 10rem;
     overflow-y: hidden;
     padding: 3rem;
     position: absolute;
-    transition: transform 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;
+    transition:
+        transform 0.3s ease-out,
+        height 0.3s ease-out,
+        opacity 0.3s ease-out;
     z-index: -1;
 
     p {
         line-height: 1.7;
         position: relative;
+    }
+}
+
+.home__card-panel {
+    @include card-primary-color();
+
+    bottom: 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    height: 10rem;
+    justify-content: space-evenly;
+    padding: 1rem;
+    position: absolute;
+    right: -1.5rem;
+    transition: all 0.3s ease-out;
+    width: $card-height + 3rem;
+    word-wrap: break-word;
+
+    p {
+        left: 1rem;
+        position: absolute;
+        top: 2.5rem;
+        transition: all 0.3s ease-out;
+
+        &:last-child {
+            bottom: 2.5rem;
+            top: initial;
+        }
     }
 }
 
@@ -167,8 +189,7 @@ $panel-height: 10rem;
     bottom: $card-height;
 
     p {
-        transform: translateX(12rem);
-        transition: all 0.3s ease-out;
+        left: 11rem;
     }
 }
 
