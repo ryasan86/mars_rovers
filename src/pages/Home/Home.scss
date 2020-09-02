@@ -50,17 +50,13 @@
     justify-content: space-between;
     overflow-x: hidden;
     position: relative;
-
-    // * {
-    //     outline: 1px solid red;
-    // }
 }
 
 .home__header {
     align-items: center;
     background: linear-gradient(90.49deg, #121212 15.36%, #282828 70.44%);
     display: flex;
-    height: 75vh;
+    height: 80vh;
     justify-content: space-evenly;
     position: relative;
     width: 100%;
@@ -70,22 +66,11 @@
     }
 }
 
-.home__weather-text {
-    color: white;
-    display: inline-block;
-    font-size: 1.5rem;
-    left: -3rem;
-    position: absolute;
-    top: 42rem;
-    transform: rotate(-90deg) translateY(-50%);
-    z-index: 1;
-}
-
 .home__pct-text {
     color: white;
     display: inline-block;
     position: absolute;
-    right: 6rem;
+    right: -6rem;
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
@@ -99,14 +84,6 @@
     }
 }
 
-.home__overlay {
-    background: $black;
-    height: 100%;
-    opacity: 0.8;
-    position: absolute;
-    width: 100%;
-}
-
 .home__video-container {
     position: relative;
     transform: translateY(-5rem);
@@ -116,6 +93,17 @@
         object-fit: cover;
         position: relative;
         width: 60rem;
+    }
+
+    .video__weather-text {
+        bottom: 0;
+        color: white;
+        display: inline-block;
+        font-size: 1.5rem;
+        left: -7.5rem;
+        position: absolute;
+        transform: rotate(-90deg) translateY(-50%);
+        z-index: 1;
     }
 
     .video__content-container {
@@ -130,6 +118,7 @@
         }
 
         .video__subtext {
+            line-height: 1.5;
             margin-bottom: 5rem;
         }
 
@@ -150,6 +139,7 @@
     height: 50rem;
     justify-content: space-evenly;
     position: relative;
+    transform: translateY(2.5rem);
     width: 50rem;
 
     footer {
@@ -161,7 +151,7 @@
 }
 
 .home__circle-track {
-    border: 0.1rem solid $teal;
+    border: 0.2rem solid $teal;
     border-radius: 50%;
     height: 50rem;
     position: absolute;
@@ -249,12 +239,60 @@
     }
 }
 
+.home__stripe-block {
+    align-items: center;
+    background: linear-gradient(87.29deg, #9bf0e1 17.71%, #36baa2 80.85%);
+    clip-path: polygon(0 8%, 100% 0, 100% 100%, 0% 100%);
+    color: $black;
+    display: flex;
+    height: 45vh;
+    justify-content: center;
+    position: relative;
+    transform: translateY(-2rem);
+
+    .home__stripe-quote {
+        font-size: 4rem;
+        font-style: italic;
+        font-weight: 900;
+        max-width: 80rem;
+        text-align: center;
+        text-transform: uppercase;
+        transform: rotate(-1.5deg) translateY(-5rem);
+
+        &::before {
+            content: '\201F';
+            font-size: 15rem;
+            left: -5rem;
+            position: absolute;
+            top: -5rem;
+        }
+
+        &::after {
+            bottom: -5rem;
+            content: '\201F';
+            font-size: 15rem;
+            position: absolute;
+            right: -5rem;
+            transform: rotate(180deg);
+        }
+    }
+
+    .home__stripe-source {
+        bottom: 7rem;
+        font-size: 2.5rem;
+        font-style: italic;
+        font-weight: 800;
+        left: 55%;
+        position: absolute;
+    }
+}
+
 .home__body {
     background: $blacker;
     box-shadow: $box-shadow-top;
-    clip-path: polygon(0 4%, 100% 0, 100% 100%, 0% 100%);
+    clip-path: polygon(0 8%, 100% 0, 100% 100%, 0% 100%);
     padding: 8rem 0;
-    transform: translateY(-5rem);
+    transform: translateY(-8rem);
     width: 100%;
 }
 
@@ -263,5 +301,5 @@
     display: flex;
     justify-content: center;
     margin: 0;
-    margin-top: 5rem;
+    margin-top: 15rem;
 }

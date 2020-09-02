@@ -64,11 +64,11 @@ const Home: React.FC<ReduxProps> = () => {
         <Layout>
             <div className='home'>
                 <div className='home__header'>
-                    <div className='home__weather-text'>
-                        Sol 259<span> | </span> High: -17° F <span> | </span>{' '}
-                        Low: -150° F
-                    </div>
                     <div className='home__video-container'>
+                        <div className='video__weather-text'>
+                            Sol 259<span> | </span> High: -17° F<span> | </span>
+                            Low: -150° F
+                        </div>
                         <video className='video' autoPlay loop muted>
                             <source src={Perseverance} type='video/webm' />
                         </video>
@@ -90,6 +90,9 @@ const Home: React.FC<ReduxProps> = () => {
                         </div>
                     </div>
                     <div className='home__circle-container'>
+                        <div className='home__pct-text'>
+                            <span>%</span>
+                        </div>
                         <div className='home__circle-track home__circle-track--clockwise'></div>
                         <div className='home__circle-track home__circle-track--counterclockwise'></div>
                         <h1 className='home__title'>
@@ -101,13 +104,17 @@ const Home: React.FC<ReduxProps> = () => {
                         </q>
                         <footer>– Sarcastic Rover</footer>
                     </div>
-                    <div className='home__pct-text'>
-                        <span>%</span>
-                    </div>
                 </div>
-                <div className='home__body'>
+                <div className='home__stripe-block'>
+                    <h1 className='home__stripe-quote'>
+                        It{"'"}s a fixer-upper of a planet but we could make it
+                        work.
+                    </h1>
+                    <p className='home__stripe-source'>- Elon Musk</p>
+                </div>
+                <section className='home__body'>
                     <CardList />
-                </div>
+                </section>
             </div>
         </Layout>
     )
