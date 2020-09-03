@@ -1,27 +1,30 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { ResponseProps } from './interfaces'
 
 export const baseUrl = 'https://api.nasa.gov'
 export const apiKey = process.env.REACT_APP_API_KEY
 
-export const useCustomQuery = <T>({
-    query
-}: {
-    query: string
-}): T | ResponseProps => {
+export const useCustomQuery = ({ query }: { query: string }): ResponseProps => {
     const [{ data, loading, error }, setState] = useState({
-        data: [],
+        data: {},
         loading: false,
         error: null
     })
 
-    useEffect(() => {
-        setState(prev => ({ ...prev, loading: true }))
+    // prettier-ignore
+    const refetch = (): void => {
         fetch(query)
             .then(res => res.json())
             .then(data => setState(prev => ({ ...prev, data, loading: false })))
             .catch(error => setState(prev => ({ ...prev, error })))
-    }, [])
+    }
 
-    return { data, loading, error }
+    useEffect(() => refetch(), [])
+
+    return {
+        data,
+        loading,
+        error,
+        refetch
+    }
 }

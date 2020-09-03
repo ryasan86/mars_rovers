@@ -287,12 +287,22 @@
 }
 
 .home__body {
+    align-items: center;
     background: $blacker;
     box-shadow: $box-shadow-top;
     clip-path: polygon(0 8%, 100% 0, 100% 100%, 0% 100%);
-    padding: 8rem 0;
-    transform: translateY(-8rem);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transform: translateY(-8.2rem);
     width: 100%;
+}
+
+.home__spaceship-gif {
+    display: inline-block;
+    height: 15rem;
+    margin-top: 10rem;
+    width: 15rem;
 }
 
 .home__card-list {
@@ -300,5 +310,5 @@
     display: flex;
     justify-content: center;
     margin: 0;
-    margin-top: 15rem;
+    margin-top: 5rem;
 }

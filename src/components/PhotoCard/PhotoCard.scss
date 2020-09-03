@@ -19,6 +19,7 @@
     width: 100%;
 
     .photo-card__img {
+        border-radius: 0.2rem 0.2rem 0 0;
         height: 100%;
         width: 100%;
     }
@@ -33,6 +34,7 @@
 
 .photo-card__body {
     background: white;
+    border-radius: 0 0 0.2rem 0.2rem;
     color: $black;
     height: 20rem;
     padding: 1.5rem;

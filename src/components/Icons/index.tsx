@@ -4,6 +4,8 @@ import Burger from './Burger'
 import Close from './Close'
 import Github from './Github'
 import Rover from './Rover'
+import Satellite from './Satellite'
+import Spaceship from './Spaceship'
 
 interface Props {
     style: CSSProperties
@@ -26,6 +28,10 @@ const Icon: React.ComponentType<Partial<Props>> = props => {
             return <Github {...props} />
         case 'rover':
             return <Rover {...props} />
+        case 'satellite':
+            return <Satellite {...props} />
+        case 'spaceship':
+            return <Spaceship {...props} />
         default:
             return
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import Layout from '../../components/Layout'
@@ -18,11 +18,13 @@ const PhotosPage: React.FC = () => {
         ctx.selectedDate || roverMap[name].maxPhotoDate
     )
 
-    const { data, loading } = useCustomQuery({
+    const { data, loading, refetch } = useCustomQuery({
         query: `${baseUrl}/mars-photos/api/v1/rovers/${name}/photos?earth_date=${date}&api_key=${apiKey}`
     })
 
     useEffect(() => ctx.onSelectRover(roverMap[name]), [name])
+
+    useEffect(() => refetch(), [name])
 
     return (
         <Layout>
@@ -31,10 +33,10 @@ const PhotosPage: React.FC = () => {
                     <Loader className='photos__loader' />
                 ) : (
                     <ul className='photos__list'>
-                        {data.photos?.length ? (
-                            data.photos?.map((photo, i) => {
-                                return <PhotoCard key={i} photo={photo} />
-                            })
+                        {data.photos && data.photos.length > 0 ? (
+                            data.photos.map((p, i) => (
+                                <PhotoCard key={i} photo={p} />
+                            ))
                         ) : (
                             <div className='photos__title'>
                                 No results{' '}

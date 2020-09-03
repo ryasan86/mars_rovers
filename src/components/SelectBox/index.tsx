@@ -1,9 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
-import { actionCreators } from '../../actions'
-import { ReduxProps } from '../../interfaces'
 import './SelectBox.scss'
 
 const CAMERAS = [
@@ -45,17 +41,17 @@ const CAMERAS = [
     }
 ]
 
-const SelectBox: React.FC<ReduxProps> = ({ data, ui, actions }) => {
-    const handleCamFilterSelect = async e => {
-        const camera = e.target.value
-        const { selectCameraFilter, toggleSidebar } = actions
-        if (ui.sidebarIsOpen) toggleSidebar()
-        await selectCameraFilter({ camera })
-    }
+const SelectBox: React.FC = () => {
+    // const handleCamFilterSelect = async e => {
+    //     const camera = e.target.value
+    //     const { selectCameraFilter, toggleSidebar } = actions
+    //     if (ui.sidebarIsOpen) toggleSidebar()
+    //     await selectCameraFilter({ camera })
+    // }
 
     return (
         <div className='select-box'>
-            <div className='select-box__title'>Camera</div>
+            {/* <div className='select-box__title'>Camera</div>
             <div className='select-box__container'>
                 <select
                     className='select-box__box'
@@ -68,12 +64,9 @@ const SelectBox: React.FC<ReduxProps> = ({ data, ui, actions }) => {
                         </option>
                     ))}
                 </select>
-            </div>
+            </div> */}
         </div>
     )
 }
 
-export default connect(
-    state => state,
-    dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
-)(SelectBox)
+export default SelectBox

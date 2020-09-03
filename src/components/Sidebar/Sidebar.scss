@@ -1,7 +1,7 @@
 @import '../../globals.scss';
 
 .sidebar {
-    background: $blacker;
+    background: $teal;
     box-shadow: $box-shadow-lg;
     height: 100%;
     left: 0;
@@ -11,7 +11,7 @@
     transform: translateX(-100%);
     transition: all 0.2s ease-in-out;
     width: 30%;
-    z-index: 1;
+    z-index: 10;
 
     &.active {
         transform: translateX(0);
@@ -19,8 +19,36 @@
 }
 
 .sidebar__header {
-    margin-top: 10%;
-    text-align: center;
+    height: 30rem;
+    width: 100%;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(1080deg);
+    }
+}
+
+.sidebar__toggle-btn-container {
+    background: $teal;
+    box-shadow: $box-shadow-m;
+    color: white;
+    cursor: pointer;
+    height: 7rem;
+    position: absolute;
+    right: -7rem;
+    top: 0;
+    width: 7rem;
+}
+
+.sidebar__toggle-btn {
+    animation: spin 0.5s ease-out;
+    padding: 2.5rem;
+    transition: all 0.5s;
 }
 
 .sidebar__link-list {
@@ -29,15 +57,13 @@
 }
 
 .sidebar__link-item {
-    background: $teal;
-    color: $light;
-    padding: 15px;
-    padding-left: 5rem;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    font-size: $font-size-lg;
+    font-weight: 600;
+    height: 5rem;
+    letter-spacing: 0.5rem;
     text-decoration: none;
-}
-
-.sidebar__toggle-btn {
-    color: $teal;
-    height: 2.5rem;
-    width: 2.5rem;
 }

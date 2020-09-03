@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import Layout from '../../components/Layout'
 import HomeCard from '../../components/HomeCard'
-import { ReduxProps, RoverProps } from '../../interfaces'
+import { RoverProps } from '../../interfaces'
 import { roverList } from '../../store'
 import { Perseverance } from '../../videos'
 import './Home.scss'
@@ -45,7 +45,7 @@ const CardList: React.StatelessComponent = () => (
     </ul>
 )
 
-const HomePage: React.FC<ReduxProps> = () => {
+const HomePage: React.FC = () => {
     const [pct, setPct] = useState(0)
     const [int, setInt] = useState(null)
 
@@ -113,6 +113,12 @@ const HomePage: React.FC<ReduxProps> = () => {
                     <p className='home__stripe-source'>- Elon Musk</p>
                 </div>
                 <section className='home__body'>
+                    <img
+                            className='home__spaceship-gif'
+                            src={require('../../images/spaceship.gif')}
+                            alt='spaceship'
+                        />
+
                     <CardList />
                 </section>
             </div>

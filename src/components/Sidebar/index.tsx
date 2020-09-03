@@ -1,37 +1,35 @@
 import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 import DatePicker from '../DatePicker'
 import Icon from '../Icons'
-import { actionCreators } from '../../actions'
 import { RoverProps } from '../../interfaces'
 import { roverList } from '../../store'
 import { Context } from '../../App'
+import { capitalize } from '../../utils'
 import './Sidebar.scss'
 
 const LinkList: React.StatelessComponent<{
     selectedRover: RoverProps
-    onRoverSelect: () => void
-}> = ({ selectedRover }) => (
+}> = () => (
     <ul className='sidebar__link-list'>
         {roverList.map(({ rover }, i) => (
             <NavLink
-                className='sidebar__nav-link'
                 key={i}
+                className='sidebar__link-item'
                 to={{
-                    pathname: `/main`,
+                    path: '/photos',
                     search: `?name=${rover.name}`
-                }}
-                selected={selectedRover}>
-                <span className='sidebar__rover-name'>{rover.name}</span>
+                }}>
+                <span className='sidebar__rover-name'>
+                    {capitalize(rover.name)}
+                </span>
             </NavLink>
         ))}
     </ul>
 )
 
-const Sidebar: React.FC = ({}) => {
+const Sidebar: React.FC = () => {
     const {
         sidebarOpen,
         onToggleSidebar,
@@ -42,11 +40,16 @@ const Sidebar: React.FC = ({}) => {
 
     return (
         <div className={`sidebar${sidebarOpen ? ' active' : ''}`}>
-            <Icon className='sidebar__toggle-btn' onClick={onToggleSidebar} name='close' />
-            <LinkList
-                onRoverSelect={() => ({})}
-                selectedRover={selectedRover}
-            />
+            <div
+                className='sidebar__toggle-btn-container'
+                onClick={onToggleSidebar}>
+                <Icon
+                    className='sidebar__toggle-btn'
+                    name={sidebarOpen ? 'close' : 'burger'}
+                />
+            </div>
+            <div className='sidebar__header'></div>
+            <LinkList selectedRover={selectedRover} />
             <DatePicker
                 selectedRover={selectedRover}
                 selectedDate={selectedDate}
@@ -56,7 +59,4 @@ const Sidebar: React.FC = ({}) => {
     )
 }
 
-export default connect(
-    state => state,
-    dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
-)(Sidebar)
+export default Sidebar

@@ -24,33 +24,9 @@ export interface PhotoProps {
     }
 }
 
-export interface DataProps {
-    selectedDate: Date | null
-    selectedCamera: string
-    photos: PhotoProps[]
-    filteredPhotos: PhotoProps[]
-    roverList: Array<{ rover: RoverProps }>
-}
-
-export interface UiProps {
-    sidebarIsOpen: boolean
-    loading: boolean
-}
-
-export interface ReduxProps {
-    actions: Record<string, (arg?: unknown) => void>
-    ui: UiProps
-    data: DataProps
-}
-
-export interface ActionProps {
-    type: string
-    payload?: Record<string, unknown>
-}
-
-
 export interface ResponseProps {
-    data: Array<unknown> | Record<string, unknown>
+    data: { photos?: PhotoProps[] } | undefined
     loading: boolean
-    error: unknown
+    error: unknown | null
+    refetch: () => void
 }
