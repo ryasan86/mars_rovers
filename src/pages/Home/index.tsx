@@ -54,7 +54,7 @@ const HomePage: React.FC = () => {
         const interval = setInterval(increase, 50)
         setInt(interval)
         return () => clearInterval(int)
-    }, [])
+    }, [int])
 
     useEffect(() => {
         if (pct >= 100) clearInterval(int)

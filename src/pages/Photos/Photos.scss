@@ -14,7 +14,6 @@
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 5rem;
-    max-width: $max-width;
     position: relative;
     width: 100%;
 }
@@ -23,4 +22,8 @@
     height: 7.5rem;
     margin-top: 10%;
     width: 7.5rem;
+}
+
+.photos__empty {
+    margin-top: 5rem;
 }

@@ -30,13 +30,7 @@ const LinkList: React.StatelessComponent<{
 )
 
 const Sidebar: React.FC = () => {
-    const {
-        sidebarOpen,
-        onToggleSidebar,
-        selectedDate,
-        onSelectDate,
-        selectedRover
-    } = useContext(Context)
+    const { sidebarOpen, onToggleSidebar, selectedRover } = useContext(Context)
 
     return (
         <div className={`sidebar${sidebarOpen ? ' active' : ''}`}>
@@ -48,13 +42,12 @@ const Sidebar: React.FC = () => {
                     name={sidebarOpen ? 'close' : 'burger'}
                 />
             </div>
-            <div className='sidebar__header'></div>
+            <div className='sidebar__header'>
+                <div className='sidebar__header-gif'></div>
+                <span className='sidebar__header-text'>Select rover</span>
+            </div>
             <LinkList selectedRover={selectedRover} />
-            <DatePicker
-                selectedRover={selectedRover}
-                selectedDate={selectedDate}
-                onSelectDate={onSelectDate}
-            />
+            <DatePicker />
         </div>
     )
 }

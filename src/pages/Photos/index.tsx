@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import Layout from '../../components/Layout'
@@ -6,50 +6,73 @@ import Loader from '../../components/Loader'
 import PhotoCard from '../../components/PhotoCard'
 import { useCustomQuery, baseUrl, apiKey } from '../../client'
 import { formatEarthDate, parseParams } from '../../utils'
-import { roverMap } from '../../store'
 import { Context } from '../../App'
+import { roverMap } from '../../store'
 import './Photos.scss'
 
-const PhotosPage: React.FC = () => {
-    const location = useLocation()
-    const ctx = useContext(Context)
-    const [, name] = parseParams(location.search)
-    const date = formatEarthDate(
-        ctx.selectedDate || roverMap[name].maxPhotoDate
-    )
+interface Props {
+    date: Date | string
+    roverName: string
+}
+
+const PhotosPage: React.FC<Props> = ({ date, roverName }) => {
+    const isFirstRender = useRef(true)
 
     const { data, loading, refetch } = useCustomQuery({
-        query: `${baseUrl}/mars-photos/api/v1/rovers/${name}/photos?earth_date=${date}&api_key=${apiKey}`
+        query: `${baseUrl}/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${date}&api_key=${apiKey}`
     })
-
-    useEffect(() => ctx.onSelectRover(roverMap[name]), [name])
-
-    useEffect(() => refetch(), [name])
+    
+    useEffect(() => {
+        if (!isFirstRender.current) refetch()
+        isFirstRender.current = false
+    }, [refetch])
 
     return (
         <Layout>
             <div className='photos'>
                 {loading ? (
                     <Loader className='photos__loader' />
-                ) : (
+                ) : data.photos.length > 0 ? (
                     <ul className='photos__list'>
-                        {data.photos && data.photos.length > 0 ? (
-                            data.photos.map((p, i) => (
-                                <PhotoCard key={i} photo={p} />
-                            ))
-                        ) : (
-                            <div className='photos__title'>
-                                No results{' '}
-                                <span role='img' aria-label='img'>
-                                    😢
-                                </span>
-                            </div>
-                        )}
+                        {data.photos.map((p, i) => (
+                            <PhotoCard key={i} photo={p} />
+                        ))}
                     </ul>
+                ) : (
+                    <span className='photos__empty'>No results</span>
                 )}
             </div>
         </Layout>
     )
 }
 
-export default PhotosPage
+const withContext = Component => props => {
+    const {
+        selectedRover,
+        selectedDate,
+        onSelectRover,
+        onSelectDate
+    } = useContext(Context)
+    const { search } = useLocation()
+    const roverName = parseParams(search)
+
+    useEffect(() => {
+        const rover = roverMap[roverName]
+        onSelectRover(rover)
+        onSelectDate(rover.maxPhotoDate)
+    }, [roverName])
+
+    const ComponentWithContext = () => {
+        return (
+            <Component
+                {...props}
+                roverName={roverName}
+                date={formatEarthDate(selectedDate)}
+            />
+        )
+    }
+
+    return selectedDate && selectedRover ? ComponentWithContext() : null
+}
+
+export default withContext(PhotosPage)

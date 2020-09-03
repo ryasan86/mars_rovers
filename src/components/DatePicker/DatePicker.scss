@@ -1,18 +1,59 @@
-.date-picker-container {
+@import '../../globals';
+
+.date-picker {
     display: flex;
     flex-direction: column;
-    margin-top: 5%;
+    margin: 3rem 0 0 3rem;
 }
 
-.date-picker__inner {
-    border: 0;
-    border-radius: 5px;
-    font-size: 1.2em;
-    margin: 10px 0;
-    padding: 5px;
-}
-
-.date-picker__text {
+.date-picker__input {
+    background: $blacker !important;
+    border: 0.1rem solid $teal;
+    border-radius: 0.3rem;
     color: white;
-    margin: 0;
+    cursor: pointer;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.react-datepicker-popper {
+    background: transparent;
+}
+
+.react-datepicker {
+    background: $blacker;
+    border: 1px solid $teal;
+    color: $teal;
+}
+
+.react-datepicker__month-container {
+    width: 229px;
+}
+
+.react-datepicker__header {
+    background: $teal;
+}
+
+.react-datepicker__current-month {
+    color: white;
+}
+
+.react-datepicker__day-names {
+    display: flex;
+    justify-content: space-between;
+}
+
+.react-datepicker__day-name {
+    color: white;
+    font-size: $font-size-s;
+}
+
+.react-datepicker__week {
+    display: flex;
+    justify-content: space-between;
+}
+
+.react-datepicker__day {
+    color: $teal;
+    font-size: $font-size-s;
 }

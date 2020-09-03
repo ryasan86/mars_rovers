@@ -1,40 +1,42 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ReactDatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-import { RoverProps } from '../../interfaces'
+import Loader from '../Loader'
+import { Context } from '../../App'
+import { capitalize } from '../../utils'
 import './DatePicker.scss'
 
-const DatePicker: React.FC<{
-    onSelectDate: (date: string) => string
-    selectedDate: string
-    selectedRover: RoverProps
-}> = ({ selectedRover, selectedDate, onSelectDate }) => {
-    const handleDateSelect = async date => {
+const DatePicker: React.FC = () => {
+    const { selectedRover, selectedDate, onSelectDate } = useContext(Context)
 
-        // toggleSidebar()
-        // selectCameraFilter({ camera: 'All' })
-        // await selectDateFilter({ date })
+    const handleDateSelect = date => {
+        onSelectDate(date)
     }
 
-    const minDate = new Date(selectedRover?.minPhotoDate)
-    const maxDate = new Date(selectedRover?.maxPhotoDate)
+    if (selectedRover && selectedDate) {
+        const minDate = new Date(selectedRover.minPhotoDate)
+        const maxDate = new Date(selectedRover.maxPhotoDate)
+        const selected = new Date(selectedDate)
 
-    return (
-        <div className='date-picker'>
-            <div className='date-picker__text'>
-                {/* {capitalize(selectedRover.minPhotoDate)} Date Range: */}
+        return (
+            <div className='date-picker'>
+                <div className='date-picker__text'>
+                    {capitalize(selectedRover.name)} Date Range:
+                </div>
+                <ReactDatePicker
+                    className='date-picker__input'
+                    minDate={minDate}
+                    maxDate={maxDate}
+                    onChange={handleDateSelect}
+                    selected={selected}
+                    dateFormat='yyyy/MM/dd'
+                />
             </div>
-            <ReactDatePicker
-                className='date-picker__inner'
-                minDate={minDate}
-                maxDate={maxDate}
-                onChange={handleDateSelect}
-                selected={new Date(selectedDate)}
-                dateFormat='MMMM d, yyyy'
-            />
-        </div>
-    )
+        )
+    }
+
+    return <Loader className='date-picker__loader' />
 }
 
 export default DatePicker

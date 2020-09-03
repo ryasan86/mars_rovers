@@ -3,16 +3,20 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Home from './pages/Home'
 import Photos from './pages/Photos'
-import { RoverProps } from './interfaces'
+import { RoverProps, ContextProps } from './interfaces'
+import { formatEarthDate } from './utils'
 
-export const Context = React.createContext(null)
+export const Context = React.createContext<ContextProps>(null)
 
 const App: React.FC = () => {
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false)
-    const [selectedDate, setSelectedDate] = useState<string | null>(null)
+    const [selectedDate, setSelectedDate] = useState<string | Date>()
     const [selectedRover, setSelectedRover] = useState<RoverProps | null>(null)
 
-    // prettier-ignore
+    const onToggleSidebar = () => setSidebarOpen(prev => !prev)
+    const onSelectDate = (date: string) => setSelectedDate(date) // prettier-ignore
+    const onSelectRover = (rover: RoverProps) => setSelectedRover(rover)
+
     return (
         <BrowserRouter>
             <Context.Provider
@@ -20,18 +24,18 @@ const App: React.FC = () => {
                     sidebarOpen,
                     selectedDate,
                     selectedRover,
-                    onToggleSidebar: () => setSidebarOpen(prev => !prev),
-                    onSelectDate: (date: string) => setSelectedDate(date),
-                    onSelectRover: (rover: RoverProps): void => setSelectedRover(rover)
+                    onToggleSidebar,
+                    onSelectDate,
+                    onSelectRover
                 }}>
-                    <Route
-                        render={({ location }) => (
-                            <Switch location={location}>
-                                <Route component={Home} path='/' exact />
-                                <Route component={Photos} path='/photos' />
-                            </Switch>
-                        )}
-                    />
+                <Route
+                    render={({ location }) => (
+                        <Switch location={location}>
+                            <Route component={Home} path='/' exact />
+                            <Route component={Photos} path='/photos' />
+                        </Switch>
+                    )}
+                />
             </Context.Provider>
         </BrowserRouter>
     )

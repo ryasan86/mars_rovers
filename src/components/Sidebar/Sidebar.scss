@@ -1,8 +1,9 @@
-@import '../../globals.scss';
+@import '../../globals';
 
 .sidebar {
-    background: $teal;
-    box-shadow: $box-shadow-lg;
+    background: $blacker;
+    background: linear-gradient(0deg, #191919 15.36%, #282828 70.44%);
+    box-shadow: 1rem 0 1rem rgba(0, 0, 0, 0.76);
     height: 100%;
     left: 0;
     min-width: 300px;
@@ -19,11 +20,28 @@
 }
 
 .sidebar__header {
-    height: 30rem;
+    align-items: center;
+    color: $teal;
+    display: flex;
+    flex-direction: column;
+    height: 23rem;
+    justify-content: center;
     width: 100%;
+
+    .sidebar__header-text {
+        letter-spacing: 0.5rem;
+        text-transform: uppercase;
+    }
 }
 
-@keyframes spin {
+.sidebar__header-gif {
+    background: url('../../images/spaceship.gif') center center no-repeat;
+    background-size: cover;
+    height: 15rem;
+    width: 15rem;
+}
+
+@keyframes toggleAnimate {
     0% {
         transform: rotate(0);
     }
@@ -34,9 +52,8 @@
 }
 
 .sidebar__toggle-btn-container {
-    background: $teal;
-    box-shadow: $box-shadow-m;
-    color: white;
+    background: $blacker;
+    color: $teal;
     cursor: pointer;
     height: 7rem;
     position: absolute;
@@ -45,10 +62,14 @@
     width: 7rem;
 }
 
+.sidebar.active .sidebar__toggle-btn-container {
+    background: $teal;
+    color: white;
+}
+
 .sidebar__toggle-btn {
-    animation: spin 0.5s ease-out;
+    animation: toggleAnimate 0.5s ease-out;
     padding: 2.5rem;
-    transition: all 0.5s;
 }
 
 .sidebar__link-list {
@@ -58,12 +79,26 @@
 
 .sidebar__link-item {
     align-items: center;
+    border: 0.1rem solid $teal;
+    border-left: 0;
+    border-right: 0;
     color: white;
     cursor: pointer;
     display: flex;
     font-size: $font-size-lg;
-    font-weight: 600;
+    font-weight: 500;
     height: 5rem;
     letter-spacing: 0.5rem;
+    padding: 3rem;
     text-decoration: none;
+    transition: color 0.3s, background 0.3s;
+
+    &:not(:first-child) {
+        border-top: 0;
+    }
+
+    &:hover {
+        background: $blacker;
+        color: $teal;
+    }
 }

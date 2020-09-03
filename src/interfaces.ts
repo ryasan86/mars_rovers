@@ -30,3 +30,12 @@ export interface ResponseProps {
     error: unknown | null
     refetch: () => void
 }
+
+export interface ContextProps {
+    sidebarOpen: boolean
+    selectedDate: string | Date
+    selectedRover: RoverProps | null
+    onToggleSidebar: () => void
+    onSelectDate: (date: string | Date) => void
+    onSelectRover: (rover: RoverProps) => void
+}
