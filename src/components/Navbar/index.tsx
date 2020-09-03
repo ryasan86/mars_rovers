@@ -2,13 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import Icon from '../Icons'
+import { rootPath } from '../../constants'
 import './Navbar.scss'
 
 const Navbar: React.StatelessComponent<{ Addon?: JSX.Element | undefined }> = ({
     Addon
 }) => (
     <div className='navbar'>
-        <Link to='/'>
+        <Link to={rootPath}>
             <Icon
                 className='navbar__icon navbar__icon--left'
                 name='satellite'
