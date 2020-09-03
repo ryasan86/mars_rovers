@@ -2,7 +2,7 @@ export interface RoverProps {
     name: string
     minPhotoDate: string
     maxPhotoDate: string
-    selected: boolean
+    totalPhotos: number | undefined
 }
 
 export interface PhotoProps {
@@ -25,7 +25,9 @@ export interface PhotoProps {
 }
 
 export interface ResponseProps {
-    data: { photos?: PhotoProps[] } | undefined
+    data:
+        | { photos?: PhotoProps[]; photo_manifest?: PhotoManifestProps | null }
+        | undefined
     loading: boolean
     error: unknown | null
     refetch: () => void
@@ -38,4 +40,20 @@ export interface ContextProps {
     onToggleSidebar: () => void
     onSelectDate: (date: string | Date) => void
     onSelectRover: (rover: RoverProps) => void
+}
+
+export interface PhotoManifestProps {
+    name: string
+    landing_date: string
+    launch_date: string
+    status: string
+    max_sol: number
+    max_date: string
+    total_photos: number
+    photos: {
+        sol: number
+        earth_date: string
+        total_photos: number
+        cameras: string[]
+    }
 }

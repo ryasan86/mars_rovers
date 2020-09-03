@@ -25,6 +25,11 @@ const DatePicker: React.FC = () => {
                     maxDate={maxDate}
                     selected={selected}
                 />
+                {selectedRover.totalPhotos && (
+                    <span style={{ marginLeft: '1rem' }}>
+                        Total: {selectedRover.totalPhotos}
+                    </span>
+                )}
             </div>
         )
     }

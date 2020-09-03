@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Home from './pages/Home'
 import Photos from './pages/Photos'
-import { RoverProps, ContextProps } from './interfaces'
-import { rootPath } from './constants'
+import { RoverProps, ContextProps, ResponseProps } from './interfaces'
+import { rootPath, roverMap, apiKey } from './constants'
+import { useCustomQuery } from './client'
 
 export const Context = React.createContext<ContextProps>(null)
 
@@ -16,6 +17,16 @@ const App: React.FC = () => {
     const onToggleSidebar = () => setSidebarOpen(prev => !prev)
     const onSelectDate = (date: string) => setSelectedDate(date) // prettier-ignore
     const onSelectRover = (rover: RoverProps) => setSelectedRover(rover)
+
+    const { data } = useCustomQuery({
+        query: `https://api.nasa.gov/mars-photos/api/v1/manifests/curiosity?api_key=${apiKey}`
+    })
+
+    useEffect(() => {
+        if (data.photo_manifest) {
+            roverMap.curiosity.totalPhotos = data.photo_manifest.total_photos
+        }
+    }, [data])
 
     return (
         <BrowserRouter>
@@ -32,7 +43,10 @@ const App: React.FC = () => {
                     render={({ location }) => (
                         <Switch location={location}>
                             <Route component={Home} path={rootPath} exact />
-                            <Route component={Photos} path={rootPath + 'photos'} />
+                            <Route
+                                component={Photos}
+                                path={rootPath + 'photos'}
+                            />
                         </Switch>
                     )}
                 />

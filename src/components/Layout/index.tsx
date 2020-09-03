@@ -4,12 +4,9 @@ import Navbar from '../Navbar/index'
 import Sidebar from '../Sidebar'
 import './Layout.scss'
 
-const Layout: React.StatelessComponent<{ Addon?: JSX.Element }> = ({
-    children,
-    Addon
-}) => (
+const Layout: React.StatelessComponent = ({ children }) => (
     <div className='layout'>
-        <Navbar Addon={Addon} />
+        <Navbar />
         <Sidebar />
         <main className='layout__inner'>{children}</main>
     </div>

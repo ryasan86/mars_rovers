@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom'
 import Layout from '../../components/Layout'
 import Loader from '../../components/Loader'
 import PhotoCard from '../../components/PhotoCard'
-import DatePicker from '../../components/DatePicker'
 import { useCustomQuery } from '../../client'
 import { formatEarthDate, parseParams } from '../../utils'
 import { Context } from '../../App'
@@ -29,7 +28,7 @@ const PhotosPage: React.FC<Props> = ({ date, roverName }) => {
     }, [refetch])
 
     return (
-        <Layout Addon={<DatePicker />}>
+        <Layout>
             <div className='photos'>
                 {loading ? (
                     <Loader className='photos__loader' />
