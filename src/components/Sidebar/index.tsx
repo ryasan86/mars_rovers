@@ -1,36 +1,35 @@
 import React, { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-import DatePicker from '../DatePicker'
 import Icon from '../Icons'
-import { RoverProps } from '../../interfaces'
-import { roverList } from '../../store'
+import { roverList, rootPath } from '../../constants'
 import { Context } from '../../App'
 import { capitalize } from '../../utils'
 import './Sidebar.scss'
 
 const LinkList: React.StatelessComponent<{
-    selectedRover: RoverProps
-}> = () => (
+    onToggleSidebar: () => void
+}> = ({ onToggleSidebar }) => (
     <ul className='sidebar__link-list'>
         {roverList.map(({ rover }, i) => (
-            <NavLink
+            <Link
                 key={i}
                 className='sidebar__link-item'
+                onClick={onToggleSidebar}
                 to={{
-                    path: '/photos',
+                    pathname: rootPath + 'photos',
                     search: `?name=${rover.name}`
                 }}>
                 <span className='sidebar__rover-name'>
                     {capitalize(rover.name)}
                 </span>
-            </NavLink>
+            </Link>
         ))}
     </ul>
 )
 
 const Sidebar: React.FC = () => {
-    const { sidebarOpen, onToggleSidebar, selectedRover } = useContext(Context)
+    const { sidebarOpen, onToggleSidebar } = useContext(Context)
 
     return (
         <div className={`sidebar${sidebarOpen ? ' active' : ''}`}>
@@ -46,8 +45,7 @@ const Sidebar: React.FC = () => {
                 <div className='sidebar__header-gif'></div>
                 <span className='sidebar__header-text'>Select rover</span>
             </div>
-            <LinkList selectedRover={selectedRover} />
-            <DatePicker />
+            <LinkList onToggleSidebar={onToggleSidebar} />
         </div>
     )
 }

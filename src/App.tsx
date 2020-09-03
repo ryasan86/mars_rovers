@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Photos from './pages/Photos'
 import { RoverProps, ContextProps } from './interfaces'
-import { formatEarthDate } from './utils'
+import { rootPath } from './constants'
 
 export const Context = React.createContext<ContextProps>(null)
 
@@ -31,8 +31,8 @@ const App: React.FC = () => {
                 <Route
                     render={({ location }) => (
                         <Switch location={location}>
-                            <Route component={Home} path='/' exact />
-                            <Route component={Photos} path='/photos' />
+                            <Route component={Home} path={rootPath} exact />
+                            <Route component={Photos} path={rootPath + 'photos'} />
                         </Switch>
                     )}
                 />

@@ -1,8 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
-import { ResponseProps } from './interfaces'
 
-export const baseUrl = 'https://api.nasa.gov'
-export const apiKey = process.env.REACT_APP_API_KEY
+import { ResponseProps } from './interfaces'
 
 export const useCustomQuery = ({ query }: { query: string }): ResponseProps => {
     const [{ data, loading, error }, setState] = useState({

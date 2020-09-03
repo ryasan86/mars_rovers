@@ -4,10 +4,11 @@ import { useLocation } from 'react-router-dom'
 import Layout from '../../components/Layout'
 import Loader from '../../components/Loader'
 import PhotoCard from '../../components/PhotoCard'
-import { useCustomQuery, baseUrl, apiKey } from '../../client'
+import DatePicker from '../../components/DatePicker'
+import { useCustomQuery } from '../../client'
 import { formatEarthDate, parseParams } from '../../utils'
 import { Context } from '../../App'
-import { roverMap } from '../../store'
+import { roverMap, baseUrl, apiKey } from '../../constants'
 import './Photos.scss'
 
 interface Props {
@@ -21,14 +22,14 @@ const PhotosPage: React.FC<Props> = ({ date, roverName }) => {
     const { data, loading, refetch } = useCustomQuery({
         query: `${baseUrl}/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${date}&api_key=${apiKey}`
     })
-    
+
     useEffect(() => {
         if (!isFirstRender.current) refetch()
         isFirstRender.current = false
     }, [refetch])
 
     return (
-        <Layout>
+        <Layout Addon={<DatePicker />}>
             <div className='photos'>
                 {loading ? (
                     <Loader className='photos__loader' />
@@ -47,12 +48,7 @@ const PhotosPage: React.FC<Props> = ({ date, roverName }) => {
 }
 
 const withContext = Component => props => {
-    const {
-        selectedRover,
-        selectedDate,
-        onSelectRover,
-        onSelectDate
-    } = useContext(Context)
+    const { selectedRover, selectedDate, onSelectRover, onSelectDate } = useContext(Context) // prettier-ignore
     const { search } = useLocation()
     const roverName = parseParams(search)
 
@@ -60,17 +56,15 @@ const withContext = Component => props => {
         const rover = roverMap[roverName]
         onSelectRover(rover)
         onSelectDate(rover.maxPhotoDate)
-    }, [roverName])
+    }, [roverName, onSelectRover, onSelectDate])
 
-    const ComponentWithContext = () => {
-        return (
-            <Component
-                {...props}
-                roverName={roverName}
-                date={formatEarthDate(selectedDate)}
-            />
-        )
-    }
+    const ComponentWithContext = () => (
+        <Component
+            {...props}
+            roverName={roverName}
+            date={formatEarthDate(selectedDate)}
+        />
+    )
 
     return selectedDate && selectedRover ? ComponentWithContext() : null
 }

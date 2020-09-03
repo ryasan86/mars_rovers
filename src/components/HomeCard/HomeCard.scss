@@ -4,17 +4,7 @@ $card-height: 35rem;
 $panel-height: 10rem;
 
 @mixin card-primary-color($blackenPct: 0) {
-    &--1 {
-        background: darken($teal, $blackenPct);
-    }
-
-    &--2 {
-        background: darken($teal, $blackenPct);
-    }
-
-    &--3 {
-        background: darken($teal, $blackenPct);
-    }
+    background: darken($teal, $blackenPct);
 }
 
 .home__card-item {
@@ -215,6 +205,7 @@ $panel-height: 10rem;
 
     border-radius: 50%;
     box-shadow: $box-shadow-m;
+    color: white;
     cursor: pointer;
     height: 4rem;
     padding: 1rem;

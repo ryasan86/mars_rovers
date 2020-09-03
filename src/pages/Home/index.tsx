@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import Layout from '../../components/Layout'
 import HomeCard from '../../components/HomeCard'
 import { RoverProps } from '../../interfaces'
-import { roverList } from '../../store'
+import { roverList } from '../../constants'
 import { Perseverance } from '../../videos'
 import './Home.scss'
 
@@ -45,85 +45,69 @@ const CardList: React.StatelessComponent = () => (
     </ul>
 )
 
-const HomePage: React.FC = () => {
-    const [pct, setPct] = useState(0)
-    const [int, setInt] = useState(null)
-
-    useEffect(() => {
-        const increase = () => setPct(prev => prev + 1)
-        const interval = setInterval(increase, 50)
-        setInt(interval)
-        return () => clearInterval(int)
-    }, [int])
-
-    useEffect(() => {
-        if (pct >= 100) clearInterval(int)
-    }, [pct, int])
-
-    return (
-        <Layout>
-            <div className='home'>
-                <div className='home__header'>
-                    <div className='home__video-container'>
-                        <div className='video__weather-text'>
-                            Sol 259<span> | </span> High: -17° F<span> | </span>
-                            Low: -150° F
-                        </div>
-                        <video className='video' autoPlay loop muted>
-                            <source src={Perseverance} type='video/webm' />
-                        </video>
-                        <div className='video__content-container'>
-                            <h3 className='video__title'>
-                                Perseverance is on it{"'"}s way to Mars
-                            </h3>
-                            <p className='video__subtext'>
-                                Inside it{"'"}s protective spacecraft, NASA{"'"}{' '}
-                                next Mars rover is cruising through space for a
-                                touchdown on Mars on Feb. 18, 2021.
-                            </p>
-                            <a
-                                className='video__content-link'
-                                href='https://mars.nasa.gov/mars2020/timeline/cruise'
-                                target='__blank'>
-                                Follow the journey
-                            </a>
-                        </div>
+const HomePage: React.StatelessComponent = () => (
+    <Layout>
+        <div className='home'>
+            <div className='home__header'>
+                <div className='home__video-container'>
+                    <div className='video__weather-text'>
+                        Sol 259<span> | </span> High: -17° F<span> | </span>
+                        Low: -150° F
                     </div>
-                    <div className='home__circle-container'>
-                        <div className='home__pct-text'>
-                            <span>%</span>
-                        </div>
-                        <div className='home__circle-track home__circle-track--clockwise'></div>
-                        <div className='home__circle-track home__circle-track--counterclockwise'></div>
-                        <h1 className='home__title'>
-                            Welc<span className='home__title-dot'></span>me to{' '}
-                            <br /> Mars
-                        </h1>
-                        <q className='home__subtitle'>
-                            Mars is the only planet inhabited solely by robots.
-                        </q>
-                        <footer>– Sarcastic Rover</footer>
+                    <video className='video' autoPlay loop muted>
+                        <source src={Perseverance} type='video/webm' />
+                    </video>
+                    <div className='video__content-container'>
+                        <h3 className='video__title'>
+                            Perseverance is on it{"'"}s way to Mars
+                        </h3>
+                        <p className='video__subtext'>
+                            Inside it{"'"}s protective spacecraft, NASA{"'"}{' '}
+                            next Mars rover is cruising through space for a
+                            touchdown on Mars on Feb. 18, 2021.
+                        </p>
+                        <a
+                            className='video__content-link'
+                            href='https://mars.nasa.gov/mars2020/timeline/cruise'
+                            target='__blank'>
+                            Follow the journey
+                        </a>
                     </div>
                 </div>
-                <div className='home__stripe-block'>
-                    <h1 className='home__stripe-quote'>
-                        It{"'"}s a fixer-upper of a planet but we could make it
-                        work.
+                <div className='home__circle-container'>
+                    <div className='home__pct-text'>
+                        <span>%</span>
+                    </div>
+                    <div className='home__circle-track home__circle-track--clockwise'></div>
+                    <div className='home__circle-track home__circle-track--counterclockwise'></div>
+                    <h1 className='home__title'>
+                        Welc<span className='home__title-dot'></span>me to{' '}
+                        <br /> Mars
                     </h1>
-                    <p className='home__stripe-source'>- Elon Musk</p>
+                    <q className='home__subtitle'>
+                        Mars is the only planet inhabited solely by robots.
+                    </q>
+                    <footer>– Sarcastic Rover</footer>
                 </div>
-                <section className='home__body'>
-                    <img
-                            className='home__spaceship-gif'
-                            src={require('../../images/spaceship.gif')}
-                            alt='spaceship'
-                        />
-
-                    <CardList />
-                </section>
             </div>
-        </Layout>
-    )
-}
+            <div className='home__stripe-block'>
+                <h1 className='home__stripe-quote'>
+                    It{"'"}s a fixer-upper of a planet but we could make it
+                    work.
+                </h1>
+                <p className='home__stripe-source'>- Elon Musk</p>
+            </div>
+            <section className='home__body'>
+                <img
+                    className='home__spaceship-gif'
+                    src={require('../../images/spaceship.gif')}
+                    alt='spaceship'
+                />
+
+                <CardList />
+            </section>
+        </div>
+    </Layout>
+)
 
 export default HomePage

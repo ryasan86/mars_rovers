@@ -6,6 +6,7 @@ import { RoverProps } from '../../interfaces'
 import './HomeCard.scss'
 import Icon from '../Icons'
 import { capitalize } from '../../utils'
+import { rootPath } from '../../constants'
 
 interface Props {
     idx: number
@@ -64,7 +65,7 @@ const HomeCard: React.StatelessComponent<Props> = ({ idx, rover }) => {
                 <p className='home__card-medium-text'>{rover.description}</p>
                 <button
                     className={`home__card-btn home__card-btn--${idx}`}
-                    onClick={navigate(`/photos?name=${rover.name}`)}>
+                    onClick={navigate(`${rootPath}photos?name=${rover.name}`)}>
                     See photos
                 </button>
             </div>

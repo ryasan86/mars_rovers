@@ -9,7 +9,7 @@ import Spaceship from './Spaceship'
 
 interface Props {
     style: CSSProperties
-    name: string
+    name: Required<string>
     fill: string
     width: string | number
     viewBox: string

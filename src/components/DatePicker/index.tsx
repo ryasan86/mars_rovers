@@ -4,15 +4,10 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 import Loader from '../Loader'
 import { Context } from '../../App'
-import { capitalize } from '../../utils'
 import './DatePicker.scss'
 
 const DatePicker: React.FC = () => {
     const { selectedRover, selectedDate, onSelectDate } = useContext(Context)
-
-    const handleDateSelect = date => {
-        onSelectDate(date)
-    }
 
     if (selectedRover && selectedDate) {
         const minDate = new Date(selectedRover.minPhotoDate)
@@ -20,17 +15,15 @@ const DatePicker: React.FC = () => {
         const selected = new Date(selectedDate)
 
         return (
-            <div className='date-picker'>
-                <div className='date-picker__text'>
-                    {capitalize(selectedRover.name)} Date Range:
-                </div>
+            <div className='date-picker__container'>
+                <span>Range: </span>
                 <ReactDatePicker
                     className='date-picker__input'
+                    dateFormat='yyyy/MM/dd'
+                    onChange={date => onSelectDate(date)}
                     minDate={minDate}
                     maxDate={maxDate}
-                    onChange={handleDateSelect}
                     selected={selected}
-                    dateFormat='yyyy/MM/dd'
                 />
             </div>
         )

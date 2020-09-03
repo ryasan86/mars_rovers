@@ -1,5 +1,9 @@
 import { RoverProps } from './interfaces'
 
+export const baseUrl = 'https://api.nasa.gov'
+export const apiKey = process.env.REACT_APP_API_KEY
+export const rootPath = process.env.NODE_ENV === 'development' ? '/' : '/mars_rovers/'
+
 export const roverMap = {
     curiosity: {
         name: 'curiosity',
