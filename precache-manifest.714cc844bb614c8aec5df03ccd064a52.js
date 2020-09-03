@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b25a28414bf6861a31138627824795b0",
+    "revision": "d234d7713fc4166b422aaade77ab1c0a",
     "url": "/mars_rovers/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/mars_rovers/static/css/2.8a9e15d2.chunk.css"
   },
   {
-    "revision": "2b7f55807875c7fa6c78",
+    "revision": "d5227e3b008c49677785",
     "url": "/mars_rovers/static/css/main.cc99bbc2.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/mars_rovers/static/js/2.370ca472.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2b7f55807875c7fa6c78",
-    "url": "/mars_rovers/static/js/main.c580a5a6.chunk.js"
+    "revision": "d5227e3b008c49677785",
+    "url": "/mars_rovers/static/js/main.f0f255f2.chunk.js"
   },
   {
     "revision": "848b7539edb1c44002fc",
