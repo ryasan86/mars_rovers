@@ -1,34 +1,8 @@
-import React, { CSSProperties } from 'react'
+import React from 'react'
 
-interface Props {
-    style: CSSProperties
-    name: string
-    fill: string
-    width: string | number
-    viewBox: string
-    visibility: string
-    className: string
-    onClick: () => void
-}
-
-const Rover: React.StatelessComponent<Partial<Props>> = ({
-    style = {},
-    fill = '#fff',
-    width = '100%',
-    viewBox = '0 0 128 128',
-    visibility = 'visibile',
-    className,
-    onClick = () => ({})
-}) => (
+const Rover: React.StatelessComponent = props => (
     <svg
-        width={width}
-        height={width}
-        style={style}
-        viewBox={viewBox}
-        fill={fill}
-        onClick={onClick}
-        visibility={visibility}
-        className={className}
+        {...props}
         xmlSpace='preserve'
         xmlns='http://www.w3.org/2000/svg'
         xmlnsXlink='http://www.w3.org/1999/xlink'>

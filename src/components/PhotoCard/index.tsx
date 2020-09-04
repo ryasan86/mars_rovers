@@ -1,15 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Reveal from 'react-reveal/Reveal'
 
 import Loader from '../Loader'
 import { PhotoProps } from '../../interfaces'
 import './PhotoCard.scss'
+import { Context } from '../../App'
 
-const Card: React.FC<{ photo: PhotoProps }> = props => {
-    const { img_src, earth_date, sol, camera } = props.photo
+const Card: React.FC<{
+    photo: PhotoProps
+    idx: number
+    onToggleModal: (bool: boolean) => void
+}> = ({ photo, idx, onToggleModal }) => {
+    const { img_src, earth_date, sol, camera } = photo
     const [imgIsLoading, setLoading] = useState(true)
+    const { onSelectPhotoIdx } = useContext(Context)
 
     const onPhotoLoad = () => setLoading(false)
+
+    const handleBtnClick = () => {
+        onSelectPhotoIdx(() => idx)
+        onToggleModal(true)
+    }
 
     return (
         <Reveal>
@@ -28,7 +39,7 @@ const Card: React.FC<{ photo: PhotoProps }> = props => {
                     <p className='photo-card__text'>Date: {earth_date}</p>
                     <p className='photo-card__text'>Martian Sol: {sol}</p>
                     <p className='photo-card__text'>Camera: {camera.full_name} ({camera.name})</p>
-                    <button className='photo-card__btn' onClick={() => window.open(img_src, '_blank')}>
+                    <button className='photo-card__btn' onClick={handleBtnClick}>
                         View Image
                     </button>
                 </div>

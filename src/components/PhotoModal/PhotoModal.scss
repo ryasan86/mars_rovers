@@ -1,0 +1,183 @@
+@import '../../globals';
+
+.photo-modal {
+    position: relative;
+}
+
+.photo-modal__slide-container {
+    background: rgba(0, 0, 0, 0.9);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+@keyframes fadeLeft {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    25% {
+        opacity: 0;
+        transform: translateX(-100vw);
+    }
+
+    50% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+
+    75% {
+        opacity: 0;
+        transform: translateX(100vw);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-in-out {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    25% {
+        opacity: 0;
+        transform: translateX(calc(-100vw));
+    }
+
+    50% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+
+    75% {
+        opacity: 0;
+        transform: translateX(calc(100vw));
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@mixin fade-animation($n: -1) {
+    animation: fade-in-out 0.5s linear;
+
+    @keyframes fade-in-out {
+        0% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        25% {
+            opacity: 0;
+            transform: translateX($n * -100vw);
+        }
+
+        50% {
+            opacity: 0;
+            transform: translateX(0);
+        }
+
+        75% {
+            opacity: 0;
+            transform: translateX($n * 100vw);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+}
+
+.photo-modal-slide {
+    align-items: center;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+
+    &.fade-left {
+        @include fade-animation(-1);
+    }
+
+    &.fade-right {
+        @include fade-animation(1);
+    }
+}
+
+.photo-modal__btn {
+    align-items: center;
+    background: $teal;
+    border: 0;
+    border-radius: 50%;
+    color: $blacker;
+    cursor: pointer;
+    display: flex;
+    font-size: 4rem;
+    height: 5rem;
+    justify-content: center;
+    padding: 0.75rem;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: background 0.3s;
+    width: 5rem;
+    z-index: 1000;
+
+    &--left {
+        left: 2rem;
+    }
+
+    &--right {
+        right: 2rem;
+    }
+
+    &--close {
+        background: 0;
+        color: $teal;
+        right: 1rem;
+        top: 3rem;
+
+        &:hover {
+            background: 0;
+            color: lighten($teal, 15%);
+        }
+    }
+
+    &.disabled {
+        background: $gray;
+        pointer-events: none;
+    }
+
+    &:hover:not(&--close) {
+        background: lighten($teal, 15%);
+    }
+}
+
+.photo-modal__photo-container {
+    height: 90vh;
+    position: relative;
+    width: 90vw;
+}
+
+.photo-modal__img {
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    transition: all 0.1s linear;
+    transition-delay: 2.9s;
+    width: 100%;
+}

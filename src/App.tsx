@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Home from './pages/Home'
 import Photos from './pages/Photos'
-import { RoverProps, ContextProps, ResponseProps } from './interfaces'
+import { RoverProps, ContextProps } from './interfaces'
 import { rootPath, roverMap, apiKey } from './constants'
 import { useCustomQuery } from './client'
 
@@ -13,12 +13,14 @@ const App: React.FC = () => {
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false)
     const [selectedDate, setSelectedDate] = useState<string | Date>()
     const [selectedRover, setSelectedRover] = useState<RoverProps | null>(null)
+    const [selectedPhotoIdx, setSelectedPhotoIdx] = useState(0)
 
     const onToggleSidebar = () => setSidebarOpen(prev => !prev)
     const onSelectDate = (date: string) => setSelectedDate(date) // prettier-ignore
     const onSelectRover = (rover: RoverProps) => setSelectedRover(rover)
+    const onSelectPhotoIdx = (cb: (arg: number) => number) => setSelectedPhotoIdx(cb)
 
-    const { data } = useCustomQuery({
+    const { data, loading } = useCustomQuery({
         query: `https://api.nasa.gov/mars-photos/api/v1/manifests/curiosity?api_key=${apiKey}`
     })
 
@@ -35,9 +37,12 @@ const App: React.FC = () => {
                     sidebarOpen,
                     selectedDate,
                     selectedRover,
+                    selectedPhotoIdx,
                     onToggleSidebar,
                     onSelectDate,
-                    onSelectRover
+                    onSelectRover,
+                    onSelectPhotoIdx,
+                    loadingManifest: loading
                 }}>
                 <Route
                     render={({ location }) => (

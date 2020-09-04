@@ -5,6 +5,22 @@ export interface RoverProps {
     totalPhotos: number | undefined
 }
 
+export interface PhotoManifestProps {
+    name: string
+    landing_date: string
+    launch_date: string
+    status: string
+    max_sol: number
+    max_date: string
+    total_photos: number
+    photos: {
+        sol: number
+        earth_date: string
+        total_photos: number
+        cameras: string[]
+    }
+}
+
 export interface PhotoProps {
     id: number
     img_src: string
@@ -34,26 +50,13 @@ export interface ResponseProps {
 }
 
 export interface ContextProps {
+    loadingManifest: boolean
     sidebarOpen: boolean
     selectedDate: string | Date
     selectedRover: RoverProps | null
+    selectedPhotoIdx: number
     onToggleSidebar: () => void
     onSelectDate: (date: string | Date) => void
     onSelectRover: (rover: RoverProps) => void
-}
-
-export interface PhotoManifestProps {
-    name: string
-    landing_date: string
-    launch_date: string
-    status: string
-    max_sol: number
-    max_date: string
-    total_photos: number
-    photos: {
-        sol: number
-        earth_date: string
-        total_photos: number
-        cameras: string[]
-    }
+    onSelectPhotoIdx: (any: (any: number) => number) => void
 }

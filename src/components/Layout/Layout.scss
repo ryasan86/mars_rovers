@@ -1,7 +1,12 @@
+.layout {
+    position: relative;
+}
+
 .layout__inner {
     display: flex;
     flex-direction: column;
     margin-top: 7rem;
     min-height: calc(100vh - 7rem);
+    position: relative;
     width: 100%;
 }

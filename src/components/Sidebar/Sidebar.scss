@@ -53,6 +53,7 @@
 
 .sidebar__toggle-btn-container {
     background: $blacker;
+    box-shadow: $box-shadow-lg;
     color: $teal;
     cursor: pointer;
     height: 7rem;
@@ -64,6 +65,7 @@
 
 .sidebar.active .sidebar__toggle-btn-container {
     background: $teal;
+    box-shadow: initial;
     color: white;
 }
 
