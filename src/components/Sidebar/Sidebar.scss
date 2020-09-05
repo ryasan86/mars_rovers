@@ -60,13 +60,23 @@
     position: absolute;
     right: -7rem;
     top: 0;
+    transition: background 0.3s, color 0.3s;
     width: 7rem;
+
+    &:hover {
+        background: lighten($blacker, 0.5%);
+        color: lighten($teal, 5%);
+    }
 }
 
 .sidebar.active .sidebar__toggle-btn-container {
     background: $teal;
     box-shadow: initial;
     color: white;
+
+    &:hover {
+        background: lighten($teal, 5%);
+    }
 }
 
 .sidebar__toggle-btn-svg {

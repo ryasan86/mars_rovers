@@ -58,7 +58,7 @@ $panel-height: 10rem;
 }
 
 .home__card-img {
-    background: white;
+    background: $black;
     height: calc(100% + 2rem);
     object-fit: contain;
     padding: 2rem;

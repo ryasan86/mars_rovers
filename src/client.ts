@@ -4,7 +4,7 @@ import { ResponseProps } from './interfaces'
 
 export const useCustomQuery = ({ query }: { query: string }): ResponseProps => {
     const [{ data, loading, error }, setState] = useState({
-        data: { photos: [], photo_manifest: null },
+        data: { photos: null, photo_manifest: null },
         loading: false,
         error: null
     })

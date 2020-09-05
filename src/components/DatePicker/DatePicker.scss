@@ -55,3 +55,11 @@
     color: $teal;
     font-size: $font-size-s;
 }
+
+.react-datepicker__navigation--previous {
+    border-right-color: white;
+}
+
+.react-datepicker__navigation--next {
+    border-left-color: white;
+}

@@ -6,7 +6,7 @@ import Loader from '../../components/Loader'
 import PhotoCard from '../../components/PhotoCard'
 import PhotoModal from '../../components/PhotoModal'
 import { useCustomQuery } from '../../client'
-import { formatEarthDate, parseParams } from '../../utils'
+import { formatEarthDate, parseParams, capitalize } from '../../utils'
 import { Context } from '../../App'
 import { roverMap, baseUrl, apiKey } from '../../constants'
 import './Photos.scss'
@@ -29,7 +29,7 @@ const PhotosPage: React.FC<Props> = ({ date, roverName }) => {
     })
 
     const renderPhotos = () => {
-        return photos.length > 0 ? (
+        return photos?.length > 0 ? (
             <ul className='photos__list'>
                 {photos.map((p, i) => (
                     <PhotoCard
@@ -53,47 +53,51 @@ const PhotosPage: React.FC<Props> = ({ date, roverName }) => {
     return (
         <Layout>
             <div className='photos'>
+                <h2 className='photos__title'>{capitalize(roverName)}</h2>
                 {loading ? (
                     <Loader className='photos__loader' />
                 ) : (
                     renderPhotos()
                 )}
             </div>
-            <PhotoModal
-                photos={photos}
-                modalOpen={modalOpen}
-                onToggleModal={setModalOpen}
-            />
+            {photos && (
+                <PhotoModal
+                    photos={photos}
+                    modalOpen={modalOpen}
+                    onToggleModal={setModalOpen}
+                />
+            )}
         </Layout>
     )
 }
 
 const withContext = Component => props => {
     const {
-        selectedRover,
+        selectedRover: currentRover,
         selectedDate,
         onSelectRover,
         onSelectDate
     } = useContext(Context)
-
     const { search } = useLocation()
-    const roverName = parseParams(search)
+    const incomingName = parseParams(search)
 
     useEffect(() => {
-        const rover = roverMap[roverName]
-        onSelectRover(rover)
-        onSelectDate(rover.maxPhotoDate)
-    }, [roverName, onSelectRover, onSelectDate])
+        if (currentRover?.name !== incomingName) {
+            const rover = roverMap[incomingName]
+            onSelectRover(rover)
+            onSelectDate(rover.maxPhotoDate)
+        }
+    }, [incomingName, currentRover, onSelectDate, onSelectRover])
 
     const ComponentWithContext = () => (
         <Component
             {...props}
-            roverName={roverName}
+            roverName={incomingName}
             date={formatEarthDate(selectedDate)}
         />
     )
 
-    return selectedDate && selectedRover ? ComponentWithContext() : null
+    return selectedDate && currentRover ? ComponentWithContext() : null
 }
 
 export default withContext(PhotosPage)
