@@ -43,6 +43,14 @@
     }
 }
 
+.home__particles {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
 .home {
     background: $blacker;
     display: flex;
@@ -150,6 +158,7 @@
 }
 
 .home__circle-track {
+    background: $blacker;
     border: 0.2rem solid $teal;
     border-radius: 50%;
     height: 50rem;
@@ -203,6 +212,7 @@
     margin: 0;
     padding: 0;
     text-align: center;
+    z-index: 1;
 }
 
 .home__subtitle {
@@ -213,6 +223,7 @@
     padding: 0;
     text-align: center;
     width: 80%;
+    z-index: 1;
 }
 
 .home__title-dot {

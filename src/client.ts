@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 
-import { ResponseProps, PhotoManifestProps } from './interfaces'
+import { ResponseProps } from './interfaces'
 
 export const useCustomQuery = ({ query }: { query: string }): ResponseProps => {
     const [{ data, loading, error }, setState] = useState({

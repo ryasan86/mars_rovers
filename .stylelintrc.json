@@ -10,6 +10,7 @@
         "selector-class-pattern": null,
         "indentation": 4,
         "declaration-block-semicolon-newline-after": null,
-        "max-nesting-depth": 2
+        "max-nesting-depth": 2,
+        "selector-max-id": null
     }
 }

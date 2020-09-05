@@ -1,4 +1,5 @@
 import React from 'react'
+import Particles from 'react-particles-js'
 
 import Layout from '../../components/Layout'
 import HomeCard from '../../components/HomeCard'
@@ -11,6 +12,49 @@ interface Props {
     img: string
     activeDate: string
     description: string
+}
+
+const particlesA = {
+    color: {
+        value: '#00bfa5'
+    },
+    number: {
+        value: 20,
+        density: {
+            enable: true,
+            value_area: 1500
+        }
+    },
+    line_linked: {
+        enable: true,
+        opacity: 0.3,
+        color: '#00bfa5'
+    },
+    move: {
+        speed: 0.7
+    },
+    size: {
+        value: 2.5
+    },
+    opacity: {
+        value: 100,
+        anim: {
+            enable: true,
+            speed: 1,
+            opacity_min: 0.05
+        }
+    }
+}
+
+const particlesB = {
+    ...particlesA,
+    line_linked: {
+        enable: false,
+        color: '#00bfa5'
+    },
+    size: {
+        value: 1.25
+    }
 }
 
 // prettier-ignore
@@ -48,7 +92,15 @@ const CardList: React.StatelessComponent = () => (
 const HomePage: React.StatelessComponent = () => (
     <Layout>
         <div className='home'>
-            <div className='home__header'>
+            <header className='home__header'>
+                <Particles
+                    className='home__particles'
+                    params={{ particles: particlesA, retina_detect: true }}
+                />
+                <Particles
+                    className='home__particles'
+                    params={{ particles: particlesB, retina_detect: true }}
+                />
                 <div className='home__video-container'>
                     <div className='video__weather-text'>
                         Sol 259<span> | </span> High: -17° F<span> | </span>
@@ -89,21 +141,20 @@ const HomePage: React.StatelessComponent = () => (
                     </q>
                     <footer>– Sarcastic Rover</footer>
                 </div>
-            </div>
-            <div className='home__stripe-block'>
+            </header>
+            <section className='home__stripe-block'>
                 <h1 className='home__stripe-quote'>
                     It{"'"}s a fixer-upper of a planet but we could make it
                     work.
                 </h1>
                 <p className='home__stripe-source'>- Elon Musk</p>
-            </div>
+            </section>
             <section className='home__body'>
                 <img
                     className='home__spaceship-gif'
                     src={require('../../images/spaceship.gif')}
                     alt='spaceship'
                 />
-
                 <CardList />
             </section>
         </div>

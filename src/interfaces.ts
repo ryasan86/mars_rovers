@@ -32,6 +32,7 @@ export interface PhotoProps {
         full_name: string
         name: string
     }
+
     rover: {
         id: number
         name: string
