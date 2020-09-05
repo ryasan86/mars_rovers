@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/mars_rovers/static/css/main.cf7a1f96.chunk.css",
-    "main.js": "/mars_rovers/static/js/main.b6b1382f.chunk.js",
-    "main.js.map": "/mars_rovers/static/js/main.b6b1382f.chunk.js.map",
+    "main.css": "/mars_rovers/static/css/main.72541db1.chunk.css",
+    "main.js": "/mars_rovers/static/js/main.bbc4047a.chunk.js",
+    "main.js.map": "/mars_rovers/static/js/main.bbc4047a.chunk.js.map",
     "runtime-main.js": "/mars_rovers/static/js/runtime-main.017077f4.js",
     "runtime-main.js.map": "/mars_rovers/static/js/runtime-main.017077f4.js.map",
     "static/css/2.8a9e15d2.chunk.css": "/mars_rovers/static/css/2.8a9e15d2.chunk.css",
-    "static/js/2.2b151abf.chunk.js": "/mars_rovers/static/js/2.2b151abf.chunk.js",
-    "static/js/2.2b151abf.chunk.js.map": "/mars_rovers/static/js/2.2b151abf.chunk.js.map",
+    "static/js/2.1cd4fb4f.chunk.js": "/mars_rovers/static/js/2.1cd4fb4f.chunk.js",
+    "static/js/2.1cd4fb4f.chunk.js.map": "/mars_rovers/static/js/2.1cd4fb4f.chunk.js.map",
     "index.html": "/mars_rovers/index.html",
-    "precache-manifest.dc22ff59eae4ee50d8699dff140f6a53.js": "/mars_rovers/precache-manifest.dc22ff59eae4ee50d8699dff140f6a53.js",
+    "precache-manifest.228ec8d8514e21b79412ef6dd8e1c22f.js": "/mars_rovers/precache-manifest.228ec8d8514e21b79412ef6dd8e1c22f.js",
     "service-worker.js": "/mars_rovers/service-worker.js",
     "static/css/2.8a9e15d2.chunk.css.map": "/mars_rovers/static/css/2.8a9e15d2.chunk.css.map",
-    "static/css/main.cf7a1f96.chunk.css.map": "/mars_rovers/static/css/main.cf7a1f96.chunk.css.map",
-    "static/js/2.2b151abf.chunk.js.LICENSE.txt": "/mars_rovers/static/js/2.2b151abf.chunk.js.LICENSE.txt",
+    "static/css/main.72541db1.chunk.css.map": "/mars_rovers/static/css/main.72541db1.chunk.css.map",
+    "static/js/2.1cd4fb4f.chunk.js.LICENSE.txt": "/mars_rovers/static/js/2.1cd4fb4f.chunk.js.LICENSE.txt",
     "static/media/curiosity-1.png": "/mars_rovers/static/media/curiosity-1.0463621c.png",
     "static/media/marsRoverClip.mp4": "/mars_rovers/static/media/marsRoverClip.766b8620.mp4",
     "static/media/milkyWay.mp4": "/mars_rovers/static/media/milkyWay.8458c2e9.mp4",
@@ -25,8 +25,8 @@
   "entrypoints": [
     "static/js/runtime-main.017077f4.js",
     "static/css/2.8a9e15d2.chunk.css",
-    "static/js/2.2b151abf.chunk.js",
-    "static/css/main.cf7a1f96.chunk.css",
-    "static/js/main.b6b1382f.chunk.js"
+    "static/js/2.1cd4fb4f.chunk.js",
+    "static/css/main.72541db1.chunk.css",
+    "static/js/main.bbc4047a.chunk.js"
   ]
 }
