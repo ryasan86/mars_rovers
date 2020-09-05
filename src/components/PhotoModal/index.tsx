@@ -1,35 +1,45 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 
 import Icon from '../../components/Icons'
 import { classList } from '../../utils'
 import { PhotoProps } from '../../interfaces'
 import './PhotoModal.scss'
+import { Context } from '../../App'
 
 interface Props {
     photos: PhotoProps[]
-    selectedPhotoIdx?: number
     step?: number
     idx?: number
     modalOpen?: boolean
+    selectedPhotoIdx?: number
     onToggleModal?: (bool: boolean) => void
     onSelectPhotoIdx?: (any: (any: number) => number) => void
 }
 
-const Modal: React.FC<Props> = ({ photos, idx, step }) => (
-    <div
-        className='photo-modal-slide'
-        style={{ transform: `translateX(${(idx + step) * 100}vw)` }}>
-        <div className='photo-modal__photo-container'>
-            <img
-                className='photo-modal__img'
-                src={photos[idx]?.img_src}
-                alt={'photo-' + idx}
-            />
-        </div>
-    </div>
-)
+const Modal: React.FC<Props> = ({ photos, idx, step, selectedPhotoIdx }) => {
+    const src = photos[idx]?.img_src
 
-const initialState = (selectedIdx: number) => [
+    // useEffect(() => {
+    //     console.log(idx + selectedPhotoIdx)
+    // }, [idx])
+
+    // prettier-ignore
+    return (
+        <div
+            className='photo-modal-slide'
+            style={{ transform: `translateX(${((idx - selectedPhotoIdx) + step) * 100}vw)` }}>
+            <div className='photo-modal__photo-container'>
+                <img
+                    className='photo-modal__img'
+                    src={src}
+                    alt={'photo-' + idx}
+                />
+            </div>
+        </div>
+    )
+}
+
+const initLayers = (selectedIdx: number) => [
     selectedIdx - 2,
     selectedIdx - 1,
     selectedIdx,
@@ -38,17 +48,14 @@ const initialState = (selectedIdx: number) => [
 ]
 
 const PhotoModal: React.FC<Props> = props => {
-    const {
-        selectedPhotoIdx: selectedPhotoIdx,
-        photos,
-        onToggleModal,
-        modalOpen
-    } = props
-    const [photoIndices, setPhotoIndices] = useState(initialState(selectedPhotoIdx)) // prettier-ignore
+    const { selectedPhotoIdx } = useContext(Context)
+    const { photos, onToggleModal, modalOpen } = props
+    const [layers, setLayers] = useState(null)
     const [step, setStep] = useState(0)
+    const selectedLayer = layers?.[2]
 
     const handleLeftClick = () => {
-        setPhotoIndices(prev => {
+        setLayers(prev => {
             const add = prev[0] - 1
             return [add, ...prev.slice(0, prev.length - 1)]
         })
@@ -56,12 +63,17 @@ const PhotoModal: React.FC<Props> = props => {
     }
 
     const handleRightClick = () => {
-        setPhotoIndices(prev => {
+        setLayers(prev => {
             const add = prev[prev.length - 1] + 1
             return [...prev.slice(1), add]
         })
         setStep(prev => prev - 1)
     }
+
+    useEffect(() => {
+        if (selectedPhotoIdx !== null) setLayers(initLayers(selectedPhotoIdx))
+        else setLayers(initLayers(0))
+    }, [modalOpen])
 
     return (
         <div className={`photo-modal${modalOpen ? ' active' : ''}`}>
@@ -71,14 +83,14 @@ const PhotoModal: React.FC<Props> = props => {
                 className={classList({
                     'photo-modal__btn': true,
                     'photo-modal__btn--left': true,
-                    disabled: photoIndices[2] <= 0
+                    disabled: selectedLayer <= 0
                 })}
             />
             <div className='photo-modal__slide-container'>
-                {photoIndices.map(idx => (
+                {layers?.map(layer => (
                     <Modal
-                        key={idx}
-                        idx={idx}
+                        key={layer}
+                        idx={layer}
                         step={step}
                         photos={photos}
                         selectedPhotoIdx={selectedPhotoIdx}
@@ -91,11 +103,15 @@ const PhotoModal: React.FC<Props> = props => {
                 className={classList({
                     'photo-modal__btn': true,
                     'photo-modal__btn--right': true,
-                    disabled: photoIndices[2] >= photoIndices.length - 1
+                    disabled: selectedLayer >= photos.length - 1
                 })}
             />
             <Icon
-                onClick={() => onToggleModal(false)}
+                onClick={() => {
+                    setLayers(null)
+                    setStep(0)
+                    onToggleModal(false)
+                }}
                 className='photo-modal__btn photo-modal__btn--close'
                 name='close'
             />

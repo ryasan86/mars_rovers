@@ -164,6 +164,10 @@ $panel-height: 10rem;
     outline: 0;
     padding: 1rem 2rem;
     transition: all 0.3s ease-out;
+
+    &:hover {
+        background: lighten($teal, 5%);
+    }
 }
 
 .home__card-item.active .home__card-img-container {
@@ -214,4 +218,8 @@ $panel-height: 10rem;
     top: 2rem;
     width: 4rem;
     z-index: 20;
+
+    &:hover {
+        background: lighten($teal, 5%);
+    }
 }

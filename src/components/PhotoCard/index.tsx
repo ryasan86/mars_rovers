@@ -6,11 +6,11 @@ import { PhotoProps } from '../../interfaces'
 import './PhotoCard.scss'
 import { Context } from '../../App'
 
-const Card: React.FC<{
+const PhotoCard: React.FC<{
     photo: PhotoProps
     idx: number
-    onToggleModal: (bool: boolean) => void
-}> = ({ photo, idx, onToggleModal }) => {
+    onModalToggle?: (bool: boolean) => void
+}> = ({ photo, idx, onModalToggle }) => {
     const { img_src, earth_date, sol, camera } = photo
     const [imgIsLoading, setLoading] = useState(true)
     const { onSelectPhotoIdx } = useContext(Context)
@@ -19,7 +19,7 @@ const Card: React.FC<{
 
     const handleBtnClick = () => {
         onSelectPhotoIdx(() => idx)
-        onToggleModal(true)
+        onModalToggle(true)
     }
 
     return (
@@ -48,4 +48,4 @@ const Card: React.FC<{
     )
 }
 
-export default Card
+export default PhotoCard

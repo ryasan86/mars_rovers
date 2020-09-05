@@ -1,14 +1,14 @@
 @import '../../globals';
 
 .photo-modal {
-    height: 100%;
+    height: 100vh;
     left: 0;
     opacity: 0;
     position: fixed;
     top: 0;
     transform: scale(0);
-    transition: all 0.3s;
-    width: 100%;
+    transition: opacity 0.3s, transform 0.3s;
+    width: 100vw;
     z-index: 20;
 
     &.active {
@@ -21,6 +21,7 @@
     background: rgba(0, 0, 0, 0.9);
     display: flex;
     height: 100%;
+    left: 0;
     position: absolute;
     top: 0;
     width: 100%;
@@ -32,7 +33,7 @@
     display: flex;
     height: 100vh;
     justify-content: center;
-    position: fixed;
+    position: absolute;
     top: 0;
     transition: transform 0.3s, opacity 0.3s;
     width: 100vw;
@@ -54,7 +55,7 @@
     height: 5rem;
     justify-content: center;
     padding: 0.75rem;
-    position: fixed;
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
     transition: background 0.3s;
@@ -93,7 +94,7 @@
 
 .photo-modal__photo-container {
     height: 90vh;
-    position: relative;
+    position: absolute;
     width: 90vw;
 }
 
@@ -101,7 +102,5 @@
     height: 100%;
     object-fit: contain;
     position: absolute;
-    transition: all 0.1s linear;
-    transition-delay: 2.9s;
     width: 100%;
 }

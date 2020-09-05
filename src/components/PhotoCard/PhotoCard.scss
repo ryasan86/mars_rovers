@@ -59,10 +59,11 @@
     padding: 8px;
     text-align: center;
     text-decoration: none;
-    transition: background 0.3s, color 0.3s;
+    transition: all 0.3s;
 
     &:hover {
-        background: $teal;
+        background: lighten($teal, 5%);
+        border-color: lighten($teal, 5%);
         color: white;
     }
 }

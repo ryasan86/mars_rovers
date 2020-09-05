@@ -14,28 +14,40 @@ import './Photos.scss'
 interface Props {
     date: Date | string
     roverName: string
-    selectedPhotoIdx: number
-    onSelectPhotoIdx: (any: (any: number) => number) => void
 }
 
-const PhotosPage: React.FC<Props> = ({
-    date,
-    roverName,
-    selectedPhotoIdx,
-    onSelectPhotoIdx
-}) => {
+const PhotosPage: React.FC<Props> = ({ date, roverName }) => {
     const isFirstRender = useRef(true)
     const [modalOpen, setModalOpen] = useState(false)
 
-    const { data, loading, refetch } = useCustomQuery({
+    const {
+        data: { photos },
+        loading,
+        refetch
+    } = useCustomQuery({
         query: `${baseUrl}/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${date}&api_key=${apiKey}`
     })
 
-    const handleModalToggle = (bool: boolean) => setModalOpen(bool)
+    const renderPhotos = () => {
+        return photos.length > 0 ? (
+            <ul className='photos__list'>
+                {photos.map((p, i) => (
+                    <PhotoCard
+                        key={i}
+                        idx={i}
+                        photo={p}
+                        onModalToggle={setModalOpen}
+                    />
+                ))}
+            </ul>
+        ) : (
+            <span className='photos__empty'>No results</span>
+        )
+    }
 
     useEffect(() => {
         if (!isFirstRender.current) refetch()
-        isFirstRender.current = false
+        if (isFirstRender.current) isFirstRender.current = false
     }, [refetch])
 
     return (
@@ -43,30 +55,15 @@ const PhotosPage: React.FC<Props> = ({
             <div className='photos'>
                 {loading ? (
                     <Loader className='photos__loader' />
-                ) : data.photos.length > 0 ? (
-                    <ul className='photos__list'>
-                        {data.photos.map((p, i) => (
-                            <PhotoCard
-                                key={i}
-                                idx={i}
-                                photo={p}
-                                onToggleModal={handleModalToggle}
-                            />
-                        ))}
-                    </ul>
                 ) : (
-                    <span className='photos__empty'>No results</span>
+                    renderPhotos()
                 )}
             </div>
-            {data.photos.length > 0 && (
-                <PhotoModal
-                    photos={data.photos}
-                    modalOpen={modalOpen}
-                    selectedPhotoIdx={selectedPhotoIdx}
-                    onToggleModal={handleModalToggle}
-                    onSelectPhotoIdx={onSelectPhotoIdx}
-                />
-            )}
+            <PhotoModal
+                photos={photos}
+                modalOpen={modalOpen}
+                onToggleModal={setModalOpen}
+            />
         </Layout>
     )
 }
@@ -76,9 +73,7 @@ const withContext = Component => props => {
         selectedRover,
         selectedDate,
         onSelectRover,
-        onSelectDate,
-        selectedPhotoIdx,
-        onSelectPhotoIdx
+        onSelectDate
     } = useContext(Context)
 
     const { search } = useLocation()
@@ -94,8 +89,6 @@ const withContext = Component => props => {
         <Component
             {...props}
             roverName={roverName}
-            selectedPhotoIdx={selectedPhotoIdx}
-            onSelectPhotoIdx={onSelectPhotoIdx}
             date={formatEarthDate(selectedDate)}
         />
     )

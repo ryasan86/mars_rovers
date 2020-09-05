@@ -13,7 +13,7 @@ const App: React.FC = () => {
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false)
     const [selectedDate, setSelectedDate] = useState<string | Date>()
     const [selectedRover, setSelectedRover] = useState<RoverProps | null>(null)
-    const [selectedPhotoIdx, setSelectedPhotoIdx] = useState(0)
+    const [selectedPhotoIdx, setSelectedPhotoIdx] = useState(null)
 
     const onToggleSidebar = () => setSidebarOpen(prev => !prev)
     const onSelectDate = (date: string) => setSelectedDate(date) // prettier-ignore
