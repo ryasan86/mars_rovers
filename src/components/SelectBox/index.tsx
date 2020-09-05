@@ -2,7 +2,7 @@ import React from 'react'
 
 import './SelectBox.scss'
 
-const CAMERAS = [
+const cameras = [
     {
         abbrev: 'FHAZ',
         fullName: 'Front Hazard Avoidance Camera'
@@ -42,29 +42,25 @@ const CAMERAS = [
 ]
 
 const SelectBox: React.FC = () => {
-    // const handleCamFilterSelect = async e => {
-    //     const camera = e.target.value
-    //     const { selectCameraFilter, toggleSidebar } = actions
-    //     if (ui.sidebarIsOpen) toggleSidebar()
-    //     await selectCameraFilter({ camera })
-    // }
+    const handleCamFilterSelect = e => {
+        const camera = e.target.value
+        console.log(camera)
+    }
 
     return (
         <div className='select-box'>
-            {/* <div className='select-box__title'>Camera</div>
-            <div className='select-box__container'>
+            <div className='select-box__title'>Camera:</div>
                 <select
-                    className='select-box__box'
-                    value={data.selectedCamera}
+                    className='select-box__select'
+                    value={''}
                     onChange={handleCamFilterSelect}>
                     <option value='All'>All</option>
-                    {CAMERAS.map(({ abbrev, fullName }, i) => (
+                    {cameras.map(({ abbrev, fullName }, i) => (
                         <option key={i} value={abbrev}>
                             {fullName} ({abbrev})
                         </option>
                     ))}
                 </select>
-            </div> */}
         </div>
     )
 }

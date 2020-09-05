@@ -64,7 +64,7 @@
     width: 7rem;
 
     &:hover {
-        background: lighten($blacker, 0.5%);
+        background: darken($blacker, 2%);
         color: lighten($teal, 5%);
     }
 }
@@ -76,6 +76,7 @@
 
     &:hover {
         background: lighten($teal, 5%);
+        color: $light;
     }
 }
 

@@ -5,6 +5,7 @@ import Icon from '../Icons'
 import DatePicker from '../DatePicker'
 import { rootPath } from '../../constants'
 import './Navbar.scss'
+import SelectBox from '../SelectBox'
 
 const Navbar: React.StatelessComponent = () => {
     const location = useLocation()
@@ -20,6 +21,11 @@ const Navbar: React.StatelessComponent = () => {
             {location.pathname !== rootPath && (
                 <div className='navbar__date-picker-container'>
                     <DatePicker />
+                </div>
+            )}
+            {location.pathname !== rootPath && (
+                <div className='navbar__select-box-container'>
+                    <SelectBox />
                 </div>
             )}
             <Icon

@@ -10,7 +10,7 @@ export const roverMap = {
         name: 'curiosity',
         minPhotoDate: '2012-8-6',
         maxPhotoDate: moment(Date.now())
-            .subtract(2, 'days')
+            .subtract(3, 'days')
             .format('YYYY-M-D')
     } as RoverProps,
 

@@ -135,6 +135,12 @@
             color: white;
             padding: 2rem 4rem;
             text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .video__content-link:hover {
+            background: darken($blacker, 2%);
+            color: $light;
         }
     }
 }
