@@ -9,12 +9,19 @@
     transform: scale(0);
     transition: opacity 0.3s, transform 0.3s;
     width: 100vw;
-    z-index: 20;
+    z-index: 9999;
 
     &.active {
         opacity: 1;
         transform: scale(1);
     }
+}
+
+.photo-modal__count {
+    left: 2rem;
+    position: absolute;
+    top: 2rem;
+    z-index: 1;
 }
 
 .photo-modal__slide-container {
@@ -25,7 +32,6 @@
     position: absolute;
     top: 0;
     width: 100%;
-    z-index: 20;
 }
 
 .photo-modal-slide {
@@ -60,7 +66,7 @@
     transform: translateY(-50%);
     transition: background 0.3s;
     width: 5rem;
-    z-index: 1000;
+    z-index: 1;
 
     &--left {
         left: 2rem;
