@@ -1,120 +1,44 @@
 @import '../../globals';
 
 .photo-modal {
-    position: relative;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    transform: scale(0);
+    transition: all 0.3s;
+    width: 100%;
+    z-index: 20;
+
+    &.active {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .photo-modal__slide-container {
     background: rgba(0, 0, 0, 0.9);
-    height: 100vh;
-    position: fixed;
+    display: flex;
+    height: 100%;
+    position: absolute;
     top: 0;
     width: 100%;
-    z-index: 10;
-}
-
-@keyframes fadeLeft {
-    0% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    25% {
-        opacity: 0;
-        transform: translateX(-100vw);
-    }
-
-    50% {
-        opacity: 0;
-        transform: translateX(0);
-    }
-
-    75% {
-        opacity: 0;
-        transform: translateX(100vw);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes fade-in-out {
-    0% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    25% {
-        opacity: 0;
-        transform: translateX(calc(-100vw));
-    }
-
-    50% {
-        opacity: 0;
-        transform: translateX(0);
-    }
-
-    75% {
-        opacity: 0;
-        transform: translateX(calc(100vw));
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@mixin fade-animation($n: -1) {
-    animation: fade-in-out 0.5s linear;
-
-    @keyframes fade-in-out {
-        0% {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        25% {
-            opacity: 0;
-            transform: translateX($n * -100vw);
-        }
-
-        50% {
-            opacity: 0;
-            transform: translateX(0);
-        }
-
-        75% {
-            opacity: 0;
-            transform: translateX($n * 100vw);
-        }
-
-        100% {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
+    z-index: 20;
 }
 
 .photo-modal-slide {
     align-items: center;
-    animation-fill-mode: forwards;
-    animation-iteration-count: 1;
     display: flex;
     height: 100vh;
     justify-content: center;
-    position: absolute;
+    position: fixed;
     top: 0;
+    transition: transform 0.3s, opacity 0.3s;
     width: 100vw;
 
-    &.fade-left {
-        @include fade-animation(-1);
-    }
-
-    &.fade-right {
-        @include fade-animation(1);
+    &:not(:nth-child(3)) {
+        opacity: 0;
     }
 }
 

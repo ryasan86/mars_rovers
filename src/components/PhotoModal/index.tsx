@@ -7,57 +7,83 @@ import './PhotoModal.scss'
 
 interface Props {
     photos: PhotoProps[]
-    selectedPhotoIdx: number
+    selectedPhotoIdx?: number
+    step?: number
     idx?: number
-    modalOpen: boolean
-    isTickingLeft?: boolean
+    modalOpen?: boolean
     onToggleModal?: (bool: boolean) => void
     onSelectPhotoIdx?: (any: (any: number) => number) => void
 }
 
+const Modal: React.FC<Props> = ({ photos, idx, step }) => (
+    <div
+        className='photo-modal-slide'
+        style={{ transform: `translateX(${(idx + step) * 100}vw)` }}>
+        <div className='photo-modal__photo-container'>
+            <img
+                className='photo-modal__img'
+                src={photos[idx]?.img_src}
+                alt={'photo-' + idx}
+            />
+        </div>
+    </div>
+)
+
+const initialState = (selectedIdx: number) => [
+    selectedIdx - 2,
+    selectedIdx - 1,
+    selectedIdx,
+    selectedIdx + 1,
+    selectedIdx + 2
+]
+
 const PhotoModal: React.FC<Props> = props => {
-    const { selectedPhotoIdx, photos, onSelectPhotoIdx, onToggleModal } = props
-    const [isTicking, setIsTicking] = useState(false)
+    const {
+        selectedPhotoIdx: selectedPhotoIdx,
+        photos,
+        onToggleModal,
+        modalOpen
+    } = props
+    const [photoIndices, setPhotoIndices] = useState(initialState(selectedPhotoIdx)) // prettier-ignore
+    const [step, setStep] = useState(0)
 
-    const rotateSlide = (num: number) => {
-        setIsTicking(true)
-        setTimeout(() => {
-            onSelectPhotoIdx(prev => prev + num)
-        }, 250)
-
-        setTimeout(() => {
-            setIsTicking(false)
-        }, 500)
+    const handleLeftClick = () => {
+        setPhotoIndices(prev => {
+            const add = prev[0] - 1
+            return [add, ...prev.slice(0, prev.length - 1)]
+        })
+        setStep(prev => prev + 1)
     }
 
-    const handleLeftClick = () => rotateSlide(-1)
-    const handleRightClick = () => rotateSlide(1)
+    const handleRightClick = () => {
+        setPhotoIndices(prev => {
+            const add = prev[prev.length - 1] + 1
+            return [...prev.slice(1), add]
+        })
+        setStep(prev => prev - 1)
+    }
 
     return (
-        <div className='photo-modal'>
+        <div className={`photo-modal${modalOpen ? ' active' : ''}`}>
             <Icon
                 name='arrow-left'
                 onClick={handleLeftClick}
                 className={classList({
                     'photo-modal__btn': true,
                     'photo-modal__btn--left': true,
-                    disabled: selectedPhotoIdx <= 0
+                    disabled: photoIndices[2] <= 0
                 })}
             />
-            <div className={`photo-modal__slide-container`}>
-                <div
-                    className={classList({
-                        'photo-modal-slide': true,
-                        'fade-right': isTicking
-                    })}>
-                    <div className='photo-modal__photo-container'>
-                        <img
-                            className='photo-modal__img'
-                            src={photos[selectedPhotoIdx].img_src}
-                            alt={'photo-' + selectedPhotoIdx}
-                        />
-                    </div>
-                </div>
+            <div className='photo-modal__slide-container'>
+                {photoIndices.map(idx => (
+                    <Modal
+                        key={idx}
+                        idx={idx}
+                        step={step}
+                        photos={photos}
+                        selectedPhotoIdx={selectedPhotoIdx}
+                    />
+                ))}
             </div>
             <Icon
                 name='arrow-right'
@@ -65,7 +91,7 @@ const PhotoModal: React.FC<Props> = props => {
                 className={classList({
                     'photo-modal__btn': true,
                     'photo-modal__btn--right': true,
-                    disabled: selectedPhotoIdx >= photos.length - 1
+                    disabled: photoIndices[2] >= photoIndices.length - 1
                 })}
             />
             <Icon

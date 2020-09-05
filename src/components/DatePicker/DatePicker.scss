@@ -1,5 +1,10 @@
 @import '../../globals';
 
+.date-picker__container {
+    align-items: center;
+    display: flex;
+}
+
 .date-picker__input {
     background: $blacker !important;
     border: 0.1rem solid $teal;

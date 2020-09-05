@@ -4,12 +4,12 @@ import { useLocation } from 'react-router-dom'
 import Layout from '../../components/Layout'
 import Loader from '../../components/Loader'
 import PhotoCard from '../../components/PhotoCard'
+import PhotoModal from '../../components/PhotoModal'
 import { useCustomQuery } from '../../client'
 import { formatEarthDate, parseParams } from '../../utils'
 import { Context } from '../../App'
 import { roverMap, baseUrl, apiKey } from '../../constants'
 import './Photos.scss'
-import PhotoModal from '../../components/PhotoModal'
 
 interface Props {
     date: Date | string
@@ -18,7 +18,12 @@ interface Props {
     onSelectPhotoIdx: (any: (any: number) => number) => void
 }
 
-const PhotosPage: React.FC<Props> = ({ date, roverName, selectedPhotoIdx, onSelectPhotoIdx }) => {
+const PhotosPage: React.FC<Props> = ({
+    date,
+    roverName,
+    selectedPhotoIdx,
+    onSelectPhotoIdx
+}) => {
     const isFirstRender = useRef(true)
     const [modalOpen, setModalOpen] = useState(false)
 
@@ -67,7 +72,15 @@ const PhotosPage: React.FC<Props> = ({ date, roverName, selectedPhotoIdx, onSele
 }
 
 const withContext = Component => props => {
-    const { selectedRover, selectedDate, onSelectRover, onSelectDate, selectedPhotoIdx, onSelectPhotoIdx } = useContext(Context) // prettier-ignore
+    const {
+        selectedRover,
+        selectedDate,
+        onSelectRover,
+        onSelectDate,
+        selectedPhotoIdx,
+        onSelectPhotoIdx
+    } = useContext(Context)
+
     const { search } = useLocation()
     const roverName = parseParams(search)
 

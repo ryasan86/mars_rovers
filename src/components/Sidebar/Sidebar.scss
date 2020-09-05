@@ -41,7 +41,7 @@
     width: 15rem;
 }
 
-@keyframes toggleAnimate {
+@keyframes sidebar-btn-spin {
     0% {
         transform: rotate(0);
     }
@@ -69,9 +69,11 @@
     color: white;
 }
 
-.sidebar__toggle-btn {
-    animation: toggleAnimate 0.5s ease-out;
-    padding: 2.5rem;
+.sidebar__toggle-btn-svg {
+    animation: sidebar-btn-spin 0.5s ease-out;
+    height: 100%;
+    padding: 2rem;
+    width: 100%;
 }
 
 .sidebar__link-list {

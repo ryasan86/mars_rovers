@@ -37,7 +37,7 @@ const Sidebar: React.FC = () => {
                 className='sidebar__toggle-btn-container'
                 onClick={onToggleSidebar}>
                 <Icon
-                    className='sidebar__toggle-btn'
+                    className='sidebar__toggle-btn-svg'
                     name={sidebarOpen ? 'close' : 'burger'}
                 />
             </div>

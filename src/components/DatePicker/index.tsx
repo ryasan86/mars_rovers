@@ -27,7 +27,7 @@ const DatePicker: React.FC = () => {
 
         return (
             <div className='date-picker__container'>
-                <span>Range: </span>
+                <span style={{ marginRight: '1rem' }}>Range:</span>
                 <ReactDatePicker
                     className='date-picker__input'
                     dateFormat='yyyy/MM/dd'
