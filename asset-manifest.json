@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/mars_rovers/static/css/main.7d19354f.chunk.css",
-    "main.js": "/mars_rovers/static/js/main.ecb27574.chunk.js",
-    "main.js.map": "/mars_rovers/static/js/main.ecb27574.chunk.js.map",
+    "main.js": "/mars_rovers/static/js/main.3be36b76.chunk.js",
+    "main.js.map": "/mars_rovers/static/js/main.3be36b76.chunk.js.map",
     "runtime-main.js": "/mars_rovers/static/js/runtime-main.017077f4.js",
     "runtime-main.js.map": "/mars_rovers/static/js/runtime-main.017077f4.js.map",
     "static/css/2.8a9e15d2.chunk.css": "/mars_rovers/static/css/2.8a9e15d2.chunk.css",
-    "static/js/2.86970051.chunk.js": "/mars_rovers/static/js/2.86970051.chunk.js",
-    "static/js/2.86970051.chunk.js.map": "/mars_rovers/static/js/2.86970051.chunk.js.map",
+    "static/js/2.5053ffd3.chunk.js": "/mars_rovers/static/js/2.5053ffd3.chunk.js",
+    "static/js/2.5053ffd3.chunk.js.map": "/mars_rovers/static/js/2.5053ffd3.chunk.js.map",
     "index.html": "/mars_rovers/index.html",
-    "precache-manifest.fc699f4199b5ec18d174fcf83752e97b.js": "/mars_rovers/precache-manifest.fc699f4199b5ec18d174fcf83752e97b.js",
+    "precache-manifest.648361f3e4415c439bd576f508146c53.js": "/mars_rovers/precache-manifest.648361f3e4415c439bd576f508146c53.js",
     "service-worker.js": "/mars_rovers/service-worker.js",
     "static/css/2.8a9e15d2.chunk.css.map": "/mars_rovers/static/css/2.8a9e15d2.chunk.css.map",
     "static/css/main.7d19354f.chunk.css.map": "/mars_rovers/static/css/main.7d19354f.chunk.css.map",
-    "static/js/2.86970051.chunk.js.LICENSE.txt": "/mars_rovers/static/js/2.86970051.chunk.js.LICENSE.txt",
+    "static/js/2.5053ffd3.chunk.js.LICENSE.txt": "/mars_rovers/static/js/2.5053ffd3.chunk.js.LICENSE.txt",
     "static/media/curiosity-1.png": "/mars_rovers/static/media/curiosity-1.0463621c.png",
     "static/media/marsRoverClip.mp4": "/mars_rovers/static/media/marsRoverClip.766b8620.mp4",
     "static/media/milkyWay.mp4": "/mars_rovers/static/media/milkyWay.8458c2e9.mp4",
@@ -25,8 +25,8 @@
   "entrypoints": [
     "static/js/runtime-main.017077f4.js",
     "static/css/2.8a9e15d2.chunk.css",
-    "static/js/2.86970051.chunk.js",
+    "static/js/2.5053ffd3.chunk.js",
     "static/css/main.7d19354f.chunk.css",
-    "static/js/main.ecb27574.chunk.js"
+    "static/js/main.3be36b76.chunk.js"
   ]
 }
