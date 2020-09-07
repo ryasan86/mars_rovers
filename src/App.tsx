@@ -14,11 +14,13 @@ const App: React.FC = () => {
     const [selectedDate, setSelectedDate] = useState<string | Date>()
     const [selectedRover, setSelectedRover] = useState<RoverProps | null>(null)
     const [selectedPhotoIdx, setSelectedPhotoIdx] = useState(null)
+    const [selectedCamera, setSelectedCamera] = useState<string>(null)
 
     const onToggleSidebar = () => setSidebarOpen(prev => !prev)
     const onSelectDate = (date: string) => setSelectedDate(date) // prettier-ignore
     const onSelectRover = (rover: RoverProps) => setSelectedRover(rover)
     const onSelectPhotoIdx = (cb: (arg: number) => number) => setSelectedPhotoIdx(cb)
+    const onSelectCamera = (camera: string) => setSelectedCamera(camera)
 
     const { data, loading } = useCustomQuery({
         query: `https://api.nasa.gov/mars-photos/api/v1/manifests/curiosity?api_key=${apiKey}`
@@ -34,6 +36,7 @@ const App: React.FC = () => {
         <BrowserRouter>
             <Context.Provider
                 value={{
+                    selectedCamera,
                     sidebarOpen,
                     selectedDate,
                     selectedRover,
@@ -42,6 +45,7 @@ const App: React.FC = () => {
                     onSelectDate,
                     onSelectRover,
                     onSelectPhotoIdx,
+                    onSelectCamera,
                     loadingManifest: loading
                 }}>
                 <Route

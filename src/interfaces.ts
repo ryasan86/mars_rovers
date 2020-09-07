@@ -51,6 +51,7 @@ export interface ResponseProps {
 }
 
 export interface ContextProps {
+    selectedCamera: string | null
     loadingManifest: boolean
     sidebarOpen: boolean
     selectedDate: string | Date
@@ -60,4 +61,5 @@ export interface ContextProps {
     onSelectDate: (date: string | Date) => void
     onSelectRover: (rover: RoverProps) => void
     onSelectPhotoIdx: (any: (any: number) => number) => void
+    onSelectCamera: (camera: string) => void
 }

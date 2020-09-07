@@ -14,18 +14,25 @@ import './Photos.scss'
 interface Props {
     date: Date | string
     roverName: string
+    selectedCamera: string | null
 }
 
-const PhotosPage: React.FC<Props> = ({ date, roverName }) => {
+const PhotosPage: React.FC<Props> = ({ date, roverName, selectedCamera }) => {
     const isFirstRender = useRef(true)
     const [modalOpen, setModalOpen] = useState(false)
 
-    const {
-        data: { photos },
-        loading,
-        refetch
-    } = useCustomQuery({
-        query: `${baseUrl}/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${date}&api_key=${apiKey}`
+    const query = {
+        [`${baseUrl}/mars-photos/api/v1/rovers/${roverName}/`]: true,
+        [`/photos?earth_date=${date}&api_key=${apiKey}`]: true,
+        [`&camera=${selectedCamera}`]: !!selectedCamera
+    }
+
+    // prettier-ignore
+    const { data: { photos }, loading, refetch } = useCustomQuery({
+        query: Object.entries(query)
+            .filter(entry => entry[1])
+            .map(entry => entry[0])
+            .join('')
     })
 
     const renderPhotos = () => {
@@ -76,7 +83,8 @@ const withContext = Component => props => {
         selectedRover: currentRover,
         selectedDate,
         onSelectRover,
-        onSelectDate
+        onSelectDate,
+        selectedCamera
     } = useContext(Context)
     const { search } = useLocation()
     const incomingName = parseParams(search)
@@ -93,6 +101,7 @@ const withContext = Component => props => {
         <Component
             {...props}
             roverName={incomingName}
+            selectedCamera={selectedCamera}
             date={formatEarthDate(selectedDate)}
         />
     )

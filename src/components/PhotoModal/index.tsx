@@ -78,9 +78,9 @@ const PhotoModal: React.FC<Props> = props => {
                 className='photo-modal__btn photo-modal__btn--left'
             />
             <div className='photo-modal__slide-container'>
-                {layers?.map(layer => (
+                {layers?.map((layer, i) => (
                     <Modal
-                        key={layer}
+                        key={i}
                         idx={layer}
                         step={step}
                         img={photos[layer]?.img_src}

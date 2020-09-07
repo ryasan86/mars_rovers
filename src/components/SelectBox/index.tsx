@@ -1,66 +1,69 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
+import { Context } from '../../App'
 import './SelectBox.scss'
 
 const cameras = [
     {
-        abbrev: 'FHAZ',
+        abbreviation: 'FHAZ',
         fullName: 'Front Hazard Avoidance Camera'
     },
     {
-        abbrev: 'RHAZ',
+        abbreviation: 'RHAZ',
         fullName: 'Rear Hazard Avoidance Camera'
     },
     {
-        abbrev: 'MAST',
+        abbreviation: 'MAST',
         fullName: 'Mast Camera'
     },
     {
-        abbrev: 'CHEMCAM',
+        abbreviation: 'CHEMCAM',
         fullName: 'Chemistry and Camera Complex'
     },
     {
-        abbrev: 'MAHLI',
+        abbreviation: 'MAHLI',
         fullName: 'Mars Hand Lens Imager'
     },
     {
-        abbrev: 'MARDI',
+        abbreviation: 'MARDI',
         fullName: 'Mars Descent Imager'
     },
     {
-        abbrev: 'NAVCAM',
+        abbreviation: 'NAVCAM',
         fullName: 'Navigation Camera'
     },
     {
-        abbrev: 'PANCAM',
+        abbreviation: 'PANCAM',
         fullName: 'Panoramic Camera'
     },
     {
-        abbrev: 'MINITES',
+        abbreviation: 'MINITES',
         fullName: 'Miniature Thermal Emission Spectrometer'
     }
 ]
 
 const SelectBox: React.FC = () => {
+    const { selectedCamera, onSelectCamera } = useContext(Context)
+
     const handleCamFilterSelect = e => {
         const camera = e.target.value
-        console.log(camera)
+        onSelectCamera(camera === 'ALL' ? null : camera)
     }
 
     return (
         <div className='select-box'>
             <div className='select-box__title'>Camera:</div>
-                <select
-                    className='select-box__select'
-                    value={''}
-                    onChange={handleCamFilterSelect}>
-                    <option value='All'>All</option>
-                    {cameras.map(({ abbrev, fullName }, i) => (
-                        <option key={i} value={abbrev}>
-                            {fullName} ({abbrev})
-                        </option>
-                    ))}
-                </select>
+            <select
+                className='select-box__select'
+                value={selectedCamera || 'ALL'}
+                onChange={handleCamFilterSelect}>
+                <option value='ALL'>All</option>
+                {cameras.map(({ abbreviation, fullName }, i) => (
+                    <option key={i} value={abbreviation}>
+                        {fullName} ({abbreviation})
+                    </option>
+                ))}
+            </select>
         </div>
     )
 }
