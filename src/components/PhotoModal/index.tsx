@@ -43,16 +43,16 @@ const PhotoModal: React.FC<Props> = props => {
 
     const handleLeftClick = () => {
         setLayers(prev => {
-            const add = (prev[0] - 1 + photos.length) % photos.length
-            return [add, ...prev.slice(0, prev.length - 1)]
+            const tail = (prev[0] - 1 + photos.length) % photos.length
+            return [tail, ...prev.slice(0, prev.length - 1)]
         })
         setStep(prev => (prev - 1 + photos.length) % photos.length)
     }
 
     const handleRightClick = () => {
         setLayers(prev => {
-            const add = (prev[prev.length - 1] + 1) % photos.length
-            return [...prev.slice(1), add]
+            const head = (prev[prev.length - 1] + 1) % photos.length
+            return [...prev.slice(1), head]
         })
         setStep(prev => (prev + 1) % photos.length)
     }
