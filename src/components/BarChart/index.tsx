@@ -44,7 +44,7 @@ interface YearProps {
     spirit?: number
 }
 
-const getYearlyData = () => {
+const getYearlyData = (): DataProps[] => {
     const map: { [year: string]: YearProps } = {}
     // prettier-ignore
     manifests.forEach(manifest => {
@@ -71,7 +71,9 @@ const getYearlyData = () => {
     }))
 }
 
-const data: DataProps[] = getYearlyData()
+const data = getYearlyData()
+
+console.log(data)
 
 const width = 960
 const height = 500
@@ -104,7 +106,7 @@ const BarChart: React.FC = () => {
         const series = d3
             .stack()
             .keys(['curiosity', 'opportunity', 'spirit'])(data)
-            .map(d => (d.forEach(v => (v.key = d.key)), d))
+            .map(d => (d.forEach(v => (v.key = d.key)), d)) // eslint-disable-line
 
         const x = d3
             .scaleBand()
@@ -145,7 +147,6 @@ const BarChart: React.FC = () => {
                 .call(g => g.selectAll('.domain').remove())
 
         svg.append('g').call(xAxis)
-
         svg.append('g').call(yAxis)
 
         return svg.node()

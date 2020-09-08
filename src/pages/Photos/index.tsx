@@ -5,7 +5,6 @@ import Layout from '../../components/Layout'
 import Loader from '../../components/Loader'
 import PhotoCard from '../../components/PhotoCard'
 import PhotoModal from '../../components/PhotoModal'
-import BarChart from '../../components/BarChart'
 import { useCustomQuery } from '../../client'
 import { formatEarthDate, parseParams, capitalize } from '../../utils'
 import { Context } from '../../App'
@@ -62,7 +61,6 @@ const PhotosPage: React.FC<Props> = ({ date, roverName, selectedCamera }) => {
         <Layout>
             <div className='photos'>
                 <h2 className='photos__title'>{capitalize(roverName)}</h2>
-                <BarChart />
                 {loading ? (
                     <Loader className='photos__loader' />
                 ) : (
