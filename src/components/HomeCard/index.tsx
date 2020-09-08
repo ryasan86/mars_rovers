@@ -16,6 +16,7 @@ interface Props {
 const HomeCard: React.StatelessComponent<Props> = ({ idx, rover }) => {
     const [isActive, setIsActive] = useState(false)
     const history = useHistory()
+    const modifier = rover.name.toLowerCase()
 
     const navigate = (path: string) => () => {
         history.push(path)
@@ -26,11 +27,11 @@ const HomeCard: React.StatelessComponent<Props> = ({ idx, rover }) => {
             key={idx}
             className={classList({
                 'home__card-item': true,
-                [`home__card-item--${idx}`]: true,
+                [`home__card-item--${modifier}`]: true,
                 active: isActive
             })}>
             <Icon
-                className={`home__card-toggle-btn  home__card-toggle-btn--${idx}`}
+                className={`home__card-toggle-btn  home__card-toggle-btn--${modifier}`}
                 name='burger'
                 onClick={() => setIsActive(prev => !prev)}
             />
@@ -47,9 +48,9 @@ const HomeCard: React.StatelessComponent<Props> = ({ idx, rover }) => {
                 className={classList({
                     'home__card-wing': true,
                     'home__card-wing--left': true,
-                    [`home__card-wing--${idx}`]: true
+                    [`home__card-wing--${modifier}`]: true
                 })}></div>
-            <div className={`home__card-panel home__card-panel--${idx}`}>
+            <div className={`home__card-panel home__card-panel--${modifier}`}>
                 <p className='home__card-medium-text'>
                     {capitalize(rover.name)}
                 </p>
@@ -59,12 +60,12 @@ const HomeCard: React.StatelessComponent<Props> = ({ idx, rover }) => {
                 className={classList({
                     'home__card-wing': true,
                     'home__card-wing--right': true,
-                    [`home__card-wing--${idx}`]: true
+                    [`home__card-wing--${modifier}`]: true
                 })}></div>
-            <div className={`home__card-body home__card-body--${idx}`}>
+            <div className={`home__card-body home__card-body--${modifier}`}>
                 <p className='home__card-medium-text'>{rover.description}</p>
                 <button
-                    className={`home__card-btn home__card-btn--${idx}`}
+                    className={`home__card-btn home__card-btn--${modifier}`}
                     onClick={navigate(`${rootPath}photos?name=${rover.name}`)}>
                     See photos
                 </button>

@@ -3,12 +3,22 @@
 $card-height: 35rem;
 $panel-height: 10rem;
 
-@mixin card-primary-color($blackenPct: 0) {
-    background: darken($teal, $blackenPct);
+@mixin rover-hover-colors {
+    &--curiosity:hover {
+        background: lighten($teal, 5%);
+    }
+
+    &--opportunity:hover {
+        background: lighten($blue, 5%);
+    }
+
+    &--spirit:hover {
+        background: lighten($purple, 5%);
+    }
 }
 
 .home__card-item {
-    @include card-primary-color();
+    @include rover-colors();
 
     box-shadow: $box-shadow-xlg;
     color: $black;
@@ -24,7 +34,7 @@ $panel-height: 10rem;
     }
 
     &::before {
-        @include card-primary-color();
+        @include rover-colors();
 
         content: '';
         height: 1rem;
@@ -42,8 +52,9 @@ $panel-height: 10rem;
 }
 
 .home__card-img-container {
+    @include rover-colors();
+
     align-items: center;
-    background: $teal;
     display: flex;
     height: $card-height;
     justify-content: center;
@@ -58,7 +69,7 @@ $panel-height: 10rem;
 }
 
 .home__card-img {
-    background: $black;
+    background: $blacker;
     height: calc(100% + 2rem);
     object-fit: contain;
     padding: 2rem;
@@ -75,11 +86,10 @@ $panel-height: 10rem;
 }
 
 .home__card-wing {
-    @include card-primary-color(15%);
-
+    background: black;
     bottom: 3rem;
     height: 9rem;
-    left: -6.7rem;
+    left: -6.9rem;
     position: absolute;
     transform: rotateY(-80deg) rotateZ(5deg);
     transform-style: preserve-3d;
@@ -89,8 +99,20 @@ $panel-height: 10rem;
 
     &--right {
         left: initial;
-        right: -6.7rem;
+        right: -6.9rem;
         transform: rotateY(80deg) rotateZ(-5deg);
+    }
+
+    &--curiosity {
+        background: darken($teal, 15%);
+    }
+
+    &--opportunity {
+        background: darken($blue, 15%);
+    }
+
+    &--spirit {
+        background: darken($purple, 15%);
     }
 }
 
@@ -122,8 +144,8 @@ $panel-height: 10rem;
 }
 
 .home__card-panel {
-    @include card-primary-color();
-
+    background: $blacker;
+    border: 0.4rem solid black;
     bottom: 0;
     color: white;
     display: flex;
@@ -136,15 +158,18 @@ $panel-height: 10rem;
     right: -1.5rem;
     transition: all 0.3s ease-out;
     width: $card-height + 3rem;
-    word-wrap: break-word;
 
     p {
+        display: block;
         font-weight: 600;
         left: 1rem;
+        overflow: hidden;
         position: absolute;
+        text-overflow: ellipsis;
         text-transform: uppercase;
         top: 2.5rem;
         transition: all 0.3s ease-out;
+        white-space: nowrap;
 
         &:last-child {
             bottom: 2.5rem;
@@ -152,10 +177,23 @@ $panel-height: 10rem;
             top: initial;
         }
     }
+
+    &--curiosity {
+        border-color: $teal;
+    }
+
+    &--opportunity {
+        border-color: $blue;
+    }
+
+    &--spirit {
+        border-color: $purple;
+    }
 }
 
 .home__card-btn {
-    @include card-primary-color();
+    @include rover-colors();
+    @include rover-hover-colors();
 
     border: 0;
     bottom: 3rem;
@@ -164,11 +202,6 @@ $panel-height: 10rem;
     outline: 0;
     padding: 1rem 2rem;
     transition: background 0.3s, color 0.3s;
-
-    &:hover {
-        background: lighten($teal, 5%);
-        color: $light;
-    }
 }
 
 .home__card-item.active .home__card-img-container {
@@ -188,6 +221,7 @@ $panel-height: 10rem;
 
     p {
         left: 11rem;
+        max-width: 20rem;
     }
 }
 
@@ -206,7 +240,8 @@ $panel-height: 10rem;
 }
 
 .home__card-toggle-btn {
-    @include card-primary-color();
+    @include rover-colors();
+    @include rover-hover-colors();
 
     border-radius: 50%;
     box-shadow: $box-shadow-m;
@@ -222,7 +257,6 @@ $panel-height: 10rem;
     z-index: 20;
 
     &:hover {
-        background: lighten($teal, 5%);
         color: $light;
     }
 }

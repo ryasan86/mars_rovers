@@ -86,3 +86,17 @@ span {
     margin: 0;
     padding: 0;
 }
+
+@mixin rover-colors($prop: background) {
+    &--curiosity {
+        #{$prop}: $teal;
+    }
+
+    &--opportunity {
+        #{$prop}: $blue;
+    }
+
+    &--spirit {
+        #{$prop}: $purple;
+    }
+}

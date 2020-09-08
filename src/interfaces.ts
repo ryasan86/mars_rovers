@@ -13,12 +13,12 @@ export interface PhotoManifestProps {
     max_sol: number
     max_date: string
     total_photos: number
-    photos: {
+    photos: Array<{
         sol: number
         earth_date: string
         total_photos: number
         cameras: string[]
-    }
+    }>
 }
 
 export interface PhotoProps {

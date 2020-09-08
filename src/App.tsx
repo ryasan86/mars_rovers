@@ -19,7 +19,7 @@ const App: React.FC = () => {
     const onToggleSidebar = () => setSidebarOpen(prev => !prev)
     const onSelectDate = (date: string) => setSelectedDate(date) // prettier-ignore
     const onSelectRover = (rover: RoverProps) => setSelectedRover(rover)
-    const onSelectPhotoIdx = (cb: (arg: number) => number) => setSelectedPhotoIdx(cb)
+    const onSelectPhotoIdx = (cb: (arg: number) => number) => setSelectedPhotoIdx(cb) // prettier-ignore
     const onSelectCamera = (camera: string) => setSelectedCamera(camera)
 
     const { data, loading } = useCustomQuery({

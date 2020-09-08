@@ -1,0 +1,47 @@
+@import '../../globals';
+
+.bar-chart {
+    position: relative;
+}
+
+.bar-chart__bar {
+    @include rover-colors(fill);
+
+    width: 3.5rem;
+}
+
+.bar-chart__legend {
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    position: relative;
+    top: 0;
+}
+
+.bar-chart__legend-item {
+    @include rover-colors();
+
+    height: 3rem;
+    line-height: 3rem;
+    position: relative;
+    width: 3rem;
+
+    &::before {
+        font-size: $font-size-s;
+        left: 3.5rem;
+        position: absolute;
+        top: 0;
+    }
+
+    &--curiosity::before {
+        content: 'Curiosity';
+    }
+
+    &--opportunity::before {
+        content: 'Opportunity';
+    }
+
+    &--spirit::before {
+        content: 'Spirit';
+    }
+}
