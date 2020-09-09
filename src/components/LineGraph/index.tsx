@@ -207,8 +207,6 @@ const parseLargestVoronoi = (flatData, voronoiData, xScale, yScale) => {
     return output2
 }
 
-const last = array => array[array.length - 1]
-
 const LineGraph: React.FC = () => {
     const canvasRef = useRef()
 
@@ -231,7 +229,7 @@ const LineGraph: React.FC = () => {
 
         const xAxisGenerator = d3
             .axisBottom(xScale)
-            .tickValues(d3.range(2004, 2021).map(y => new Date(y, 0)))
+            .tickValues(d3.range(2004, 2020).map(y => new Date(y, 0)))
 
         const yAxisGenerator = d3
             .axisLeft(yScale)
@@ -301,7 +299,7 @@ const LineGraph: React.FC = () => {
                         ]
 
                     return flatData.some(d0 =>
-                        (console.log(d0), geometric.pointInPolygon([xScale(d0.year), yScale(d0.value)], labelRect))
+                        geometric.pointInPolygon([xScale(d0.year), yScale(d0.value)], labelRect)
                     )
                 }
 
