@@ -6,17 +6,9 @@ import * as arr from 'arraygeous'
 import {
     curiosityManifest,
     opportunityManifest,
-    spiritManifest,
-    fruits
+    spiritManifest
 } from '../../data'
 import './LineGraph.scss'
-
-interface Fruit {
-    Date: string
-    Apples: string
-    Blueberries: string
-    Carrots: string
-}
 
 interface ManifestProps {
     sol: number
@@ -24,93 +16,103 @@ interface ManifestProps {
     total_photos: number
 }
 
-const manifests: Array<{ name: string; data: ManifestProps[] }> = [
-    {
-        name: 'curiosity',
-        data: curiosityManifest
-    },
-    {
-        name: 'opportunity',
-        data: opportunityManifest
-    },
-    {
-        name: 'spirit',
-        data: spiritManifest
-    }
-]
-
 interface YearProps {
     Curiosity?: number
     Opportunity?: number
     Spirit?: number
 }
 
+interface DataProps {
+    Year: number
+    Curiosity: number
+    Opportunity: number
+    Spirit: number
+}
+
+const manifests: Array<{ name: string; data: ManifestProps[] }> = [
+    {
+        name: 'Curiosity',
+        data: curiosityManifest
+    },
+    {
+        name: 'Opportunity',
+        data: opportunityManifest
+    },
+    {
+        name: 'Spirit',
+        data: spiritManifest
+    }
+]
+
 const parseYearlyData = (): DataProps[] => {
-    const map: { [date: string]: YearProps } = {}
+    const map: { [year: string]: YearProps } = {}
     // prettier-ignore
     manifests.forEach(manifest => {
         manifest.data.forEach(m => {
-            const date = m.earth_date
-            const dateExists = map[date]
-            const roverExists = map[date]?.[manifest.name]
+            const [year] = m.earth_date.match(/^\w+/)
+            const yearExists = map[year]
+            const roverExists = map[year]?.[manifest.name]
 
-            if (!dateExists) {
-                map[date] = { [manifest.name]: m.total_photos }
+            if (!yearExists) {
+                map[year] = { [manifest.name]: m.total_photos }
             } else if (!roverExists) {
-                map[date] = { ...map[date], [manifest.name]: m.total_photos }
+                map[year] = { ...map[year], [manifest.name]: m.total_photos }
             } else if (roverExists) {
-                map[date][manifest.name] += m.total_photos
+                map[year][manifest.name] += m.total_photos
             }
         })
     })
 
-    return Object.entries(map).map(([date, rovers]) => ({
-        Curiosity: rovers.Curiosity || 5,
-        Opportunity: rovers.Opportunity || 5,
-        Spirit: rovers.Spirit || 5,
-        date
+    return Object.entries(map).map(([year, rovers]) => ({
+        Year: +year,
+        Curiosity: rovers.Curiosity || 0,
+        Opportunity: rovers.Opportunity || 0,
+        Spirit: rovers.Spirit || 0
     }))
 }
 
-interface DataProps {
-    date: string
-    Curiosity?: number
-    Opportunity?: number
-    Spirit?: number
+const yearlyData = parseYearlyData()
+
+const height = 447
+const width = 1000
+const margin = { left: 40, bottom: 20, right: 60, top: 10 }
+const chartWidth = width - margin.left - margin.right
+const chartHeight = height
+
+const colors = {
+    Curiosity: {
+        light: '#4de0cd',
+        dark: '#00bfa5'
+    },
+    Opportunity: {
+        light: '#66ade4',
+        dark: '#216ba5'
+    },
+    Spirit: {
+        light: '#d36ae6',
+        dark: '#9c27b0'
+    }
 }
 
-const parseData = (data: Fruit[]) => {
+const parseData = (data: DataProps[]) => {
     const output = []
     for (let i = 0, l = data.length; i < l; i++) {
-        const d = data[i]
-        const o = { date: null }
-        const s: string[] = d.Date.split('/')
-        const yyyy = +('20' + s[2])
-        const mm = +s[0] - 1
-        const dd = +s[1]
-
-        o.date = new Date(yyyy, mm, dd)
-
+        const d = data[i],
+            o: any = {}
+        o.year = new Date(d.Year, 0)
         for (const col in d) {
-            if (col !== 'Date') {
-                o[col] = +d[col]
-            }
+            if (col !== 'Year') o[col] = +d[col]
         }
         output.push(o)
     }
     return output
 }
 
-const data = parseData(fruits)
-
-interface FruitData {
-    date: string
-    Apples: number
-    Blueberries: number
-    Carrots: number
+interface LineDataProps extends DataProps {
+    year: number
 }
 
-const parseLineData = (data: FruitData[]) => {
+const parseLineData = (data: LineDataProps[]) => {
     const output = []
     let i = 0
     for (const col in data[0]) {
@@ -124,7 +126,7 @@ const parseLineData = (data: FruitData[]) => {
             for (let i0 = 0, l0 = data.length; i0 < l0; i0++) {
                 const d0 = data[i0]
                 o.data.push({
-                    date: d0.date,
+                    year: d0.year,
                     value: d0[col]
                 })
             }
@@ -135,7 +137,7 @@ const parseLineData = (data: FruitData[]) => {
     return output
 }
 
-const parseFlatData = data => {
+const parseFlatData = (data: LineDataProps[]) => {
     const output: any = []
     const columns = []
     let i = 0
@@ -145,7 +147,7 @@ const parseFlatData = data => {
             for (let i0 = 0, l0 = data.length; i0 < l0; i0++) {
                 const d0 = data[i0]
                 output.push({
-                    date: d0.date,
+                    year: d0.year,
                     value: d0[col],
                     key: col,
                     colors: colors[col]
@@ -158,66 +160,107 @@ const parseFlatData = data => {
     return output
 }
 
-const last = array => array[array.length - 1]
-
-const height = 477
-const width = 874
-const margin = { left: 20, bottom: 20, right: 60, top: 10 }
-const colors = {
-    Apples: {
-        light: '#3dcde0',
-        dark: '#00bfa5'
-    },
-    Blueberries: {
-        light: '#4481af',
-        dark: '#216ba5'
-    },
-    Carrots: {
-        light: '#b748ca',
-        dark: '#9c27b0'
+const parseVoronoiData = (flatData, xScale, yScale) => {
+    const v = [
+        ...new d3.Delaunay(
+            arr.flatten(flatData.map(d => [xScale(d.year), yScale(d.value)]))
+        )
+            .voronoi([0, 0, chartWidth, chartHeight])
+            .cellPolygons()
+    ]
+    for (let i = 0, l = v.length; i < l; i++) {
+        v[i].data = flatData[i]
     }
+    return v
 }
 
-const BarChart: React.FC = () => {
+const parseLargestVoronoi = (flatData, voronoiData, xScale, yScale) => {
+    const output = {}
+    for (let i = 1, l = flatData.columns.length; i < l; i++) {
+        output[flatData.columns[i]] = { area: 0 }
+    }
+
+    for (let i = 0, l = voronoiData.length; i < l; i++) {
+        const cell = voronoiData[i]
+        const area = geometric.polygonArea(cell)
+        const key = cell.data.key
+
+        if (area > output[key].area) {
+            output[key].centroid = geometric.polygonCentroid(cell)
+            output[key].point = [
+                xScale(cell.data.year),
+                yScale(cell.data.value)
+            ]
+            output[key].angle = geometric.lineAngle([
+                output[key].point,
+                output[key].centroid
+            ])
+            output[key].area = area
+            output[key].polygon = cell
+            output[key].colors = colors[key]
+        }
+    }
+    const output2 = []
+    for (const key in output) {
+        output[key].key = key
+        output2.push(output[key])
+    }
+    return output2
+}
+
+const last = array => array[array.length - 1]
+
+const LineGraph: React.FC = () => {
     const canvasRef = useRef()
 
-    const drawLineGraph = () => {
+    function drawLineGraph () {
         const svg = d3
             .select(canvasRef.current)
             .append('svg')
-            .attr('width', width)
-            .attr('height', height)
-            .style('border', '1px solid white')
+            .attr('width', chartWidth)
+            .attr('height', chartHeight + 50)
 
         const xScale = d3
             .scaleTime()
-            .domain([new Date(2010, 0, 1), new Date(2010, 3, 1)])
+            .domain([new Date(2004, 0), new Date(2020, 0)])
+            .range([0, chartWidth])
 
         const yScale = d3
             .scaleLinear()
-            .domain([0, 20])
-            .range([height, 0])
-            .range([0, width])
+            .domain([0, 90000])
+            .range([chartHeight, 0])
 
         const xAxisGenerator = d3
             .axisBottom(xScale)
-            .tickValues(d3.range(0, 4).map(d => new Date(2010, d, 1)))
+            .tickValues(d3.range(2004, 2020).map(y => new Date(y, 0)))
 
         const yAxisGenerator = d3
             .axisLeft(yScale)
-            .tickValues(d3.range(0, 30, 5))
-
-        const lineData = parseLineData(data)
+            .tickValues(d3.range(0, 90001, 10000))
 
         const lineGenerator = d3
             .line()
-            .x(d => xScale(d.date))
+            .x(d => xScale(d.year))
             .y(d => yScale(d.value))
+
+        const data = parseData(yearlyData)
+        const lineData = parseLineData(data)
+        const flatData = parseFlatData(data)
+        const voronoiData = parseVoronoiData(flatData, xScale, yScale)
+        const largestVoronoiData = parseLargestVoronoi(
+            flatData,
+            voronoiData,
+            xScale,
+            yScale
+        )
 
         const g = svg
             .append('g')
+            .attr('transform', `translate(${margin.left}, ${margin.top})`)
+
+        g.append('g')
             .call(xAxisGenerator)
-            .attr('transform', `translate(0, ${height})`)
+            .attr('transform', `translate(0, ${chartHeight})`)
 
         g.append('g').call(yAxisGenerator)
 
@@ -236,7 +279,8 @@ const BarChart: React.FC = () => {
             .data(lineData)
             .enter()
             .append('g')
-            .attr('transform', d => `translate(${xScale(last(d.data).date)}, ${yScale(last(d.data).value)})`) // prettier-ignore
+            .attr('class', 'label')
+            .attr('transform', d => `translate(${xScale(last(d.data).year)}, ${yScale(last(d.data).value)})`) // prettier-ignore
 
         valueLabel
             .append('circle')
@@ -249,64 +293,56 @@ const BarChart: React.FC = () => {
             .text(d => last(d.data).value)
             .attr('dy', 5)
             .attr('dx', 10)
-            .style('font-family', 'monospace')
+            .style('font-family', 'Montserrat')
             .style('fill', d => d.dark)
 
-        const parseLargestVoronoi = (flatData, voronoiData) => {
-            const output = {}
-            for (let i = 1, l = flatData.columns.length; i < l; i++) {
-                output[flatData.columns[i]] = { area: 0 }
-            }
-            for (let i = 0, l = voronoiData.length; i < l; i++) {
-                const cell = voronoiData[i]
-                const area = geometric.polygonArea(cell)
-                const key = cell.data.key
-                if (area > output[key].area) {
-                    output[key].centroid = geometric.polygonCentroid(cell)
-                    output[key].point = [
-                        xScale(cell.data.date),
-                        yScale(cell.data.value)
-                    ]
-                    output[key].angle = geometric.lineAngle([
-                        output[key].point,
-                        output[key].centroid
-                    ])
-                    output[key].area = area
-                    output[key].polygon = cell
-                    output[key].colors = colors[key]
-                }
-            }
-            const output2 = []
-            for (const key in output) {
-                output[key].key = key
-                output2.push(output[key])
-            }
-            return output2
-        }
+        g.selectAll('.line-label')
+            .data(largestVoronoiData)
+            .enter()
+            .append('text')
+            .text(d => d.key)
+            .attr('transform', d => `translate(${d.point})`)
+            .style('font-family', 'Montserrat')
+            .style('text-anchor', 'middle')
+            .style('font-weight', '600')
+            .style('fill', d => d.colors.dark)
+            .each((d, i, e) => {
+                const newD = Object.assign({}, d)
+                // prettier-ignore
+                function somePointsInLine () {
+                    const { width: labelWidth, height: labelHeight } = e[i].getBoundingClientRect()
+                       const labelPadding = 5
+                       const labelLeft = -labelPadding + newD.point[0] - labelWidth / 2
+                       const labelRight = labelPadding + newD.point[0] + labelWidth / 2
+                       const labelTop = -6 + -labelPadding + newD.point[1] - labelHeight / 2
+                       const labelBottom = -6 + labelPadding + newD.point[1] + labelHeight / 2
+                       const labelRect = [
+                            [labelLeft, labelTop],
+                            [labelRight, labelTop],
+                            [labelRight, labelBottom],
+                            [labelLeft, labelBottom]
+                        ]
 
-        const flatData = parseFlatData(data)
-
-        const voronoiData = flatData => {
-            const v = [
-                ...new d3.Delaunay(
-                    arr.flatten(
-                        flatData.map(d => [xScale(d.date), yScale(d.value)])
+                    return flatData.some(d0 =>
+                        geometric.pointInPolygon(
+                            [xScale(d0.year), yScale(d0.value)],
+                            labelRect
+                        )
                     )
-                )
-                    .voronoi([0, 0, width, height])
-                    .cellPolygons()
-            ]
+                }
 
-            for (let i = 0; i < v.length; i++) {
-                v[i].data = flatData[i]
-            }
-            return v
-        }
+                let i0 = 1
+                const iMax = 50
 
-        const voronoi = voronoiData(flatData)
-
-        const largestVoronoiData = parseLargestVoronoi(flatData, voronoi)
-
+                while (somePointsInLine() && i0 < iMax) {
+                    newD.point = geometric.pointTranslate(d.point, d.angle, i0)
+                    d3.select(e[i]).attr(
+                        'transform',
+                        `translate(${newD.point})`
+                    )
+                    i0++
+                }
+            })
         return svg.node()
     }
 
@@ -317,4 +353,4 @@ const BarChart: React.FC = () => {
     return <div className='line-graph' ref={canvasRef}></div>
 }
 
-export default BarChart
+export default LineGraph
