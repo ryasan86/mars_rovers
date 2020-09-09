@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 import * as d3 from 'd3'
 import * as geometric from 'geometric'
-import * as arr from 'arraygeous'
 
 import {
     curiosityManifest,
@@ -75,9 +74,9 @@ const yearlyData = parseYearlyData()
 
 const height = 447
 const width = 1000
-const margin = { left: 40, bottom: 20, right: 60, top: 10 }
+const margin = { left: 40, bottom: 20, right: 100, top: 10 }
 const chartWidth = width - margin.left - margin.right
-const chartHeight = height
+const chartHeight = height - margin.top - margin.bottom
 
 const colors = {
     Curiosity: {
@@ -163,7 +162,7 @@ const parseFlatData = (data: LineDataProps[]) => {
 const parseVoronoiData = (flatData, xScale, yScale) => {
     const v = [
         ...new d3.Delaunay(
-            arr.flatten(flatData.map(d => [xScale(d.year), yScale(d.value)]))
+            flatData.map(d => [xScale(d.year), yScale(d.value)]).flat()
         )
             .voronoi([0, 0, chartWidth, chartHeight])
             .cellPolygons()
@@ -217,8 +216,8 @@ const LineGraph: React.FC = () => {
         const svg = d3
             .select(canvasRef.current)
             .append('svg')
-            .attr('width', chartWidth)
-            .attr('height', chartHeight + 50)
+            .attr('width', width)
+            .attr('height', height)
 
         const xScale = d3
             .scaleTime()
