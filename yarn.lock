@@ -2654,6 +2654,11 @@ array.prototype.flatmap@^1.2.3:
     es-abstract "^1.17.0-next.1"
     function-bind "^1.1.1"
 
+arraygeous@0:
+  version "0.1.14"
+  resolved "https://registry.yarnpkg.com/arraygeous/-/arraygeous-0.1.14.tgz#1e088a8409941faa3360d0e3302ffc21c93a4216"
+  integrity sha512-mVb8CvplICk2qboBhddQ+YFUQlnzLZfKXKtNS7AnE+AOPMPfrj9+EkzjjdiYwoxB6mOkhGEWH22PxtcQYycdVw==
+
 arrify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
@@ -4245,7 +4250,7 @@ d3-contour@2:
   dependencies:
     d3-array "2"
 
-d3-delaunay@5:
+d3-delaunay@5, d3-delaunay@^5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/d3-delaunay/-/d3-delaunay-5.3.0.tgz#b47f05c38f854a4e7b3cea80e0bb12e57398772d"
   integrity sha512-amALSrOllWVLaHTnDLHwMIiz0d1bBu9gZXd1FiLfXf8sHcX9jrcj81TVZOqD4UX7MgBZZ07c8GxzEgBpJqc74w==
@@ -5890,6 +5895,11 @@ gensync@^1.0.0-beta.1:
   version "1.0.0-beta.1"
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.1.tgz#58f4361ff987e5ff6e1e7a210827aa371eaac269"
   integrity sha512-r8EC6NO1sngH/zdD9fiRDLdcgnbayXah+mLgManTaIZJqEC1MZstmnox8KpnI2/fxQwrp5OpCOYWLp4rBl4Jcg==
+
+geometric@1:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/geometric/-/geometric-1.5.0.tgz#12b235c17186bcc177fe6d6f7892101b922f7e49"
+  integrity sha512-tp0dprK4x/DX7DvZH9yPz5yBWWuACrfuiApNlqoyS3FnZbiV6WRgjbsD5Imz12Gww+xeHumHmDN7tSut70FyFQ==
 
 get-caller-file@^2.0.1:
   version "2.0.5"

@@ -3,7 +3,7 @@ import Particles from 'react-particles-js'
 
 import Layout from '../../components/Layout'
 import HomeCard from '../../components/HomeCard'
-import BarChart from '../../components/BarChart'
+import BarChart from '../../components/LineGraph'
 import { RoverProps } from '../../interfaces'
 import { roverList } from '../../constants'
 import { Perseverance } from '../../videos'
@@ -159,8 +159,7 @@ const HomePage: React.StatelessComponent = () => (
                 <div className='home__bar-chart-container'>
                     <BarChart />
                     <span className='home__bar-chart-text'>
-                        Total number of photos taken each year by the robots. <br/>
-                        Curiosity is the only remaining active rover.
+                        Number of photos taken each year by the cute robots
                     </span>
                 </div>
                 <CardList />

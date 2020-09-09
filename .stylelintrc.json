@@ -11,6 +11,7 @@
         "indentation": 4,
         "declaration-block-semicolon-newline-after": null,
         "max-nesting-depth": 2,
-        "selector-max-id": null
+        "selector-max-id": null,
+        "value-keyword-case": null
     }
 }
