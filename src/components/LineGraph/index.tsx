@@ -231,7 +231,7 @@ const LineGraph: React.FC = () => {
 
         const xAxisGenerator = d3
             .axisBottom(xScale)
-            .tickValues(d3.range(2004, 2020).map(y => new Date(y, 0)))
+            .tickValues(d3.range(2004, 2021).map(y => new Date(y, 0)))
 
         const yAxisGenerator = d3
             .axisLeft(yScale)
@@ -273,44 +273,22 @@ const LineGraph: React.FC = () => {
             .style('stroke-width', 2)
             .style('stroke-linejoin', 'round')
 
-        const valueLabel = g
-            .selectAll('.label')
-            .data(lineData)
-            .enter()
-            .append('g')
-            .attr('class', 'label')
-            .attr('transform', d => `translate(${xScale(last(d.data).year)}, ${yScale(last(d.data).value)})`) // prettier-ignore
-
-        valueLabel
-            .append('circle')
-            .attr('r', 4)
-            .style('stroke', 'white')
-            .style('fill', d => d.light)
-
-        valueLabel
-            .append('text')
-            .text(d => last(d.data).value)
-            .attr('dy', 5)
-            .attr('dx', 10)
-            .style('font-family', 'Montserrat')
-            .style('fill', d => d.dark)
-
+        // prettier-ignore
         g.selectAll('.line-label')
             .data(largestVoronoiData)
             .enter()
             .append('text')
             .text(d => d.key)
             .attr('transform', d => `translate(${d.point})`)
-            .style('font-family', 'Montserrat')
             .style('text-anchor', 'middle')
             .style('font-weight', '600')
             .style('fill', d => d.colors.dark)
             .each((d, i, e) => {
                 const newD = Object.assign({}, d)
-                // prettier-ignore
+
                 function somePointsInLine () {
                     const { width: labelWidth, height: labelHeight } = e[i].getBoundingClientRect()
-                       const labelPadding = 5
+                       const labelPadding = 20
                        const labelLeft = -labelPadding + newD.point[0] - labelWidth / 2
                        const labelRight = labelPadding + newD.point[0] + labelWidth / 2
                        const labelTop = -6 + -labelPadding + newD.point[1] - labelHeight / 2
@@ -323,10 +301,7 @@ const LineGraph: React.FC = () => {
                         ]
 
                     return flatData.some(d0 =>
-                        geometric.pointInPolygon(
-                            [xScale(d0.year), yScale(d0.value)],
-                            labelRect
-                        )
+                        (console.log(d0), geometric.pointInPolygon([xScale(d0.year), yScale(d0.value)], labelRect))
                     )
                 }
 
@@ -335,13 +310,11 @@ const LineGraph: React.FC = () => {
 
                 while (somePointsInLine() && i0 < iMax) {
                     newD.point = geometric.pointTranslate(d.point, d.angle, i0)
-                    d3.select(e[i]).attr(
-                        'transform',
-                        `translate(${newD.point})`
-                    )
+                    d3.select(e[i]).attr('transform', `translate(${newD.point})`)
                     i0++
                 }
             })
+
         return svg.node()
     }
 
