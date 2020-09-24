@@ -27,13 +27,16 @@ const Modal: React.FC<Props> = ({ img, idx, step }) => (
     </div>
 )
 
-const initLayers = (selectedIdx: number) => (total: number) => [
-    (selectedIdx - 2 + total) % total,
-    (selectedIdx - 1 + total) % total,
-    selectedIdx,
-    (selectedIdx + 1) % total,
-    (selectedIdx + 2) % total
-]
+const uniq = (a: number[]) => [...new Set(a)]
+
+const initLayers = (selectedIdx: number) => (pCount: number) =>
+    uniq([
+        (selectedIdx - 2 + pCount) % pCount,
+        (selectedIdx - 1 + pCount) % pCount,
+        selectedIdx,
+        (selectedIdx + 1) % pCount,
+        (selectedIdx + 2) % pCount
+    ])
 
 const PhotoModal: React.FC<Props> = props => {
     const { selectedPhotoIdx } = useContext(Context)
@@ -68,7 +71,7 @@ const PhotoModal: React.FC<Props> = props => {
     }, [modalOpen, photos.length, selectedPhotoIdx])
 
     return (
-        <div className={`photo-modal${modalOpen ? ' active' : ''}`}>
+        <div className={`photo-modal ${modalOpen ? ' active' : ''}`}>
             <h3 className='photo-modal__count'>
                 {Math.abs(step) + 1} / {photos.length}
             </h3>
