@@ -56,7 +56,7 @@ export interface ContextProps {
     sidebarOpen: boolean
     selectedDate: string | Date
     selectedRover: RoverProps | null
-    selectedPhotoIdx: number | null
+    initialPhotoIdx: number | null
     onToggleSidebar: () => void
     onSelectDate: (date: string | Date) => void
     onSelectRover: (rover: RoverProps) => void

@@ -7,6 +7,7 @@ import { Context } from '../../App'
 
 interface Props {
     photos?: PhotoProps[]
+    layersCount?: number
     step?: number
     idx?: number
     modalOpen?: boolean
@@ -15,11 +16,12 @@ interface Props {
     onSelectPhotoIdx?: (any: (any: number) => number) => void
 }
 
-const Modal: React.FC<Props> = ({ img, idx, step }) => (
+const Modal: React.FC<Props> = ({ img, idx, step, layersCount }) => (
     <div
         className='photo-modal-slide'
         style={{
-            transform: `translateX(${(idx - step) * 100}vw)`
+            transform: `translateX(${((idx - step) % layersCount) * 100}vw)`,
+            opacity: step === idx ? 1 : 0
         }}>
         <div className='photo-modal__photo-container'>
             <img className='photo-modal__img' alt={'photo-' + idx} src={img} />
@@ -29,17 +31,15 @@ const Modal: React.FC<Props> = ({ img, idx, step }) => (
 
 const uniq = (a: number[]) => [...new Set(a)]
 
-const initLayers = (selectedIdx: number) => (pCount: number) =>
+const initLayers = (selectedIdx: number, pCount: number) =>
     uniq([
-        (selectedIdx - 2 + pCount) % pCount,
         (selectedIdx - 1 + pCount) % pCount,
         selectedIdx,
-        (selectedIdx + 1) % pCount,
-        (selectedIdx + 2) % pCount
+        (selectedIdx + 1) % pCount
     ])
 
 const PhotoModal: React.FC<Props> = props => {
-    const { selectedPhotoIdx } = useContext(Context)
+    const { initialPhotoIdx } = useContext(Context)
     const { photos, onToggleModal, modalOpen } = props
     const [layers, setLayers] = useState(null)
     const [step, setStep] = useState(0)
@@ -61,14 +61,11 @@ const PhotoModal: React.FC<Props> = props => {
     }
 
     useEffect(() => {
-        if (selectedPhotoIdx !== null) {
-            setLayers(initLayers(selectedPhotoIdx)(photos.length))
-            setStep(selectedPhotoIdx)
-        } else {
-            setLayers(initLayers(0)(photos.length))
-            setStep(0)
+        if (initialPhotoIdx !== null) {
+            setLayers(initLayers(initialPhotoIdx, photos.length))
+            setStep(initialPhotoIdx)
         }
-    }, [modalOpen, photos.length, selectedPhotoIdx])
+    }, [modalOpen, photos.length, initialPhotoIdx])
 
     return (
         <div className={`photo-modal ${modalOpen ? ' active' : ''}`}>
@@ -85,6 +82,7 @@ const PhotoModal: React.FC<Props> = props => {
                     <Modal
                         key={layer}
                         idx={layer}
+                        layersCount={layers.length}
                         step={step}
                         img={photos[layer]?.img_src}
                     />
