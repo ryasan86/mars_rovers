@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/mars_rovers/precache-manifest.303609452ed496d24d0d5417bfc2f0f2.js"
+  "/mars_rovers/precache-manifest.3a50217d10f5bf37a3eb19c5d065416e.js"
 );
 
 self.addEventListener('message', (event) => {
