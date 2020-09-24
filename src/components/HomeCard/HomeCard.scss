@@ -22,7 +22,6 @@ $panel-height: 10rem;
 
     box-shadow: $box-shadow-xlg;
     color: $black;
-    height: 100%;
     height: $card-height + $panel-height;
     perspective: 600px;
     position: relative;
@@ -75,14 +74,6 @@ $panel-height: 10rem;
     padding: 2rem;
     transition: all 0.3s ease-out;
     width: 100%;
-}
-
-.home__card-panel-container {
-    bottom: 0;
-    perspective: 600px;
-    position: absolute;
-    right: 0;
-    z-index: 1;
 }
 
 .home__card-wing {
