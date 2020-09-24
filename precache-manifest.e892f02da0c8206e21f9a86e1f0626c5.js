@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e1471bc75518b4f7ff4b16fa8b9afa5c",
+    "revision": "03dc5629893e37ccfc486e7235c6e4e2",
     "url": "/mars_rovers/index.html"
   },
   {
-    "revision": "3914fc6e52b14a9a3677",
+    "revision": "b280989aa64f83abbaa6",
     "url": "/mars_rovers/static/css/2.8a9e15d2.chunk.css"
   },
   {
-    "revision": "c0d1f3a85dc90360e803",
-    "url": "/mars_rovers/static/css/main.43670220.chunk.css"
+    "revision": "4fccb2820278e86d0888",
+    "url": "/mars_rovers/static/css/main.3ceeb21d.chunk.css"
   },
   {
-    "revision": "3914fc6e52b14a9a3677",
-    "url": "/mars_rovers/static/js/2.dcde9813.chunk.js"
+    "revision": "b280989aa64f83abbaa6",
+    "url": "/mars_rovers/static/js/2.19c767e8.chunk.js"
   },
   {
     "revision": "c3cb654a3a7d27a576aed8d503b856d8",
-    "url": "/mars_rovers/static/js/2.dcde9813.chunk.js.LICENSE.txt"
+    "url": "/mars_rovers/static/js/2.19c767e8.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c0d1f3a85dc90360e803",
-    "url": "/mars_rovers/static/js/main.b616ae81.chunk.js"
+    "revision": "4fccb2820278e86d0888",
+    "url": "/mars_rovers/static/js/main.ee0e985e.chunk.js"
   },
   {
     "revision": "848b7539edb1c44002fc",
