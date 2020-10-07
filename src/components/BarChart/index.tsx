@@ -73,8 +73,6 @@ const getYearlyData = (): DataProps[] => {
 
 const data = getYearlyData()
 
-console.log(data)
-
 const width = 960
 const height = 500
 const margin = { top: 10, right: 10, bottom: 20, left: 40 }
