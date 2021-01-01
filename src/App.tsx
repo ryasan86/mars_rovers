@@ -13,13 +13,13 @@ const App: React.FC = () => {
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false)
     const [selectedDate, setSelectedDate] = useState<string | Date>()
     const [selectedRover, setSelectedRover] = useState<RoverProps | null>(null)
-    const [initialPhotoIdx, setinitialPhotoIdx] = useState(null)
+    const [initialPhotoIdx, setInitialPhotoIdx] = useState(null)
     const [selectedCamera, setSelectedCamera] = useState<string>(null)
 
     const onToggleSidebar = () => setSidebarOpen(prev => !prev)
     const onSelectDate = (date: string) => setSelectedDate(date) // prettier-ignore
     const onSelectRover = (rover: RoverProps) => setSelectedRover(rover)
-    const onSelectPhotoIdx = (cb: (arg: number) => number) => setinitialPhotoIdx(cb) // prettier-ignore
+    const onSelectPhotoIdx = (cb: (arg: number) => number) => setInitialPhotoIdx(cb) // prettier-ignore
     const onSelectCamera = (camera: string) => setSelectedCamera(camera)
 
     const { data, loading } = useCustomQuery({
